@@ -2,11 +2,25 @@
 
 One section per tag, newest first, no dates: the tag and the commit it points at are the record, and `RELEASE.md` says how a tag is cut. `Unreleased` collects what is on `main` (or in an open pull request named here) and not yet tagged.
 
-No tag exists yet. `package.json` reads `0.1.0`, and the first tag will be `v0.1.0`; the README's consumer instructions already pin it, so until it is cut, neither consumer can install from anything but a commit SHA.
+`v0.1.0` is the first tag; nothing before it was tagged. A consumer pinned to a commit SHA moves to the tag as `RELEASE.md`, "After the tag", describes.
 
 ## Unreleased
 
-Everything below is on `main` and untagged except the themed focus ring, which is this pull request, **#20** (`feat/theme-the-focus-ring`), still open; the sections mark which entries are its. What is on `main` comes from five merged pull requests: **#9** (`fix/tertiary-text-contrast`), which carried the contrast decisions first opened as #6 (`feat/contrast-decisions`) — #6 was closed unmerged, so #9 is the single commit that landed them — **#17** (`feat/control-selection-ring-token`), **#15** (`docs/contrast-register-hardening`), which merged after both, **#14** (`chore/package-private-and-release-procedure`), which wrote this file and `RELEASE.md` and is recorded under "Added" at the end, and **#18** (`feat/complete-shell-theme-tokens`), the three shell themes.
+Nothing yet.
+
+## v0.1.0
+
+The first tag carries everything on `main` at the commit it points at. **#1** (`chore/bootstrap`) created the package from the design drop, and the sections below describe what changed since. Five merged pull requests after it changed `dist/`, `tokens.json`, `test/token-test.mjs` or `package.json`: **#17** (`feat/control-selection-ring-token`); **#9** (`fix/tertiary-text-contrast`), which carried the contrast decisions first opened as #6 (`feat/contrast-decisions`) — #6 was closed unmerged, so #9 is the single commit that landed them; **#14** (`chore/package-private-and-release-procedure`), which wrote this file and `RELEASE.md` and is recorded under "Added" at the end; **#18** (`feat/complete-shell-theme-tokens`), the three shell themes; and **#20** (`feat/theme-the-focus-ring`), the themed focus ring, whose entries the sections below mark. **#15** (`docs/contrast-register-hardening`) changed the contrast register and its gate. The other eleven — #4, #7, #8, #13, #16, #19, #21, #22, #23, #24 and #25 — changed how this repository is checked and maintained; none of the twelve touched any of those four paths.
+
+### Decided by
+
+`RELEASE.md`, step 4: every pull request in `git log -- tokens.json scripts/lib/spec.mjs` up to this tag, and the person who decided what it changed.
+
+- **#1** (`chore/bootstrap`): @zxxma (design of record v0.1)
+- **#9** (`fix/tertiary-text-contrast`): @zxxma (owner decision B3)
+- **#17** (`feat/control-selection-ring-token`): @zxxma (owner decision B0b)
+- **#18** (`feat/complete-shell-theme-tokens`): @zxxma (owner decision B3)
+- **#20** (`feat/theme-the-focus-ring`): @zxxma (owner decision B-themed-ring, also stated in its description)
 
 ### Token values changed — design decisions
 
@@ -63,7 +77,7 @@ Both slate moves are **primitive** moves: a consumer that uses `slate-600` or `s
   3. `semantic.border.input`: `{color.slate.300}` -> `{color.slate.500}`
   4. Focus ring geometry: `0 0 0 3px rgba(43,75,219,.35)` -> `0 0 0 2px #2B4BDB, 0 0 0 5px rgba(43,75,219,.35)`, and with it the preset's `ringWidth.DEFAULT` `3px` -> `2px` and `ringColor.DEFAULT` `rgba(43,75,219,0.35)` -> `#2B4BDB`
 
-  The first four were recorded here, decided in ADR-0002, and landed by #9. There are not two lists. A fifth was decided by the owner and lands with #20:
+  The first four were recorded here, decided in ADR-0002, and landed by #9. There are not two lists. A fifth was decided by the owner and landed with #20:
 
   5. Focus ring colour: themed. The core follows `[data-theme]` — `semantic.theme.<t>.accent-ink`, with `semantic.theme.<t>.on-inverse` for the new on-inverse variant — so the light core moves `#2B4BDB` -> `#2340C4`, and `ringColor.DEFAULT` `#2B4BDB` -> `var(--focus-ring-color)`
 - Still open, and not #20's to close. Both records read `Status: Proposed`, in the files and in `docs/adr/README.md`; moving them to `Accepted` is a change to the ADRs and belongs in a pull request that edits them. #20 edits ADR-0002's point 3, to refresh role names that no longer existed and to say what now enforces the naming rule, and leaves the status where it is: a status move is the owner's call on the decision, not a consequence of touching the file that records it. `AGENTS.md` still repeats ADR-0001's single-input sentence — "The build must stay a pure function of `tokens.json`" — and needs the same amendment; ADR-0002 leaves it untouched on purpose, because a pull request that edits `AGENTS.md` needs a second human reviewer under that file's own rule. One thing on this list has closed. #18 opened an owner decision of its own, `B-themed-ring` — whether the focus ring gains a themed variant, or the shortfall it measured on the dark grounds is accepted with a stated reason. **The owner decided: theme the ring**, and #20 implements that decision and enforces it, so `B-themed-ring` is closed. No owner decision is open in this repository.
