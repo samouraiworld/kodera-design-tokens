@@ -1,6 +1,6 @@
 # Releasing
 
-There is no registry and no `npm publish`: `package.json` is `private: true`, and a consumer installs this package as a git dependency. **The tag is the release** — pinning to a tag, rather than to a branch or to a bare commit SHA, is the packaging model, and README, "How the hub and the console consume it", is where it is written down.
+There is no registry and no `npm publish`: `package.json` is `private: true`, and a consumer installs this package as a git dependency. **The tag is the release** — pinning to a tag, rather than to a branch or to a bare commit SHA, is the packaging model, and README, "How a consumer takes it", is where it is written down.
 
 That model is not yet in force, and nothing below should be read as saying it already is. `v0.1.0` is tagged, and no consumer pins a tag: `kodera-console` and `kodera-landing` declare the dependency, and each pins a bare commit SHA on its `main`. `samourai-hub` does not depend on the package at all yet; its README says the v2 repaint "waits on that package being published".
 
@@ -36,6 +36,6 @@ The person cutting the tag is one of the maintainers in `CODEOWNERS`.
 The tag changes nothing until a consumer pins it. One pull request per consuming repository, opened by whoever cut the tag:
 
 - Each repository that declares the dependency — `kodera-console` and `kodera-landing` — bumps `"@samourai/design-tokens": "github:samouraiworld/kodera-design-tokens#vX.Y.Z"` in `package.json` and refreshes its lockfile. For the first tag the bump replaces a commit SHA rather than an earlier tag. `samourai-hub` is expected to join when its v2 repaint lands — its README says the repaint waits on this package being published — and it takes the same pull request on the day it declares the dependency; until then there is nothing in it to repin, so no pull request is opened against it.
-- The consuming repository's CI runs the token-resolution guard against the new preset; a class that no longer resolves fails there, which is the point of pinning rather than tracking a branch. The console imports that guard from this package, as `@samourai/design-tokens/token-test`.
-- The repin pull request pastes the `check:contrast` rows whose ratio moved since the previous pin — for the first tag, since the commit SHA the console pins now — so the reviewer sees what a value change does to the screens before the palette lands on them.
+- A consuming repository that uses the Tailwind preset runs the token-resolution guard against the new preset in its CI; a class that no longer resolves fails there, which is the point of pinning rather than tracking a branch. The console imports that guard from this package, as `@samourai/design-tokens/token-test`.
+- The repin pull request pastes the `check:contrast` rows whose ratio moved since the previous pin — for the first tag, since the commit SHA the consumer pins now — so the reviewer sees what a value change does to the screens before the palette lands on them.
 - The consumer's version-drift rule (README, "The version-drift rule for consumers") is what makes the repin happen once there is a run of tags to fall behind: a consumer more than one minor behind the newest tag fails its own CI. It has no baseline to measure against until a second tag exists, and no consumer implements the check today.

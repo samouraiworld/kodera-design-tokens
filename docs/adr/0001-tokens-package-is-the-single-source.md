@@ -8,7 +8,7 @@
 
 Console ADR-0004 decided that the design tokens are a shared package rather than a file copied into two repositories, and named this repository as the package. What it did not settle is how the package is built and shipped, and that question has one awkward constraint: **there is no private registry yet.**
 
-Until GitHub Packages is configured for the organisation, `samourai-hub` and `kodera-console` install this package as a **git dependency**. npm does not run an install or a build step for a git dependency. Whatever is in the repository at the pinned ref is what lands in `node_modules`, unchanged.
+Until GitHub Packages is configured for the organisation, consumers install this package as a **git dependency**. npm does not run an install or a build step for a git dependency. Whatever is in the repository at the pinned ref is what lands in `node_modules`, unchanged.
 
 That constraint decides more than it looks like it does:
 
