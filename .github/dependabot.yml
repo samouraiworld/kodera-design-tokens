@@ -13,7 +13,7 @@ updates:
   # nothing to open a PR about. Add it with the first dependency.
   #
   # Every `uses:` in this repository is pinned to a full commit SHA with the
-  # readable version in a trailing comment, per samourai-core
+  # readable version in a trailing comment, per kodera-core
   # `docs/security/SUPPLY_CHAIN_POLICY.md` sections 6 and 8: a workflow is
   # the one dependency that runs with repository credentials, and a tag can
   # be moved under it. That format is the configuration -- dependabot has no

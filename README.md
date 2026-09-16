@@ -1,6 +1,6 @@
-# samourai-design-tokens
+# kodera-design-tokens
 
-`@samourai/design-tokens` — the design tokens of samourai.app, published as one package and consumed by both front-ends: `samourai-hub` (the marketing site) and `samourai-console` (the authenticated application).
+`@samourai/design-tokens` — the design tokens of Kodera, published as one package and consumed by both front-ends: `samourai-hub` (the marketing site) and `kodera-console` (the authenticated application).
 
 Established by **ADR-0004** in the console repository: the tokens are a shared package, not a file copied into two repositories. Copies drift silently, and nothing errors when they disagree.
 
@@ -59,10 +59,10 @@ A tag is the release: there is no registry and the package is `private: true`. T
 Until GitHub Packages is set up for the organisation, both repositories take a **git dependency pinned to a tag**. A branch or a bare repository URL is not pinned: it re-resolves on every fresh install, and the palette changes underneath the consumer between two CI runs of the same commit.
 
 ```jsonc
-// package.json in samourai-hub and samourai-console
+// package.json in samourai-hub and kodera-console
 {
   "dependencies": {
-    "@samourai/design-tokens": "github:samouraiworld/samourai-design-tokens#v0.1.0"
+    "@samourai/design-tokens": "github:samouraiworld/kodera-design-tokens#v0.1.0"
   }
 }
 ```
