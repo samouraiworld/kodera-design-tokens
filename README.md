@@ -1,6 +1,6 @@
-# samourai-design-tokens
+# kodera-design-tokens
 
-`@samourai/design-tokens` — the design tokens of samourai.app, published as one package and consumed by both front-ends: `samourai-hub` (the marketing site) and `samourai-console` (the authenticated application).
+`@samourai/design-tokens` — the design tokens of Kodera, published as one package.
 
 Established by **ADR-0004** in the console repository: the tokens are a shared package, not a file copied into two repositories. Copies drift silently, and nothing errors when they disagree.
 
@@ -18,7 +18,7 @@ scripts/check-contrast.mjs     WCAG 2.1 ratios over contrast-pairs.json
 test/token-test.mjs            the reusable token-resolution guard for consumers
 ```
 
-Everything runs on plain Node 22 with **no dependencies and no install step**. That is not minimalism for its own sake: consumers install this package from a git tag, and npm does not run an install or a build for a git dependency. A `dist/` that needed `npm install` to exist would install as an empty package, with no error at all — which is exactly the class of failure this repository is built to make loud.
+Everything runs on plain Node 22 with **no dependencies and no install step**. That is not minimalism for its own sake: a consumer installs this package from a git tag, and npm does not run an install or a build for a git dependency. A `dist/` that needed `npm install` to exist would install as an empty package, with no error at all — which is exactly the class of failure this repository is built to make loud.
 
 ## Commands
 
@@ -36,7 +36,7 @@ ADR-0004 names three tests, each guarding one failure that is otherwise complete
 
 | Test | Runs here | Fails when |
 |---|---|---|
-| **Token resolution** | exported from here, **runs in each consumer** | A Tailwind class names one of our colour families and the token does not exist. Tailwind emits no CSS and no error; for `border-*` the element falls back to preflight's `border: 0 solid #e5e7eb`. |
+| **Token resolution** | exported from here, **runs in a consumer that uses the Tailwind preset** | A Tailwind class names one of our colour families and the token does not exist. Tailwind emits no CSS and no error; for `border-*` the element falls back to preflight's `border: 0 solid #e5e7eb`. |
 | **Contrast** | here, on every PR | A declared pair falls below its WCAG minimum and is not in the allowlist with a reason — or the allowlist entry no longer describes the pair: each entry is bound to the pair's `fg`, `bg`, `min` and the ratio it was written at, so a re-pointed pair, a loosened minimum or a colour that moved fails instead of inheriting the old excuse. Translucent colours are composited before measuring; an unresolvable pair is a hard failure, never a skipped row. |
 | **Version drift** | each consumer's CI | The consumer's pinned version is more than one minor behind the tag published here. Without it a repository sits on an old palette indefinitely and nothing complains. |
 
@@ -44,9 +44,9 @@ A fourth gate is local to this repository: **drift**, which asserts `dist/` is b
 
 ## How CI is wired
 
-Five jobs, in `.github/workflows/ci.yml`. Four do work: **Tracked dot-entries** refuses a committed dot-entry nobody vouched for, **Grammar, contrast, drift, units** runs `npm test`, **Secret scan** runs gitleaks over the whole history, **Workflow lint** runs actionlint over these workflows. The gitleaks and actionlint archives are verified by SHA-256 before extraction, against the `GITLEAKS_SHA256` / `ACTIONLINT_SHA256` env values recorded next to each pinned version in the workflow. The fifth, **`ci-ok`**, does no work of its own — it needs the other four, and every one of them must have concluded `success`. A job that concluded `skipped` fails it too, unless that job is named in the `SKIP_OK` environment variable on the step; **this repository declares none**, because no job here is conditional, so nothing may skip. That is the whole point of the rule: a skipped required check is reported to branch protection as satisfied, so adding an `if:` or a path filter to a gate would otherwise turn the merge button green precisely because the gate never ran.
+The jobs are in `.github/workflows/ci.yml`. **Tracked dot-entries** refuses a committed dot-entry nobody vouched for, **Grammar, contrast, drift, units** runs `npm test`, **Secret scan** runs gitleaks over the whole history, **Workflow lint** runs actionlint over these workflows, **Vendor attribution** checks every tracked file for assistant attribution, **Vendor attribution (the surfaces that are not files)** checks the branch name, the commit messages on the branch, the tags on the commit and, on a pull request, its title and its body unless a bot opened it, and **Required clauses** checks that every clause in `.github/scripts/required-clauses.txt` is still present. The gitleaks and actionlint archives are verified by SHA-256 before extraction, against the `GITLEAKS_SHA256` / `ACTIONLINT_SHA256` env values recorded next to each pinned version in the workflow. **`ci-ok`** does no work of its own — it needs every other job, and every one of them must have concluded `success`. A job that concluded `skipped` fails it too, unless that job is named in the `SKIP_OK` environment variable on the step; **this repository declares none**, because no job here is conditional, so nothing may skip. That is the whole point of the rule: a skipped required check is reported to branch protection as satisfied, so adding an `if:` or a path filter to a gate would otherwise turn the merge button green precisely because the gate never ran.
 
-`ci-ok` is the single check branch protection points at. Requiring the four working jobs by name instead would keep the gate list in repository settings, where it drifts out of step with the workflow: a renamed job leaves the old context required forever, blocking every PR on a check nothing will ever report, while the job that replaced it is required by nothing. Adding, renaming or splitting a gate is therefore a change to `ci.yml` alone.
+`ci-ok` is the single check branch protection points at. Requiring the working jobs by name instead would keep the gate list in repository settings, where it drifts out of step with the workflow: a renamed job leaves the old context required forever, blocking every PR on a check nothing will ever report, while the job that replaced it is required by nothing. Adding, renaming or splitting a gate is therefore a change to `ci.yml` alone.
 
 Before it decides anything, `ci-ok` proves both of its scripts can still fail — `aggregate-result.selftest.sh` and `check-aggregate-covers-jobs.selftest.sh` — and then runs both: `check-aggregate-covers-jobs.py`, which fails if a job exists in `ci.yml` but is missing from `ci-ok`'s `needs:` (such a gate could go red while the required check stayed green), and `aggregate-result.py`, which reads the verdicts. A required check nobody has ever seen fail is a decoration, and this one is the last thing standing between a red gate and a green merge button.
 
@@ -54,15 +54,15 @@ Before it decides anything, `ci-ok` proves both of its scripts can still fail �
 
 A tag is the release: there is no registry and the package is `private: true`. The procedure — gates green on `main`, `dist/` drift-clean, the contrast register read, the decider of every value change named, an annotated `vX.Y.Z` tag, then one repin pull request per consumer — is in [`RELEASE.md`](RELEASE.md). What each tag carries is in [`CHANGELOG.md`](CHANGELOG.md).
 
-## How the hub and the console consume it
+## How a consumer takes it
 
-Until GitHub Packages is set up for the organisation, both repositories take a **git dependency pinned to a tag**. A branch or a bare repository URL is not pinned: it re-resolves on every fresh install, and the palette changes underneath the consumer between two CI runs of the same commit.
+Until GitHub Packages is set up for the organisation, a consuming repository takes a **git dependency pinned to a tag**. A branch or a bare repository URL is not pinned: it re-resolves on every fresh install, and the palette changes underneath the consumer between two CI runs of the same commit.
 
 ```jsonc
-// package.json in samourai-hub and samourai-console
+// package.json in a consuming repository
 {
   "dependencies": {
-    "@samourai/design-tokens": "github:samouraiworld/samourai-design-tokens#v0.1.0"
+    "@samourai/design-tokens": "github:samouraiworld/kodera-design-tokens#v0.1.0"
   }
 }
 ```
@@ -76,7 +76,7 @@ import samourai from '@samourai/design-tokens/tailwind-preset';
 export default {
   presets: [samourai],
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  // Declare nothing else. Re-declaring a colour here is how the two
+  // Declare nothing else. Re-declaring a colour here is how
   // front-ends start to disagree.
 };
 ```
@@ -87,7 +87,7 @@ Anything outside Tailwind — the Visio theme, a raw stylesheet, an email templa
 import '@samourai/design-tokens/tokens.css';
 ```
 
-And each consumer runs the resolution guard as one of its own unit tests:
+And a consumer that uses the Tailwind preset runs the resolution guard as one of its own unit tests:
 
 ```js
 import preset from '@samourai/design-tokens/tailwind-preset';
