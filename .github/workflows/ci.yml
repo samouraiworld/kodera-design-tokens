@@ -49,8 +49,9 @@ jobs:
       - name: Prove the dot-entry check can fail
         run: .github/scripts/check-tracked-dot-entries.selftest.sh
       # Development tooling keeps local configuration in a dot-directory at the
-      # repository root, and one `git add .` commits it -- here, into a public
-      # repository. `.git/info/exclude` protects only the clone it was typed in;
+      # repository root, and one `git add .` commits it -- on a public
+      # repository, into public history. `.git/info/exclude` protects only the
+      # clone it was typed in;
       # this check travels with the repository, so it protects every clone.
       - name: Every tracked dot-entry is on the allowlist
         run: .github/scripts/check-tracked-dot-entries.sh
@@ -253,12 +254,12 @@ jobs:
       # several independent ways of finding something and one bit cannot tell a
       # working branch from a silently broken one; the exit status because that
       # one bit is the whole of what this job consumes. Asserting only the
-      # message let the refusal be flipped to a pass while all 13 cases passed.
+      # message lets the refusal be flipped to a pass with every case passing.
       - name: Prove this check can fail
         run: .github/scripts/check-vendor-attribution.selftest.sh
       # Reads every tracked file as bytes, decodes base64 runs and inflates
-      # compressed PNG text chunks: both of the ways attribution actually
-      # arrived in this org are invisible to a recursive grep.
+      # compressed PNG text chunks: attribution hidden in image metadata or
+      # in base64 is invisible to a recursive grep.
       - name: No tracked file carries assistant attribution
         run: python3 .github/scripts/check-vendor-attribution.py .
 
@@ -280,13 +281,13 @@ jobs:
           # push's previous tip, or the default branch a new tag is read
           # against. No `ref:`: this action adds a `refs/pull/*` refspec only
           # when `ref` starts with `refs/pull/`, so a bare sha from a FORK is in
-          # no fetched ref and the checkout fails.
-          # This repository is public, so fork pull requests are the normal case.
+          # no fetched ref and the checkout fails. On a public repository, fork
+          # pull requests are the normal case.
           fetch-depth: 0
       # The job above scans tracked files. `git ls-files` cannot see a commit
       # message, a branch name, a pull-request title or body, or a tag — and the
-      # rule names every one of them. This repository is public, so each of those
-      # is world-readable the moment it is pushed.
+      # rule names every one of them. On a public repository each of those is
+      # world-readable the moment it is pushed.
       - name: Prove these checks can fail
         run: .github/scripts/check-vendor-attribution.selftest.sh
       # Event data reaches the shell through `env:`, never interpolated into a
@@ -405,21 +406,33 @@ jobs:
           printf '%s' "$TITLE" |
           python3 .github/scripts/check-vendor-attribution.py
           --text "pull request title"
-      # The body keeps `--allow-empty` — GitHub requires a title and not a body —
-      # and a bot's body is exempt, which is owner decision B4 (2026-09-09) as
-      # implemented in kodera-internal's merge gate: Dependabot quotes an upstream
-      # changelog it did not write. The title, commits and diff are still scanned
-      # for a bot. Nothing gates this condition, so this comment is the record
-      # that the exemption is deliberate.
+      # The body keeps `--allow-empty`: GitHub requires a title and does not
+      # require a body, so an empty body here is a real empty body.
       #
-      # B4's premise is that a pull-request body never enters git history. On this
-      # repository it does: `squash_merge_commit_message` is `PR_BODY`, so an
-      # exempt bot body becomes the squash commit's message, and the push-to-`main`
-      # run scans it as a commit message. Here that lands on a PUBLIC `main`.
-      # Closing it properly means setting that option away from `PR_BODY` or
-      # overturning B4; both are the owner's call, so neither is taken here.
-      # A related one: GitHub lets whoever merges rewrite the squash subject in
-      # the merge dialog, so that text is read by no pull-request-time gate.
+      # A bot's body is exempt, by an organisation decision that the merge
+      # tooling applies the same way: Dependabot quotes an upstream changelog it
+      # did not write. Without the exemption the merge tooling and CI would
+      # disagree, and where CI is the only required check it is the one that
+      # decides -- so a bot pull request quoting a vendor name in a changelog
+      # would be unmergeable, and the bot would rewrite the body on every
+      # update. The title, the commits and the diff are still scanned for a bot.
+      #
+      # Nothing gates this condition. The clause manifest cannot pin a
+      # workflow's behaviour -- its header says why -- so if the decision is
+      # ever overturned, this comment is the only record that the exemption was
+      # deliberate.
+      #
+      # The decision's premise is that a pull-request body never enters git
+      # history. Where the squash commit message is taken from the pull-request
+      # body (`squash_merge_commit_message` set to `PR_BODY`), it does: an
+      # exempt bot body becomes the squash commit's message, and the push run
+      # scans it as a commit message. The hole is loud rather than silent -- the
+      # default branch goes red -- but it is a hole, and closing it means either
+      # setting that option away from `PR_BODY` or overturning the decision.
+      # Both are the owner's call, so neither is taken here.
+      # On a public repository that commit message is public. A related one:
+      # GitHub lets whoever merges rewrite the squash subject in the merge
+      # dialog, so that text is read by no pull-request-time gate.
       - name: The pull request body carries no attribution
         if: >-
           github.event_name == 'pull_request' &&
@@ -441,14 +454,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      # Every gate here refuses something PRESENT. None of them had an opinion
-      # about a rule going ABSENT, which is how a merge taking `main..branch` as a
-      # stale branch's residue reverted the attribution policy, the Dependabot cap
-      # and `CODEOWNERS` on another repository on 2026-09-12, with CI green
-      # throughout. Two of those three are pinned in the manifest. `CODEOWNERS` is
-      # not, and at `approvals=0` with no code-owner review required it enforces
-      # nothing here — so it is named rather than pinned, which is the honest
-      # shape: it is unguarded, and that is a choice.
+      # Every gate here refuses something PRESENT. None of them has an opinion
+      # about a rule going ABSENT: a merge that takes `main..branch` as a stale
+      # branch's residue can revert a policy file, a dependency-update cap or
+      # `CODEOWNERS` while every other check stays green.
+      # A rule nothing enforces -- `CODEOWNERS` where no code-owner review is
+      # required -- may be left out of the manifest on purpose: unpinned means
+      # unguarded, and that is a choice to name rather than hide.
       - name: Prove the clause check can fail
         run: .github/scripts/check-required-clauses.selftest.sh
       - name: Every clause this repository must carry is still there
