@@ -11,21 +11,21 @@
 # the decision is visible in the history rather than in a merge nobody read.
 #
 # Not a workflow's behaviour. Pinning a step by its text is a category error:
-# deleting the step and leaving a comment that quotes it satisfies the clause.
-# `check-aggregate-covers-jobs`-style coverage is what guards a deleted job; a
-# deleted step is guarded by nothing here, and that is stated rather than
-# papered over. See kodera-internal for the measurement.
+# deleting the step and leaving a comment that quotes it satisfies the clause,
+# and a fragment that occurs twice stays satisfied by the other copy when one
+# step is deleted. `check-aggregate-covers-jobs`-style coverage is what guards a
+# deleted job; a deleted step is guarded by nothing here, and that is stated
+# rather than papered over.
 
 # ── the attribution rule ────────────────────────────────────────────────────
-# Deleted for real on another repository on 2026-09-12, by a merge taking
-# `main..branch` as a stale branch's residue. Every check stayed green: the
-# attribution gate scans tracked files for the vendor name and had no opinion
-# about the policy mandating it going away.
+# A merge that takes `main..branch` as a stale branch's residue can delete this
+# rule with every check green: the attribution gate scans tracked files for the
+# vendor name and has no opinion about the policy mandating it going away.
 AGENTS.md :: ## Assistant attribution — hard rule
 AGENTS.md :: Never name an AI assistant, its vendor, or a model
 
 # ── the supply-chain cap ────────────────────────────────────────────────────
-# Reverted by the same merge on that repository. Without it `patterns: ['*']`
+# The same stale-residue merge can revert it. Without it `patterns: ['*']`
 # collects majors into the weekly bundle. Note the single quotes: this clause
 # pins YAML syntax, so a reformatting of that file needs it re-pinned.
 .github/dependabot.yml :: update-types: ['minor', 'patch']

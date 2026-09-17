@@ -20,19 +20,19 @@ on:
 permissions:
   contents: read
 
+# A pull request's runs share one group per pull request, and a newer run
+# cancels the older one: only the newest head's result matters there.
+#
+# Every other run -- a push to `main`, a tag push, a manual run -- gets a group
+# of its own, keyed on the run id, so nothing can cancel it. Turning
+# `cancel-in-progress` off is not enough on its own: it protects a run that has
+# STARTED, but a run still PENDING in a group is cancelled whenever a newer run
+# queues behind it. Keyed on the ref, a burst of three merges to `main` cancels
+# the middle one before it starts, and that commit is left with no completed
+# run at all -- no record that the gates ever passed on it, and its commit
+# messages read by nobody.
 concurrency:
-  group: ci-${{ github.ref }}
-  # Cancel superseded pull-request runs, never runs on `main`. Cancelling on
-  # `main` means a rapid second push can leave the branch with no completed run
-  # at all, and therefore no record that the gates ever passed on it.
-  #
-  # Unconditional until this change, and harmless while every gate read the
-  # TREE: a superseding run re-reads the same tree, so cancellation lost nothing
-  # durable. The commit-message gate below is the first surface that is
-  # per-commit and not cumulative — on a push it reads HEAD's message and only
-  # that — so a cancelled run means that commit's message is read by nobody,
-  # ever. This line is what keeps the hole recorded two comments down loud
-  # rather than silent.
+  group: ci-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -49,8 +49,9 @@ jobs:
       - name: Prove the dot-entry check can fail
         run: .github/scripts/check-tracked-dot-entries.selftest.sh
       # Development tooling keeps local configuration in a dot-directory at the
-      # repository root, and one `git add .` commits it -- here, into a public
-      # repository. `.git/info/exclude` protects only the clone it was typed in;
+      # repository root, and one `git add .` commits it -- on a public
+      # repository, into public history. `.git/info/exclude` protects only the
+      # clone it was typed in;
       # this check travels with the repository, so it protects every clone.
       - name: Every tracked dot-entry is on the allowlist
         run: .github/scripts/check-tracked-dot-entries.sh
@@ -253,12 +254,12 @@ jobs:
       # several independent ways of finding something and one bit cannot tell a
       # working branch from a silently broken one; the exit status because that
       # one bit is the whole of what this job consumes. Asserting only the
-      # message let the refusal be flipped to a pass while all 13 cases passed.
+      # message lets the refusal be flipped to a pass with every case passing.
       - name: Prove this check can fail
         run: .github/scripts/check-vendor-attribution.selftest.sh
       # Reads every tracked file as bytes, decodes base64 runs and inflates
-      # compressed PNG text chunks: both of the ways attribution actually
-      # arrived in this org are invisible to a recursive grep.
+      # compressed PNG text chunks: attribution hidden in image metadata or
+      # in base64 is invisible to a recursive grep.
       - name: No tracked file carries assistant attribution
         run: python3 .github/scripts/check-vendor-attribution.py .
 
@@ -275,16 +276,18 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # The branch's own commits have to be reachable, and the base sha the
-          # range starts from with them. No `ref:`: this action adds a
-          # `refs/pull/*` refspec only when `ref` starts with `refs/pull/`, so a
-          # bare sha from a FORK is in no fetched ref and the checkout fails.
-          # This repository is public, so fork pull requests are the normal case.
+          # The branch's own commits have to be reachable, and the sha each
+          # range below starts from with them: the pull request's base, the
+          # push's previous tip, or the default branch a new tag is read
+          # against. No `ref:`: this action adds a `refs/pull/*` refspec only
+          # when `ref` starts with `refs/pull/`, so a bare sha from a FORK is in
+          # no fetched ref and the checkout fails. On a public repository, fork
+          # pull requests are the normal case.
           fetch-depth: 0
       # The job above scans tracked files. `git ls-files` cannot see a commit
       # message, a branch name, a pull-request title or body, or a tag — and the
-      # rule names every one of them. This repository is public, so each of those
-      # is world-readable the moment it is pushed.
+      # rule names every one of them. On a public repository each of those is
+      # world-readable the moment it is pushed.
       - name: Prove these checks can fail
         run: .github/scripts/check-vendor-attribution.selftest.sh
       # Event data reaches the shell through `env:`, never interpolated into a
@@ -300,18 +303,97 @@ jobs:
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          # `before` only on a push. A `synchronize` pull-request event carries
+          # a `before` too, and it must not be mistaken for a push's.
+          BEFORE: ${{ github.event_name == 'push' && github.event.before || '' }}
+          PUSHED: ${{ github.sha }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           # On a pull request, every commit the branch adds — ending at the head
           # sha, not at the checked-out merge commit, whose message GitHub
-          # generates and nobody authored. Otherwise the head commit alone.
+          # generates and nobody authored.
+          #
+          # On a push, every commit the push added: `before..sha`. A push to
+          # `main` is normally one squash merge, and GitHub lets whoever merges
+          # rewrite the squash subject and body in the merge dialog — so that
+          # text is scanned by no pull-request-time gate, and this run is the
+          # only thing that reads it. But a push can carry several commits (an
+          # administrator bypassing protection, a tag moved forward), and
+          # reading only the tip lets every commit under it through unread.
+          #
+          # `before` is all zeros when the push CREATED the ref -- here, a new
+          # tag, since pushes run on no branch but `main` -- so there is no
+          # previous tip to start from. Reading the tagged commit alone there
+          # is a hole: a new tag on three commits `main` does not have carries
+          # the two under the tip through unread. So a created ref reads every
+          # commit reachable from it that the DEFAULT branch does not hold.
+          #
+          # Only the default branch, not every branch on `origin`: this workflow
+          # reads a branch's commits only through a pull request or a push to
+          # `main`, so a branch pushed with no pull request has never been read,
+          # and excluding it would let a tag on its commits pass unread. The
+          # default branch's remote-tracking ref must be in this clone
+          # (`fetch-depth: 0` fetches every branch); if it is not, or its name
+          # is empty, the step refuses rather than reading everything or
+          # nothing. The list goes into a variable first, so a `git rev-list`
+          # that failed stops the step instead of reading as an empty list.
+          #
+          # When that list is empty -- a release tag on a commit `main` already
+          # has -- the tagged commit alone is read, so an ordinary tag does not
+          # meet the empty-surface refusal. A manual run has no `before` and
+          # reads the checked-out commit alone.
+          #
+          # A force push, where `before` is not an ancestor of `sha`, needs no
+          # special case: `before..sha` is still every commit reachable from
+          # `sha` and not from `before`, which is the rewritten history. What
+          # it cannot survive is `before` being ABSENT from this clone: a tip
+          # force-pushed away is on no ref, so `fetch-depth: 0` does not bring
+          # it, and git would fail to resolve the range. That is refused below
+          # with its own message rather than left to read as an empty surface.
+          # A push that moves a ref BACKWARDS lists no commit at all, and the
+          # checker refuses that as "nothing was scanned".
+          #
+          # Both of those fail closed, and that is expected rather than a bug to
+          # route around: force-moving an ANNOTATED tag always lands in the
+          # first (`before` is then the old tag object, which no ref points at
+          # any more), and moving a tag back to an ancestor lands in the second.
+          # A default branch whose protection refuses force pushes never meets
+          # either.
           #
           # Two dots are right HERE and wrong for a diff. `git log A..B` is the
           # set of commits in B and not in A, which is the branch's own commits
           # whether or not A is an ancestor. The residue rule that says to use a
-          # merge base is about `git diff`. Do not "fix" this by analogy with it.
-          if [ -n "$BASE" ]; then range="$BASE..$HEAD_SHA"; else range="-1"; fi
-          git log --format=%B "$range" |
-            python3 .github/scripts/check-vendor-attribution.py --text "commit messages on this branch"
+          # merge base is about `git diff`, where two dots carry the base's newer
+          # content as deletions. Do not "fix" these ranges by analogy with it.
+          created=0000000000000000000000000000000000000000
+          if [ -n "$BASE" ]; then
+            set -- "$BASE..$HEAD_SHA"
+          elif [ -n "$BEFORE" ] && [ "$BEFORE" != "$created" ]; then
+            if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+              echo "::error::the previous tip $BEFORE is not in this clone," \
+                "so the commits this push added cannot be listed and none was scanned"
+              exit 1
+            fi
+            set -- "$BEFORE..$PUSHED"
+          elif [ -n "$BEFORE" ]; then
+            held="refs/remotes/origin/$DEFAULT_BRANCH"
+            if [ -z "$DEFAULT_BRANCH" ] || ! git rev-parse --verify --quiet "$held^{commit}" >/dev/null; then
+              echo "::error::'$held' is not in this clone, so the commits this new ref" \
+                "brings cannot be told from the default branch's and none was scanned"
+              exit 1
+            fi
+            unread="$(git rev-list "$PUSHED" --not "$held")"
+            if [ -n "$unread" ]; then
+              set -- "$PUSHED" --not "$held"
+            else
+              set -- -1 "$PUSHED"
+            fi
+          else
+            set -- -1
+          fi
+          git log --format=%B "$@" |
+            python3 .github/scripts/check-vendor-attribution.py \
+              --text "commit messages on this branch"
       # Conditional on the event rather than tolerant of an empty surface.
       # `--allow-empty` on the title would have absorbed a typo in the field name
       # for good: `.titel` is empty on every event, reads as "not a pull request",
@@ -324,21 +406,33 @@ jobs:
           printf '%s' "$TITLE" |
           python3 .github/scripts/check-vendor-attribution.py
           --text "pull request title"
-      # The body keeps `--allow-empty` — GitHub requires a title and not a body —
-      # and a bot's body is exempt, which is owner decision B4 (2026-09-09) as
-      # implemented in kodera-internal's merge gate: Dependabot quotes an upstream
-      # changelog it did not write. The title, commits and diff are still scanned
-      # for a bot. Nothing gates this condition, so this comment is the record
-      # that the exemption is deliberate.
+      # The body keeps `--allow-empty`: GitHub requires a title and does not
+      # require a body, so an empty body here is a real empty body.
       #
-      # B4's premise is that a pull-request body never enters git history. On this
-      # repository it does: `squash_merge_commit_message` is `PR_BODY`, so an
-      # exempt bot body becomes the squash commit's message, and the push-to-`main`
-      # run scans it as a commit message. Here that lands on a PUBLIC `main`.
-      # Closing it properly means setting that option away from `PR_BODY` or
-      # overturning B4; both are the owner's call, so neither is taken here.
-      # A related one: GitHub lets whoever merges rewrite the squash subject in
-      # the merge dialog, so that text is read by no pull-request-time gate.
+      # A bot's body is exempt, by an organisation decision that the merge
+      # tooling applies the same way: Dependabot quotes an upstream changelog it
+      # did not write. Without the exemption the merge tooling and CI would
+      # disagree, and where CI is the only required check it is the one that
+      # decides -- so a bot pull request quoting a vendor name in a changelog
+      # would be unmergeable, and the bot would rewrite the body on every
+      # update. The title, the commits and the diff are still scanned for a bot.
+      #
+      # Nothing gates this condition. The clause manifest cannot pin a
+      # workflow's behaviour -- its header says why -- so if the decision is
+      # ever overturned, this comment is the only record that the exemption was
+      # deliberate.
+      #
+      # The decision's premise is that a pull-request body never enters git
+      # history. Where the squash commit message is taken from the pull-request
+      # body (`squash_merge_commit_message` set to `PR_BODY`), it does: an
+      # exempt bot body becomes the squash commit's message, and the push run
+      # scans it as a commit message. The hole is loud rather than silent -- the
+      # default branch goes red -- but it is a hole, and closing it means either
+      # setting that option away from `PR_BODY` or overturning the decision.
+      # Both are the owner's call, so neither is taken here.
+      # On a public repository that commit message is public. A related one:
+      # GitHub lets whoever merges rewrite the squash subject in the merge
+      # dialog, so that text is read by no pull-request-time gate.
       - name: The pull request body carries no attribution
         if: >-
           github.event_name == 'pull_request' &&
@@ -360,14 +454,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      # Every gate here refuses something PRESENT. None of them had an opinion
-      # about a rule going ABSENT, which is how a merge taking `main..branch` as a
-      # stale branch's residue reverted the attribution policy, the Dependabot cap
-      # and `CODEOWNERS` on another repository on 2026-09-12, with CI green
-      # throughout. Two of those three are pinned in the manifest. `CODEOWNERS` is
-      # not, and at `approvals=0` with no code-owner review required it enforces
-      # nothing here — so it is named rather than pinned, which is the honest
-      # shape: it is unguarded, and that is a choice.
+      # Every gate here refuses something PRESENT. None of them has an opinion
+      # about a rule going ABSENT: a merge that takes `main..branch` as a stale
+      # branch's residue can revert a policy file, a dependency-update cap or
+      # `CODEOWNERS` while every other check stays green.
+      # A rule nothing enforces -- `CODEOWNERS` where no code-owner review is
+      # required -- may be left out of the manifest on purpose: unpinned means
+      # unguarded, and that is a choice to name rather than hide.
       - name: Prove the clause check can fail
         run: .github/scripts/check-required-clauses.selftest.sh
       - name: Every clause this repository must carry is still there
