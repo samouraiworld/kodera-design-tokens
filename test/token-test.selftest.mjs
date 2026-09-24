@@ -8,7 +8,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative, sep } from 'node:path';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 import preset from '../dist/tailwind.preset.js';
 import { assertClassesResolve, sourceFiles, familiesOf, resolvesInPreset, scanClasses } from './token-test.mjs';
@@ -77,4 +79,85 @@ test('a scan that matches nothing is an error, never a pass', () => {
 
 test('a preset with no colours is an error, never a pass', () => {
   assert.throws(() => assertClassesResolve({ files: [join(RESOLVES, 'Good.tsx')], preset: { theme: {} } }), /nothing could ever be judged against it/);
+});
+
+// The walk skips `node_modules`, `dist` and `.git` only as whole path segments
+// below the root it was given. It used to test `/node_modules|dist|\.git/`
+// against the whole absolute path, so each tree below lost files it should
+// have scanned, and the guard judged fewer files without saying so. The trees
+// extend the three in the console's walk test (open kodera-console #125) with
+// `dist.ts`, `.github/` and a nested `node_modules`, so the two walks can be
+// held to one behaviour.
+function walked(files, under = '') {
+  const base = mkdtempSync(join(tmpdir(), 'source-walk-'));
+  try {
+    const root = join(base, under);
+    for (const file of files) {
+      mkdirSync(dirname(join(root, file)), { recursive: true });
+      writeFileSync(join(root, file), '');
+    }
+    return sourceFiles(root)
+      .map((path) => relative(root, path).split(sep).join('/'))
+      .sort();
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
+}
+
+test('the walk scans a name that only contains a skipped name', () => {
+  assert.deepEqual(
+    walked([
+      'features/distribution/Card.tsx',
+      'features/redistribute.ts',
+      'features/dist.ts',
+      'app/.github-like/x.ts',
+      '.github/scripts/check.ts',
+      'ui/Button.tsx',
+    ]),
+    [
+      '.github/scripts/check.ts',
+      'app/.github-like/x.ts',
+      'features/dist.ts',
+      'features/distribution/Card.tsx',
+      'features/redistribute.ts',
+      'ui/Button.tsx',
+    ],
+  );
+});
+
+test('the walk skips node_modules, dist and .git as whole segments, at any depth', () => {
+  assert.deepEqual(
+    walked([
+      'node_modules/pkg/index.js',
+      'features/dist/bundle.js',
+      'features/nested/node_modules/pkg/index.js',
+      '.git/hooks/pre-commit.js',
+      'ui/Button.tsx',
+    ]),
+    ['ui/Button.tsx'],
+  );
+});
+
+test('the walk judges only the segments below the root, not the checkout around it', () => {
+  assert.deepEqual(walked(['features/Home.tsx'], join('dist', '.github', 'node_modules', 'src')), ['features/Home.tsx']);
+});
+
+test('a caller-supplied ignore replaces the default and is tested against the whole path', () => {
+  const base = mkdtempSync(join(tmpdir(), 'source-walk-'));
+  try {
+    for (const file of ['dist/bundle.js', 'features/Home.tsx', 'features/skip-me/Card.tsx']) {
+      mkdirSync(dirname(join(base, file)), { recursive: true });
+      writeFileSync(join(base, file), '');
+    }
+    const listed = (options) =>
+      sourceFiles(base, options)
+        .map((path) => relative(base, path).split(sep).join('/'))
+        .sort();
+    // `dist` is walked: the segment rule is the default, and `ignore` replaces it.
+    assert.deepEqual(listed({ ignore: /features\/skip-me/ }), ['dist/bundle.js', 'features/Home.tsx']);
+    // A regex that matches nothing walks everything, as the console's call does.
+    assert.deepEqual(listed({ ignore: /(?!)/ }), ['dist/bundle.js', 'features/Home.tsx', 'features/skip-me/Card.tsx']);
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
 });
