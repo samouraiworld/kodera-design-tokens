@@ -8,6 +8,40 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 Nothing yet.
 
+## v0.2.0
+
+One pull request since `v0.1.0`, **#30** (`fix/dark-action-hover-and-source-walk`), which changes `tokens.json`, `dist/` and `test/token-test.mjs`. It is a minor, not a patch: `RELEASE.md`, step 5, classes a value change alone as a minor, and a consumer that renders the dark or black theme sees a different hover fill.
+
+### Decided by
+
+`RELEASE.md`, step 4: every pull request in `git log v0.1.0..main -- tokens.json scripts/lib/spec.mjs`, and the person who decided what it changed.
+
+- **#30** (`fix/dark-action-hover-and-source-walk`): @zxxma (owner ruling of 2026-09-24, "fix dark/black action-hover to the mock's value")
+
+### Token values changed — design decisions
+
+- `semantic.theme.dark.action-hover` and `semantic.theme.black.action-hover`: `{color.cobalt.500}` (`#2B4BDB`) → `#4C6BF0`, the high-fidelity mock's `--c-action-hover` in both themes. This reverses the departure #18 recorded under `v0.1.0`: hover lightens from `action` (`#3B57DE`) again instead of darkening. The two primitives #18 removed return, `color.theme-dark.action-hover` and `color.theme-black.action-hover`, both `#4C6BF0`, and the semantic roles reference them; the build therefore adds two CSS custom properties, `--theme-dark-action-hover` and `--theme-black-action-hover`, and renames or removes nothing. The light theme is unchanged. The fixture in `test/fixtures/themes.json` moves with the source, and `docs/specs/shell-themes.md` records the reversal.
+
+### Contrast register
+
+Every row involving the dark or black `action-hover`, before and after:
+
+| Row | Kind | Before | After | Bar |
+|---|---|---|---|---|
+| `theme.dark/on-inverse/action-hover` | normative | 6.23:1 | **4.18:1** | 4.5:1 |
+| `theme.black/on-inverse/action-hover` | normative | 6.40:1 | **4.29:1** | 4.5:1 |
+| `theme.dark/white/action-hover` | capability measurement | 6.70:1 | 4.50:1 (4.498) | 4.5:1, for comparison |
+| `theme.black/white/action-hover` | capability measurement | 6.70:1 | 4.50:1 (4.498) | 4.5:1, for comparison |
+| `theme.dark/action-hover/surface` | capability measurement | 2.51:1 | 3.73:1 | 4.5:1, for comparison |
+| `theme.black/action-hover/surface` | capability measurement | 2.92:1 | 4.35:1 | 4.5:1, for comparison |
+
+- The two normative rows are the button label on a hovered primary button, and they fall below 4.5:1. Both are added to `contrast-known-failures.json` as **allowed, not exempt**, with the owner ruling as their decision; neither row's minimum moves, and the gate fails if either colour moves or the pair starts passing. At rest, on `action`, the label still passes (5.41:1 dark, 5.56:1 black). The allowlist goes from four exempt entries to four exempt and two allowed; `check:contrast` reads 276 pairs — 262 pass, 2 allowed, 4 exempt, 8 forbidden, 0 fail.
+- No row measures it, but a prose figure moves with it: the dark and black focus ring's core (`#A9BBFF`) against a hovered primary button goes from 3.59:1 to 2.41:1. The ring against the control it surrounds was already an unmeasured gap (`test/color-math.selftest.mjs`, `docs/specs/shell-themes.md`); the figure there is updated.
+
+### Fixed
+
+- `sourceFiles` in `test/token-test.mjs`, the walk consumers pass to `assertClassesResolve`, skipped any path whose **whole absolute path** matched `/node_modules|dist|\.git/`: `src/features/distribution/`, a file named `dist.ts`, anything under `.github`, and every file of a checkout that sits under a `dist` directory went unscanned, with no error. It now skips `node_modules`, `dist` and `.git` only as whole path segments below the root it is given — the behaviour of the console's local copy, `guardedSourceFiles` (kodera-console #125), so the console can drop it. The skipped names are exported as `SKIPPED_SEGMENTS` and can be replaced with a `skip` option. `ignore` is now an extra whole-path filter with no default, and no longer replaces the segment rule. Three tests in `test/token-test.selftest.mjs`; two of them fail on the old walk.
+
 ## v0.1.0
 
 The first tag carries everything on `main` at the commit it points at. **#1** (`chore/bootstrap`) created the package from the design drop, and the sections below describe what changed since. Five merged pull requests after it changed `dist/`, `tokens.json`, `test/token-test.mjs` or `package.json`: **#17** (`feat/control-selection-ring-token`); **#9** (`fix/tertiary-text-contrast`), which carried the contrast decisions first opened as #6 (`feat/contrast-decisions`) — #6 was closed unmerged, so #9 is the single commit that landed them; **#14** (`chore/package-private-and-release-procedure`), which wrote this file and `RELEASE.md` and is recorded under "Added" at the end; **#18** (`feat/complete-shell-theme-tokens`), the three shell themes; and **#20** (`feat/theme-the-focus-ring`), the themed focus ring, whose entries the sections below mark. **#15** (`docs/contrast-register-hardening`) changed the contrast register and its gate. The other eleven — #4, #7, #8, #13, #16, #19, #21, #22, #23, #24 and #25 — changed how this repository is checked and maintained; none of the twelve touched any of those four paths.

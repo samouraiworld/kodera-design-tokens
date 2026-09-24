@@ -97,6 +97,7 @@
   --theme-dark-on-inverse: #F3F7FB;
   --theme-dark-on-inverse-dim: #9EADBC;
   --theme-dark-action: #3B57DE;
+  --theme-dark-action-hover: #4C6BF0;
   --theme-dark-accent-soft: #1C2540;
   --theme-dark-accent-ink: #A9BBFF;
   --theme-dark-ok-on-dark: #7FD1A3;
@@ -145,6 +146,7 @@
   --theme-black-on-inverse: #F7FAFC;
   --theme-black-on-inverse-dim: #A3AFBC;
   --theme-black-action: #3B57DE;
+  --theme-black-action-hover: #4C6BF0;
   --theme-black-accent-soft: #141A2E;
   --theme-black-accent-ink: #A9BBFF;
   --theme-black-ok-on-dark: #7FD1A3;
@@ -359,7 +361,7 @@
   --c-on-inverse: #F3F7FB;
   --c-on-inverse-dim: #9EADBC;
   --c-action: #3B57DE;
-  --c-action-hover: #2B4BDB;
+  --c-action-hover: #4C6BF0;
   --c-accent-soft: #1C2540;
   --c-accent-ink: #A9BBFF;
   --c-ok-on-dark: #7FD1A3;
@@ -415,7 +417,7 @@
   --c-on-inverse: #F7FAFC;
   --c-on-inverse-dim: #A3AFBC;
   --c-action: #3B57DE;
-  --c-action-hover: #2B4BDB;
+  --c-action-hover: #4C6BF0;
   --c-accent-soft: #141A2E;
   --c-accent-ink: #A9BBFF;
   --c-ok-on-dark: #7FD1A3;

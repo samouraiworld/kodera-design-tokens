@@ -203,8 +203,10 @@ const SHELL_CONTAINERS = new Set(['page', 'surface', 'sunken', 'muted', 'muted-2
 // direction today. In the light theme the core `#2340C4` is `light.action-hover`
 // exactly, so a focused primary button draws its ring at 1.20:1 against its
 // resting fill and 1.00:1 against its hovered one; dark and black draw 3.12:1
-// and 3.59:1 on the same two fills. That is a separate gap, and the fills are
-// listed here rather than left out silently, so its absence is a decision.
+// and 2.41:1 on the same two fills, the second against the reference #4C6BF0
+// hover fill the owner restored on 2026-09-24. That is a separate gap, and the
+// fills are listed here rather than left out silently, so its absence is a
+// decision.
 const NOT_A_GROUND = new Set([
   'page-grad',
   'border', 'border-soft', 'border-strong', 'rail-line',

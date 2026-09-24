@@ -36,6 +36,24 @@
       "min": 3.0,
       "reason": "Exempt, decorative only: the card's extent is carried by shadow.card (0 8px 24px -16px rgba(47,58,69,.25)), not by the 1 px slate.200 line. SC 1.4.11 applies to a boundary that is the only way to perceive a component; this one is not, and darkening it to 3:1 would put a mid-grey rule around every white card floating on the frost page.",
       "decision": "Decided, not pending: the card border stays slate.200 and this row is the written record of that. It becomes a hard failure the day a card ships without shadow.card, because then the line is the only boundary there is. border.input took the opposite ruling in the same pass — a control the user has to find is not decorative — which is why the two rows part company here."
+    },
+    {
+      "id": "theme.dark/on-inverse/action-hover",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.action-hover",
+      "ratio": 4.18,
+      "min": 4.5,
+      "reason": "Allowed, not exempt: this is the label of a real button, and 4.5:1 is the bar it misses. The owner ruled on 2026-09-24 to set the dark theme's hover fill to the high-fidelity mock's #4C6BF0 (design handoff, Couleurs, --c-action-hover), reversing the shared cobalt.500 mapping #18 had decided. Under that fill the dark on-inverse label (#F3F7FB) measures 4.18:1 on hover; at rest, on action (#3B57DE), it measures 5.41:1 and passes. The black theme carries the same ruling at 4.29:1.",
+      "decision": "Decided by @zxxma (owner ruling of 2026-09-24: fix dark/black action-hover to the mock's value), not pending. The entry is deleted when the hover label clears 4.5:1 again, by a darker hover fill or a lighter label, and the gate forces that deletion the moment it does. The gate also fails it if the pair is re-pointed, its minimum changes, or the measured ratio moves."
+    },
+    {
+      "id": "theme.black/on-inverse/action-hover",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.action-hover",
+      "ratio": 4.29,
+      "min": 4.5,
+      "reason": "Allowed, not exempt: this is the label of a real button, and 4.5:1 is the bar it misses. The owner ruled on 2026-09-24 to set the black theme's hover fill to the high-fidelity mock's #4C6BF0 (design handoff, Couleurs, --c-action-hover), reversing the shared cobalt.500 mapping #18 had decided. Under that fill the black on-inverse label (#F7FAFC) measures 4.29:1 on hover; at rest, on action (#3B57DE), it measures 5.56:1 and passes. The dark theme carries the same ruling at 4.18:1.",
+      "decision": "Decided by @zxxma (owner ruling of 2026-09-24: fix dark/black action-hover to the mock's value), not pending. The entry is deleted when the hover label clears 4.5:1 again, by a darker hover fill or a lighter label, and the gate forces that deletion the moment it does. The gate also fails it if the pair is re-pointed, its minimum changes, or the measured ratio moves."
     }
   ]
 }
