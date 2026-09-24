@@ -1,6 +1,6 @@
 {
   "name": "@samourai/design-tokens",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "description": "Design tokens of Kodera: DTCG source, generated CSS variables and Tailwind preset, contrast gate",
   "license": "UNLICENSED",
   "private": true,

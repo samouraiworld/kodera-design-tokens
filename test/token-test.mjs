@@ -27,32 +27,30 @@ import { join } from 'node:path';
 /** The utility prefixes that take a colour token. */
 export const DEFAULT_PREFIXES = ['bg', 'text', 'border', 'ring', 'fill', 'stroke'];
 
-/** The names a walk never enters, matched as whole path segments below the scanned root. */
-export const SKIPPED_SEGMENTS = Object.freeze(['node_modules', 'dist', '.git']);
+// The names a walk never enters, matched as whole path segments below the scanned root.
+const SKIPPED_SEGMENTS = new Set(['node_modules', 'dist', '.git']);
 
 /**
  * Recursively list source files under `dir`, `.ts .tsx .js .jsx .astro .html` by default.
  *
- * A directory or file is skipped when its own name is exactly one of `skip`.
- * Only the segments below `dir` are judged, never the path around it: the walk
- * used to test `/node_modules|dist|\.git/` against the whole path, so it
- * skipped `src/features/distribution/`, a file named `dist.ts`, anything under
- * `.github`, and every file of a checkout that sits under a `dist` directory —
- * silently, since a walk that returns fewer files is not an error.
+ * By default a directory or file is skipped when its own name is exactly
+ * `node_modules`, `dist` or `.git`. Only the segments below `dir` are judged,
+ * never the path around it: the default used to be `/node_modules|dist|\.git/`
+ * tested against the whole path, which skipped `src/features/distribution/`, a
+ * file named `dist.ts`, anything under `.github`, and every file of a checkout
+ * that sits under a `dist` directory — silently, since a walk that returns
+ * fewer files is not an error.
  *
- * `ignore`, when given, is an extra filter tested against the whole path.
- * Nothing is ignored that way by default, and it no longer replaces the
- * segment rule: a caller that passed `ignore` to walk everything now passes
- * `skip: []` as well.
+ * `ignore`, when given, replaces that default, as it always did, and is tested
+ * against the whole path.
  */
-export function sourceFiles(dir, { extensions = /\.(?:tsx?|jsx?|astro|html)$/, skip = SKIPPED_SEGMENTS, ignore } = {}) {
-  const skipped = new Set(skip);
+export function sourceFiles(dir, { extensions = /\.(?:tsx?|jsx?|astro|html)$/, ignore } = {}) {
+  const skip = ignore ? (name, path) => ignore.test(path) : (name) => SKIPPED_SEGMENTS.has(name);
   const out = [];
   const walk = (current) => {
     for (const entry of readdirSync(current, { withFileTypes: true })) {
-      if (skipped.has(entry.name)) continue;
       const path = join(current, entry.name);
-      if (ignore?.test(path)) continue;
+      if (skip(entry.name, path)) continue;
       if (entry.isDirectory()) walk(path);
       else if (extensions.test(entry.name)) out.push(path);
     }
