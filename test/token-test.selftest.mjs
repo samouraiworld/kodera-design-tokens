@@ -84,9 +84,10 @@ test('a preset with no colours is an error, never a pass', () => {
 // The walk skips `node_modules`, `dist` and `.git` only as whole path segments
 // below the root it was given. It used to test `/node_modules|dist|\.git/`
 // against the whole absolute path, so each tree below lost files it should
-// have scanned, and the guard judged fewer files without saying so. The same
-// three trees as the console's own walk test (kodera-console #125), so the two
-// can be held to one behaviour until the console drops its copy.
+// have scanned, and the guard judged fewer files without saying so. The trees
+// extend the three in the console's walk test (open kodera-console #125) with
+// `dist.ts`, `.github/` and a nested `node_modules`, so the two walks can be
+// held to one behaviour.
 function walked(files, under = '') {
   const base = mkdtempSync(join(tmpdir(), 'source-walk-'));
   try {
@@ -139,4 +140,24 @@ test('the walk skips node_modules, dist and .git as whole segments, at any depth
 
 test('the walk judges only the segments below the root, not the checkout around it', () => {
   assert.deepEqual(walked(['features/Home.tsx'], join('dist', '.github', 'node_modules', 'src')), ['features/Home.tsx']);
+});
+
+test('a caller-supplied ignore replaces the default and is tested against the whole path', () => {
+  const base = mkdtempSync(join(tmpdir(), 'source-walk-'));
+  try {
+    for (const file of ['dist/bundle.js', 'features/Home.tsx', 'features/skip-me/Card.tsx']) {
+      mkdirSync(dirname(join(base, file)), { recursive: true });
+      writeFileSync(join(base, file), '');
+    }
+    const listed = (options) =>
+      sourceFiles(base, options)
+        .map((path) => relative(base, path).split(sep).join('/'))
+        .sort();
+    // `dist` is walked: the segment rule is the default, and `ignore` replaces it.
+    assert.deepEqual(listed({ ignore: /features\/skip-me/ }), ['dist/bundle.js', 'features/Home.tsx']);
+    // A regex that matches nothing walks everything, as the console's call does.
+    assert.deepEqual(listed({ ignore: /(?!)/ }), ['dist/bundle.js', 'features/Home.tsx', 'features/skip-me/Card.tsx']);
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
 });
