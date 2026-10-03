@@ -25,7 +25,11 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 /** The utility prefixes that take a colour token. */
-export const DEFAULT_PREFIXES = ['bg', 'text', 'border', 'ring', 'fill', 'stroke'];
+export const DEFAULT_PREFIXES = [
+  'bg', 'text', 'border', 'divide',
+  'border-t', 'border-r', 'border-b', 'border-l', 'border-x', 'border-y', 'border-s', 'border-e',
+  'ring', 'fill', 'stroke',
+];
 
 // The names a walk never enters, matched as whole path segments below the scanned root.
 const SKIPPED_SEGMENTS = new Set(['node_modules', 'dist', '.git']);
@@ -100,11 +104,17 @@ export function resolvesInPreset(preset, key) {
  */
 export function scanClasses(source, { families, prefixes = DEFAULT_PREFIXES }) {
   const found = [];
-  for (const prefix of prefixes) {
-    for (const match of source.matchAll(new RegExp(String.raw`\b${prefix}-([a-z][a-z0-9-]*)`, 'g'))) {
-      const rest = match[1];
-      if (families.has(rest.split('-')[0])) found.push({ prefix, rest, className: `${prefix}-${rest}` });
-    }
+  if (prefixes.length === 0) return found;
+  // A single longest-prefix match keeps border-l-* distinct from border-*.
+  // A word boundary also matches after a hyphen, so it would mistake a token
+  // such as c-text-c-muted for a second utility. Never start inside a name.
+  const utilities = [...prefixes]
+    .sort((a, b) => b.length - a.length)
+    .map((prefix) => prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|');
+  for (const match of source.matchAll(new RegExp(String.raw`(?<![\w-])(${utilities})-([a-z][a-z0-9-]*)`, 'g'))) {
+    const [, prefix, rest] = match;
+    if (families.has(rest.split('-')[0])) found.push({ prefix, rest, className: `${prefix}-${rest}` });
   }
   return found;
 }

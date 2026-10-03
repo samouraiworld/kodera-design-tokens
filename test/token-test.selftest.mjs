@@ -7,9 +7,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, relative, sep } from 'node:path';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 
 import preset from '../dist/tailwind.preset.js';
@@ -161,3 +161,113 @@ test('a caller-supplied ignore replaces the default and is tested against the wh
     rmSync(base, { recursive: true, force: true });
   }
 });
+
+// Keep acceptance independent of DEFAULT_PREFIXES so an omitted utility cannot
+// erase its own test. Every refusal has a valid match from an existing prefix.
+const ADDED_PREFIXES = ['divide', 'border-t', 'border-r', 'border-b', 'border-l', 'border-x', 'border-y', 'border-s', 'border-e'];
+
+function withSource(source, check) {
+  const root = mkdtempSync(join(tmpdir(), 'token-resolution-'));
+  try {
+    const file = join(root, 'Classes.tsx');
+    writeFileSync(file, source);
+    return check(file);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+}
+
+function rejectsMissingRole(guard, prefix) {
+  withSource(`bg-c-border-soft hover:${prefix}-c-missing/50`, (file) => {
+    assert.throws(
+      () => guard({ files: [file], preset }),
+      (error) => {
+        assert.equal(error.message,
+          '1 Tailwind class(es) name a token family but resolve to no token. ' +
+          'Each emits no CSS and no error at build time:\n  ' +
+          `${file}: ${prefix}-c-missing → no token "c-missing" in the preset`);
+        return true;
+      },
+      `${prefix} must reject its missing role beside a valid existing class`,
+    );
+  });
+}
+
+for (const prefix of ADDED_PREFIXES) {
+  test(`${prefix} rejects a missing role beside a valid existing class`, () => {
+    rejectsMissingRole(assertClassesResolve, prefix);
+  });
+
+  test(`${prefix} resolves theme roles with variants and opacity`, () => {
+    withSource(`bg-c-border-soft ${prefix}-c-border-soft md:hover:!${prefix}-c-bad/50`, (file) => {
+      const report = assertClassesResolve({ files: [file], preset });
+      assert.deepEqual(report.matched.sort(), ['bg-c-border-soft', `${prefix}-c-border-soft`, `${prefix}-c-bad`].sort());
+    });
+  });
+}
+
+test('new utilities skip non-colour classes and unrelated families', () => {
+  withSource('bg-c-border-soft border-l-2 divide-y divide-y-2 border-x-0 border-s-[3px] divide-dashed divide-coral-line border-e-coral-line', (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset }).matched, ['bg-c-border-soft']);
+  });
+});
+
+test('caller prefixes replace defaults and accept custom multi-segment utilities', () => {
+  withSource('outline-c-border-soft acme-border-c-bad divide-c-missing border-l-c-missing', (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset, prefixes: ['outline', 'acme-border'] }).matched,
+      ['outline-c-border-soft', 'acme-border-c-bad']);
+  });
+  withSource('bg-c-border-soft divide-c-missing border-l-c-missing', (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset, prefixes: ['bg'] }).matched, ['bg-c-border-soft']);
+  });
+});
+
+test('custom families and overlapping prefixes use the whole utility', () => {
+  const custom = { theme: { colors: { brand: { DEFAULT: '#fff', soft: '#eee' }, l: { DEFAULT: '#fff' } } } };
+  withSource('divide-brand border-l-brand-soft', (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset: custom }).matched.sort(), ['border-l-brand-soft', 'divide-brand']);
+  });
+  // An explicit caller override keeps border-l as a colour in family l.
+  withSource('border-l', (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset: custom, prefixes: ['border'] }).matched, ['border-l']);
+  });
+});
+
+test('utility-like role suffixes are never scanned as separate classes', () => {
+  const custom = { theme: { extend: { colors: {
+    'c-text-c-missing': '#fff', 'c-border-l-c-missing': '#fff', 'c-divide-c-missing': '#fff',
+  } } } };
+  const classes = ['bg-c-text-c-missing', 'divide-c-border-l-c-missing', 'border-l-c-divide-c-missing'];
+  withSource(classes.join(' '), (file) => {
+    assert.deepEqual(assertClassesResolve({ files: [file], preset: custom }).matched.sort(), classes.sort());
+  });
+  assert.deepEqual(scanClasses('unrelated-divide-c-missing unrelated-border-l-c-missing', { families: new Set(['c']) }), []);
+});
+
+test('new coverage preserves minimum file and match floors', () => {
+  withSource('divide-c-border-soft', (file) => {
+    assert.throws(() => assertClassesResolve({ files: [file], preset, minFiles: 2 }), /scanned 1 file\(s\), expected at least 2/);
+    assert.throws(() => assertClassesResolve({ files: [file], preset, minMatches: 2 }), /matched 1 colour class\(es\), expected at least 2/);
+  });
+});
+
+for (const prefix of ADDED_PREFIXES) {
+  test(`omitting ${prefix} independently defeats its missing-role acceptance`, async () => {
+    const root = mkdtempSync(join(tmpdir(), 'token-omission-'));
+    try {
+      const original = readFileSync(join(HERE, 'token-test.mjs'), 'utf8');
+      const entry = `'${prefix}',`;
+      assert.equal(original.split(entry).length, 2, 'mutation must remove exactly one default entry');
+      const mutant = join(root, 'guard.mjs');
+      writeFileSync(mutant, original.replace(entry, ''));
+      const guard = await import(pathToFileURL(mutant).href);
+      assert.throws(() => rejectsMissingRole(guard.assertClassesResolve, prefix), {
+        code: 'ERR_ASSERTION',
+        operator: 'throws',
+        message: `Missing expected exception: ${prefix} must reject its missing role beside a valid existing class`,
+      });
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+}
