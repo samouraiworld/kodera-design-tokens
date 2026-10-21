@@ -39,6 +39,21 @@ if (!themeGroups || Object.keys(themeGroups).join(',') !== THEMES.join(',')) {
   throw new Error('expected complete theme set: light, dark, black');
 }
 const themeRoles = Object.keys(themeGroups.light);
+
+// Elevation is themed like the roles above, in a group of its own: a shadow is
+// not a colour, and the `--c-*` roles are the colour contract
+// (docs/specs/shell-themes.md). Same three themes, same levels in each.
+const elevationGroups = tree.semantic?.elevation;
+if (!elevationGroups || Object.keys(elevationGroups).filter((k) => !k.startsWith('$')).join(',') !== THEMES.join(',')) {
+  throw new Error('expected elevation for the complete theme set: light, dark, black');
+}
+const elevationLevels = Object.keys(elevationGroups.light).filter((k) => !k.startsWith('$'));
+if (!elevationLevels.length) throw new Error('light: no elevation level');
+for (const name of THEMES) {
+  if (Object.keys(elevationGroups[name]).filter((k) => !k.startsWith('$')).join(',') !== elevationLevels.join(',')) {
+    throw new Error(`${name}: incomplete elevation level set`);
+  }
+}
 if (!themeRoles.length) throw new Error('light: incomplete theme role set');
 for (const name of THEMES) {
   if (Object.keys(themeGroups[name]).join(',') !== themeRoles.join(',')) {
@@ -91,11 +106,14 @@ const CSS_PREFIX = {
   shadow: 'shadow',
   'motion.duration': 'dur',
   'motion.easing': 'ease',
+  breakpoint: 'breakpoint',
 };
 
 function cssName(path) {
   if (CSS_ALIASES[path]) return CSS_ALIASES[path];
   if (path.startsWith('semantic.theme.')) return `c-${path.split('.').slice(3).join('-')}`;
+  // Declared once per theme block, so the name carries no theme.
+  if (path.startsWith('semantic.elevation.')) return `elevation-${path.split('.').slice(3).join('-')}`;
   return mechanicalName(path);
 }
 
@@ -138,7 +156,10 @@ function cssValue(token) {
     case 'cubicBezier':
       return `cubic-bezier(${value.join(', ')})`;
     case 'shadow': {
-      const { offsetX, offsetY, blur, spread, color } = value;
+      const { offsetX, offsetY, blur, spread } = value;
+      // The colour may be a reference to a colour token (DTCG composite).
+      const color = resolveValue(value.color, index);
+      parseColor(color);
       return `${offsetX} ${offsetY} ${blur} ${spread} ${color}`;
     }
     case 'gradient': {
@@ -244,6 +265,7 @@ function buildCss() {
     ['radius', pick('radius').map(declare)],
     ['elevation', pick('shadow').map(declare)],
     ['motion', pick('motion').map(declare)],
+    ['breakpoints (min-width, mobile-first; not usable inside a media query)', pick('breakpoint').map(declare)],
     ['shell geometry', [...pick('semantic.layout'), ...pick('component.shell')].map(declare)],
   ];
 
@@ -254,7 +276,10 @@ function buildCss() {
   const themes = THEMES.map((name) => {
     const selector = name === 'light' ? ':root, [data-theme="light"]' : `[data-theme="${name}"]`;
     const values = themeRoles.map((role) => `  --c-${role}: ${cssValue(byPath.get(`semantic.theme.${name}.${role}`))};`);
-    return `${selector} {\n${[...values, ...focusRingDeclarations(name)].join('\n')}\n}`;
+    const elevation = elevationLevels.map(
+      (level) => `  --elevation-${level}: ${cssValue(byPath.get(`semantic.elevation.${name}.${level}`))};`,
+    );
+    return `${selector} {\n${[...values, ...focusRingDeclarations(name), ...elevation].join('\n')}\n}`;
   }).join('\n\n');
 
   return `${HEADER}\n:root {\n${body}\n}\n\n/* Complete shell themes, and the focus ring, which follows them; the legacy\n   variables above retain their values. */\n${themes}\n`;
@@ -339,9 +364,18 @@ function buildPreset() {
     if (byPath.get(`semantic.theme.light.${role}`).type === 'color') colors[`c-${role}`] = `var(--c-${role})`;
   }
 
+  // The themed shadow primitives are implementation values, like the theme
+  // colour primitives: consumers use the elevation levels, each a `var()` so it
+  // follows `[data-theme]` instead of freezing the light theme's shadow.
   const shadows = Object.fromEntries(
-    pick('shadow').map((t) => [t.path.slice('shadow.'.length), cssValue(t)]),
+    pick('shadow')
+      .filter((t) => !THEMES.some((name) => t.path.startsWith(`shadow.theme-${name}.`)))
+      .map((t) => [t.path.slice('shadow.'.length), cssValue(t)]),
   );
+  for (const level of elevationLevels) {
+    if (level in shadows) throw new Error(`elevation level "${level}" collides with the shadow primitive of that name`);
+    shadows[level] = `var(--elevation-${level})`;
+  }
 
   const gradient = `linear-gradient(${SPEC.pageGradient.angle}, ${SPEC.pageGradient.stops
     .map(([path, stop]) => `${flat(path)} ${stop}`)
@@ -390,6 +424,9 @@ function buildPreset() {
       pick('motion.easing').map((t) => [t.path.slice('motion.easing.'.length), cssValue(t)]),
     ),
     transitionDuration: withDefaults('transitionDuration', scaleObject('motion.duration')),
+    // Mobile-first min-widths. Every Tailwind default step is named, so none
+    // falls back to Tailwind's own rem value.
+    screens: scaleObject('breakpoint'),
   };
 
   return `// GENERATED FILE — DO NOT EDIT.
@@ -404,7 +441,8 @@ function buildPreset() {
 // to preflight's \`border: 0 solid #e5e7eb\`, a light grey line on our page.
 //
 // The c-* colors follow the complete light/dark/black CSS theme boundary.
-// Legacy colors remain static. Breakpoints and z-index are not supplied.
+// Legacy colors remain static. The elevation shadows (raised, overlay, drawer,
+// dialog) follow the theme too. Breakpoints are supplied; z-index is not.
 
 /** @type {{theme: {extend: Record<string, unknown>}}} */
 export default {
@@ -452,6 +490,7 @@ export interface SamouraiTailwindPreset {
       ringWidth: Record<string, string>;
       transitionTimingFunction: Record<string, string>;
       transitionDuration: Record<string, string>;
+      screens: Record<string, string>;
     };
   };
 }

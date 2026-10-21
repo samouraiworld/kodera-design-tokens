@@ -6,7 +6,22 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-Nothing yet.
+**`feat/breakpoint-elevation-tokens`** adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and renames, removes or changes no value a consumer renders today, so `RELEASE.md`, step 5, makes it a minor.
+
+### Decided by
+
+- **`feat/breakpoint-elevation-tokens`**: zôÖma through the lead's delegated authority (owner decisions D0–D6, which delegate design authority to the lead session). The values below are new.
+
+### Tokens added
+
+- **Breakpoints**, a new `breakpoint` root group (primitive tier, `dimension`): `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 1536px, mobile-first min-widths above a stated minimum supported width of 360px. They reach the preset as `screens` and the CSS as `--breakpoint-*`. They are Tailwind's five default steps, in px rather than Tailwind 4's rem, so `md` is the exact complement of the console's narrow layout (`max-width: 767px`) at any default font size. A consumer on Tailwind 4 that takes the preset's `screens` sees no change at the default 16px root; with a larger default font size, its `sm:` … `2xl:` variants switch at these px widths instead of scaling with the font.
+- **Elevation**, four levels plus level 0 (`shadow-none`, no token), each with a purpose and a value per theme: `raised` (a resting card; the `shadow.card` geometry, `0 8px 24px -16px`, in the theme's `shadow-1`), `overlay` (menu, popover, select, tooltip, toast; the `shadow.pop` geometry, `0 20px 50px -20px`, in `shadow-2`), `drawer` (`0 24px 64px -24px`, `shadow-2`) and `dialog` (`0 32px 80px -24px`, `shadow-2`), ordered like the z ladder (A12). Twelve primitives, `shadow.theme-<theme>.<level>`, hold the geometry and reference the theme's existing shadow colour; `semantic.elevation.<theme>.<level>` references them. Each level reaches the CSS as `--elevation-<level>` inside every theme block and the preset as `boxShadow.<level>`, a `var()`, so `shadow-overlay` follows `[data-theme]`. No new colour: the levels reuse `color.theme-*.shadow-1` and `shadow-2`, which `contrast-pairs.json` already measures.
+- `shadow.card` and `shadow.pop` are unchanged. Today the console draws `shadow-card shadow-c-shadow-1` and `shadow-pop shadow-c-shadow-2`; `shadow-raised` and `shadow-overlay` render those same shadows in each theme.
+
+### Gates
+
+- The grammar gate accepts the `breakpoint` root group and now resolves a reference inside a composite value (a shadow's `color`): a dangling one fails as `[alias]` instead of reaching the CSS as a literal `{…}` string. The build resolves the same reference and refuses an elevation set that differs between themes.
+- `test/elevation-breakpoints.selftest.mjs`, in the `units` gate: four themed levels in ladder order, each in its theme's own shadow colour, distinct across themes and dynamic in the preset; four or five px breakpoints, rising from 360px, equal to the preset's `screens`. Each clause has a mutation that turns it red, including a dangling shadow colour, which must fail both the grammar gate and the build.
 
 ## v0.2.0
 

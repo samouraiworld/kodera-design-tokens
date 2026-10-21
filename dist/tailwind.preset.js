@@ -10,7 +10,8 @@
 // to preflight's `border: 0 solid #e5e7eb`, a light grey line on our page.
 //
 // The c-* colors follow the complete light/dark/black CSS theme boundary.
-// Legacy colors remain static. Breakpoints and z-index are not supplied.
+// Legacy colors remain static. The elevation shadows (raised, overlay, drawer,
+// dialog) follow the theme too. Breakpoints are supplied; z-index is not.
 
 /** @type {{theme: {extend: Record<string, unknown>}}} */
 export default {
@@ -197,6 +198,10 @@ export default {
       boxShadow: {
         card: "0px 8px 24px -16px rgba(47,58,69,0.25)",
         pop: "0px 20px 50px -20px rgba(47,58,69,0.35)",
+        raised: "var(--elevation-raised)",
+        overlay: "var(--elevation-overlay)",
+        drawer: "var(--elevation-drawer)",
+        dialog: "var(--elevation-dialog)",
       },
       backgroundImage: {
         frost: "linear-gradient(115deg, #DCE6F0 0%, #EEF3F8 45%, #FFFFFF 100%)",
@@ -218,6 +223,13 @@ export default {
         base: "200ms",
         slow: "320ms",
         DEFAULT: "200ms",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
     },
   },

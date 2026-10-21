@@ -30,6 +30,7 @@ const ROOT_GROUPS = new Set([
   'radius',
   'shadow',
   'motion',
+  'breakpoint',
   'component',
 ]);
 
@@ -40,6 +41,7 @@ const TIER_OF = {
   radius: 'primitive',
   shadow: 'primitive',
   motion: 'primitive',
+  breakpoint: 'primitive',
   semantic: 'semantic',
   component: 'component',
 };
@@ -125,6 +127,25 @@ for (const token of tokens) {
       resolve(path, index);
     } catch (error) {
       fail(path, 'alias', error.message);
+    }
+  }
+
+  // A composite value (a shadow's `color`) may reference a token too. The
+  // build resolves it in place; one that resolves to nothing would reach the
+  // CSS as the literal string "{color.foo}", which a browser drops silently.
+  if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+    for (const [field, inner] of Object.entries(value)) {
+      const innerTarget = aliasTarget(inner);
+      if (innerTarget === null) continue;
+      if (!index.has(innerTarget)) {
+        fail(path, 'alias', `${field}: dangling reference: "${innerTarget}" resolves to no token`);
+        continue;
+      }
+      try {
+        resolve(innerTarget, index);
+      } catch (error) {
+        fail(path, 'alias', `${field}: ${error.message}`);
+      }
     }
   }
 
