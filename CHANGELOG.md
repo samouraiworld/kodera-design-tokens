@@ -6,11 +6,15 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-**`feat/breakpoint-elevation-tokens`** adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and renames, removes or changes nothing a consumer can use today, so `RELEASE.md`, step 5, makes it a minor.
+Nothing yet.
+
+## v0.3.0
+
+Two pull requests since `v0.2.0`. **#35** (`feat/breakpoint-elevation-tokens`) adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and does not rename, remove or change anything a consumer can use today. **`chore/release-v0.3.0`** cuts this version and changes only `package.json`'s `version` and this file. `RELEASE.md`, step 5, makes the whole a minor.
 
 ### Decided by
 
-- **`feat/breakpoint-elevation-tokens`**: zôÖma through the lead's delegated authority (owner decisions D0–D6, which delegate design authority to the lead session). The values below are new.
+- **#35** (`feat/breakpoint-elevation-tokens`): zôÖma through the lead's delegated authority (owner decisions D0–D6, which delegate design authority to the lead session). The values below are new.
 
 ### Tokens added
 
