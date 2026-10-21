@@ -159,7 +159,11 @@ function cssValue(token) {
       const { offsetX, offsetY, blur, spread } = value;
       // The colour may be a reference to a colour token (DTCG composite).
       const color = resolveValue(value.color, index);
-      parseColor(color);
+      try {
+        parseColor(color);
+      } catch (error) {
+        throw new Error(`${token.path}: shadow color: ${error.message}`);
+      }
       return `${offsetX} ${offsetY} ${blur} ${spread} ${color}`;
     }
     case 'gradient': {
@@ -372,8 +376,12 @@ function buildPreset() {
       .filter((t) => !THEMES.some((name) => t.path.startsWith(`shadow.theme-${name}.`)))
       .map((t) => [t.path.slice('shadow.'.length), cssValue(t)]),
   );
+  // Tailwind's own shadow scale, which an elevation level of the same name
+  // would silently replace in every consumer.
+  const TAILWIND_SHADOWS = ['DEFAULT', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'inner', 'none'];
   for (const level of elevationLevels) {
     if (level in shadows) throw new Error(`elevation level "${level}" collides with the shadow primitive of that name`);
+    if (TAILWIND_SHADOWS.includes(level)) throw new Error(`elevation level "${level}" would replace Tailwind's own shadow-${level}`);
     shadows[level] = `var(--elevation-${level})`;
   }
 
@@ -424,8 +432,8 @@ function buildPreset() {
       pick('motion.easing').map((t) => [t.path.slice('motion.easing.'.length), cssValue(t)]),
     ),
     transitionDuration: withDefaults('transitionDuration', scaleObject('motion.duration')),
-    // Mobile-first min-widths. Every Tailwind default step is named, so none
-    // falls back to Tailwind's own rem value.
+    // Mobile-first min-widths, Tailwind 4's own five steps, all named here so
+    // the package rather than Tailwind's defaults is the source.
     screens: scaleObject('breakpoint'),
   };
 

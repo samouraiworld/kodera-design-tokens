@@ -6,7 +6,7 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-**`feat/breakpoint-elevation-tokens`** adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and renames, removes or changes no value a consumer renders today, so `RELEASE.md`, step 5, makes it a minor.
+**`feat/breakpoint-elevation-tokens`** adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and renames, removes or changes nothing a consumer can use today, so `RELEASE.md`, step 5, makes it a minor.
 
 ### Decided by
 
@@ -14,14 +14,31 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ### Tokens added
 
-- **Breakpoints**, a new `breakpoint` root group (primitive tier, `dimension`): `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 1536px, mobile-first min-widths above a stated minimum supported width of 360px. They reach the preset as `screens` and the CSS as `--breakpoint-*`. They are Tailwind's five default steps, in px rather than Tailwind 4's rem, so `md` is the exact complement of the console's narrow layout (`max-width: 767px`) at any default font size. A consumer on Tailwind 4 that takes the preset's `screens` sees no change at the default 16px root; with a larger default font size, its `sm:` … `2xl:` variants switch at these px widths instead of scaling with the font.
-- **Elevation**, four levels plus level 0 (`shadow-none`, no token), each with a purpose and a value per theme: `raised` (a resting card; the `shadow.card` geometry, `0 8px 24px -16px`, in the theme's `shadow-1`), `overlay` (menu, popover, select, tooltip, toast; the `shadow.pop` geometry, `0 20px 50px -20px`, in `shadow-2`), `drawer` (`0 24px 64px -24px`, `shadow-2`) and `dialog` (`0 32px 80px -24px`, `shadow-2`), ordered like the z ladder (A12). Twelve primitives, `shadow.theme-<theme>.<level>`, hold the geometry and reference the theme's existing shadow colour; `semantic.elevation.<theme>.<level>` references them. Each level reaches the CSS as `--elevation-<level>` inside every theme block and the preset as `boxShadow.<level>`, a `var()`, so `shadow-overlay` follows `[data-theme]`. No new colour: the levels reuse `color.theme-*.shadow-1` and `shadow-2`, which `contrast-pairs.json` already measures.
+- **Breakpoints**, a new `breakpoint` root group (primitive tier, `dimension`): `sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem (640 to 1536 px at a 16 px root), mobile-first min-widths. The smallest device designed for is 360 px, and every screen still reflows without horizontal scroll at 320 CSS px (WCAG 1.4.10). They reach the preset as `screens` and the CSS as `--breakpoint-*`. They are Tailwind 4's own default steps, so a Tailwind 4 consumer that takes the preset sees no change, and its queries keep scaling with the reader's default font size.
+- **Elevation**, four levels plus level 0 (`shadow-none`, no token), each with a purpose, one geometry and a value per theme:
+  - `raised`, a resting card: the `shadow.card` geometry, `0 8px 24px -16px`, in the theme's `shadow-1`;
+  - `overlay`, a menu, popover, select, tooltip or toast: the `shadow.pop` geometry, `0 20px 50px -20px`, in `shadow-2`;
+  - `drawer`, a panel fixed to a screen edge: `0 0 64px -8px`, with no offset so it falls on the open edge whichever edge the panel is on, in `shadow-2`;
+  - `dialog`: `0 32px 80px -24px`, in `shadow-2`.
+
+  A level is chosen by the kind of surface, not by its z layer (A12): a toast sits above a dialog and still casts level 2.
+- Twelve primitives, `shadow.theme-<theme>.<level>`, hold the geometry and reference the theme's existing shadow colour. They are public CSS variables too, `--shadow-theme-light-raised` … `--shadow-theme-black-dialog`, typed in `TokenCssVariable`, so removing one later is a major. `semantic.elevation.<theme>.<level>` references them.
+- Each level reaches the CSS as `--elevation-<level>` inside every theme block and the preset as `boxShadow.<level>`, a `var()`, so `shadow-overlay` follows `[data-theme]`. A `shadow-c-*` colour or an opacity modifier has no effect on it.
+- No new colour. The levels reuse `color.theme-*.shadow-1` and `shadow-2`, which `contrast-pairs.json` already measures.
 - `shadow.card` and `shadow.pop` are unchanged. Today the console draws `shadow-card shadow-c-shadow-1` and `shadow-pop shadow-c-shadow-2`; `shadow-raised` and `shadow-overlay` render those same shadows in each theme.
+- Not covered: A10's mapping of `samourai-hub`'s three arbitrary shadows. The hub is out of Kodera's scope.
 
 ### Gates
 
-- The grammar gate accepts the `breakpoint` root group and now resolves a reference inside a composite value (a shadow's `color`): a dangling one fails as `[alias]` instead of reaching the CSS as a literal `{…}` string. The build resolves the same reference and refuses an elevation set that differs between themes.
-- `test/elevation-breakpoints.selftest.mjs`, in the `units` gate: four themed levels in ladder order, each in its theme's own shadow colour, distinct across themes and dynamic in the preset; four or five px breakpoints, rising from 360px, equal to the preset's `screens`. Each clause has a mutation that turns it red, including a dangling shadow colour, which must fail both the grammar gate and the build.
+- The grammar gate accepts the `breakpoint` root group. It now reads references inside a composite value: one is allowed in a shadow's `color` only, and it must resolve, without a cycle, to a colour token. Each of those fails as `[alias]`, naming the token and the field, instead of reaching the CSS as a literal `{…}` string or a length where a colour belongs.
+- The build resolves that colour and names the token when it is not a colour. It refuses an elevation set that is missing in a theme, empty, or different between themes, and a level named after a shadow primitive or after one of Tailwind's own shadow sizes (`sm`, `lg`, `inner` …), which it would silently replace.
+- `test/elevation-breakpoints.selftest.mjs`, in the `units` gate, checks four things:
+  - four levels, weakest first, each in its own theme's shadow colour and distinct across themes;
+  - one geometry per level, with `raised` and `overlay` field for field equal to `shadow.card` and `shadow.pop`, and blur rising up the ladder;
+  - every level scoped in every theme block and dynamic in the preset;
+  - four or five rem breakpoints, rising from above 360 px, each in the CSS and equal to the preset's `screens`.
+
+  Every clause, and every error above, has a mutation that asserts its own message. Deleting any one of the new build or grammar checks turns the suite red.
 
 ## v0.2.0
 

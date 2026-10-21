@@ -130,21 +130,28 @@ for (const token of tokens) {
     }
   }
 
-  // A composite value (a shadow's `color`) may reference a token too. The
-  // build resolves it in place; one that resolves to nothing would reach the
-  // CSS as the literal string "{color.foo}", which a browser drops silently.
+  // A composite value may reference a colour token in its `color` field (a
+  // shadow drawn in a theme colour). The build resolves that one field in
+  // place; a reference anywhere else, or one that lands on something that is
+  // not a colour, would reach the CSS as a literal "{…}" string or a length
+  // where a colour belongs, which a browser drops silently.
   if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
     for (const [field, inner] of Object.entries(value)) {
       const innerTarget = aliasTarget(inner);
       if (innerTarget === null) continue;
-      if (!index.has(innerTarget)) {
-        fail(path, 'alias', `${field}: dangling reference: "${innerTarget}" resolves to no token`);
+      if (field !== 'color') {
+        fail(path, 'alias', `${field}: a reference is allowed in a composite's "color" only`);
         continue;
       }
+      // `resolve` throws on a dangling reference and on a cycle alike.
       try {
         resolve(innerTarget, index);
       } catch (error) {
         fail(path, 'alias', `${field}: ${error.message}`);
+        continue;
+      }
+      if (index.get(innerTarget).type !== 'color') {
+        fail(path, 'alias', `${field}: "${innerTarget}" is a ${index.get(innerTarget).type} token, not a colour`);
       }
     }
   }

@@ -266,15 +266,15 @@
   --shadow-pop: 0px 20px 50px -20px rgba(47,58,69,0.35);
   --shadow-theme-light-raised: 0px 8px 24px -16px rgba(47,58,69,.25);
   --shadow-theme-light-overlay: 0px 20px 50px -20px rgba(47,58,69,.35);
-  --shadow-theme-light-drawer: 0px 24px 64px -24px rgba(47,58,69,.35);
+  --shadow-theme-light-drawer: 0px 0px 64px -8px rgba(47,58,69,.35);
   --shadow-theme-light-dialog: 0px 32px 80px -24px rgba(47,58,69,.35);
   --shadow-theme-dark-raised: 0px 8px 24px -16px rgba(0,0,0,.5);
   --shadow-theme-dark-overlay: 0px 20px 50px -20px rgba(0,0,0,.62);
-  --shadow-theme-dark-drawer: 0px 24px 64px -24px rgba(0,0,0,.62);
+  --shadow-theme-dark-drawer: 0px 0px 64px -8px rgba(0,0,0,.62);
   --shadow-theme-dark-dialog: 0px 32px 80px -24px rgba(0,0,0,.62);
   --shadow-theme-black-raised: 0px 8px 24px -16px rgba(0,0,0,.7);
   --shadow-theme-black-overlay: 0px 20px 50px -20px rgba(0,0,0,.82);
-  --shadow-theme-black-drawer: 0px 24px 64px -24px rgba(0,0,0,.82);
+  --shadow-theme-black-drawer: 0px 0px 64px -8px rgba(0,0,0,.82);
   --shadow-theme-black-dialog: 0px 32px 80px -24px rgba(0,0,0,.82);
 
   /* motion */
@@ -284,11 +284,11 @@
   --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
 
   /* breakpoints (min-width, mobile-first; not usable inside a media query) */
-  --breakpoint-sm: 640px; /* A large phone held sideways, a small tablet. */
-  --breakpoint-md: 768px; /* Tablet portrait; the wide layout (rail and sidebar) starts here. */
-  --breakpoint-lg: 1024px; /* Laptop; the order summary moves beside the content. */
-  --breakpoint-xl: 1280px; /* Desktop. */
-  --breakpoint-2xl: 1536px; /* Wide desktop. */
+  --breakpoint-sm: 40rem; /* 640 px. A large phone held sideways, a small tablet. */
+  --breakpoint-md: 48rem; /* 768 px. Tablet portrait. A width step only: a product's own narrow layout may also depend on height or pointer, and is its own query. */
+  --breakpoint-lg: 64rem; /* 1024 px. Laptop; a secondary column can move beside the content. */
+  --breakpoint-xl: 80rem; /* 1280 px. Desktop. */
+  --breakpoint-2xl: 96rem; /* 1536 px. Wide desktop. */
 
   /* shell geometry */
   --layout-rail-width: 76px;
@@ -371,7 +371,7 @@
   --focus-ring-on-inverse-color: #FFFFFF;
   --elevation-raised: 0px 8px 24px -16px rgba(47,58,69,.25);
   --elevation-overlay: 0px 20px 50px -20px rgba(47,58,69,.35);
-  --elevation-drawer: 0px 24px 64px -24px rgba(47,58,69,.35);
+  --elevation-drawer: 0px 0px 64px -8px rgba(47,58,69,.35);
   --elevation-dialog: 0px 32px 80px -24px rgba(47,58,69,.35);
 }
 
@@ -437,7 +437,7 @@
   --focus-ring-on-inverse-color: #F3F7FB;
   --elevation-raised: 0px 8px 24px -16px rgba(0,0,0,.5);
   --elevation-overlay: 0px 20px 50px -20px rgba(0,0,0,.62);
-  --elevation-drawer: 0px 24px 64px -24px rgba(0,0,0,.62);
+  --elevation-drawer: 0px 0px 64px -8px rgba(0,0,0,.62);
   --elevation-dialog: 0px 32px 80px -24px rgba(0,0,0,.62);
 }
 
@@ -503,6 +503,6 @@
   --focus-ring-on-inverse-color: #F7FAFC;
   --elevation-raised: 0px 8px 24px -16px rgba(0,0,0,.7);
   --elevation-overlay: 0px 20px 50px -20px rgba(0,0,0,.82);
-  --elevation-drawer: 0px 24px 64px -24px rgba(0,0,0,.82);
+  --elevation-drawer: 0px 0px 64px -8px rgba(0,0,0,.82);
   --elevation-dialog: 0px 32px 80px -24px rgba(0,0,0,.82);
 }
