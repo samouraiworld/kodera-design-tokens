@@ -48,7 +48,13 @@
     "t5-bg": "#EEF2F6",
     "t5-fg": "#56626E",
     "t6-bg": "#DCE6F0",
-    "t6-fg": "#2F3A45"
+    "t6-fg": "#2F3A45",
+    "elevated": "#FFFFFF",
+    "scrim": "rgba(47,58,69,.55)",
+    "border-input": "#7C8894",
+    "placeholder": "#5C6874",
+    "disabled": "#EEF2F6",
+    "on-disabled": "#5C6874"
   },
   "dark": {
     "page": "#10151B",
@@ -99,7 +105,13 @@
     "t5-bg": "#212A33",
     "t5-fg": "#B9C6D4",
     "t6-bg": "#26303A",
-    "t6-fg": "#E8EFF6"
+    "t6-fg": "#E8EFF6",
+    "elevated": "#1D252E",
+    "scrim": "rgba(0,0,0,.6)",
+    "border-input": "#6B7886",
+    "placeholder": "#8592A1",
+    "disabled": "#242E38",
+    "on-disabled": "#98A6B5"
   },
   "black": {
     "page": "#000000",
@@ -150,6 +162,12 @@
     "t5-bg": "#16191D",
     "t5-fg": "#C3CDD8",
     "t6-bg": "#1B1E22",
-    "t6-fg": "#F1F4F8"
+    "t6-fg": "#F1F4F8",
+    "elevated": "#141619",
+    "scrim": "rgba(0,0,0,.72)",
+    "border-input": "#606A75",
+    "placeholder": "#7C8794",
+    "disabled": "#1B1E22",
+    "on-disabled": "#9BA7B4"
   }
 }

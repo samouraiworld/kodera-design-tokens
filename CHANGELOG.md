@@ -8,6 +8,35 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 Nothing yet.
 
+## v0.2.0
+
+Four pull requests since `v0.1.1`: three merged, and the one that cuts this version. **`feat/themes-dark-black`** completes the three themes for the screens the product reference does not draw (menus, dialogs, form fields, disabled controls) and fixes the two placeholder rows by value; it adds names and changes one value, and renames or removes nothing. **#32** (`fix/token-resolution-coverage`) changes `test/token-test.mjs`, which consumers import as `./token-test`, and is recorded under "Fixed". **#31** (`chore/bounded-attribution-check`) and **#33** (a Dependabot bump of `actions/setup-node`) changed how this repository is checked. `RELEASE.md`, step 5, makes the whole a minor.
+
+### Decided by
+
+- **`feat/themes-dark-black`**: @zxxma, through the lead session to which @zxxma delegated design and merge authority (owner decisions D0–D6); the lane brief carries @zxxma's wish for a more modern UI and a real dark theme. Every value below is new except `semantic.text.placeholder`.
+
+### Fixed
+
+- **#32**: the token-resolution guard now also scans `divide-*` and the directional borders (`border-t-*` … `border-e-*`, `border-x-*`, `border-y-*`), matched by the longest prefix so `border-l-*` is not read as `border-*`, and never from inside a hyphenated name. A consumer's CI that repins can newly fail on such a class that does not resolve, which is the point of the guard.
+
+### Token values changed — design decisions
+
+- `semantic.text.placeholder`: `{color.slate.500}` → `{color.slate.600}`. The hint now clears 4.5:1 like running text — 5.87:1 on white (was 3.62:1) and 5.22:1 on the muted field (was 3.21:1) — so `text.placeholder/surface.default` and `text.placeholder/surface.muted` lose their exemption and leave `contrast-known-failures.json`. Every field still carries a visible label. `slate.500` itself does not move: it stays the picto and `border.input` step, and `forbidden:slate.500/surface.default` still fails the gate if it ever becomes usable as text. Three consumer names move with it, from `#7C8894` to `#5A6672`: the CSS variable `--text-placeholder` and the preset keys `text-placeholder` and `ink-placeholder`. A consumer that uses `slate-500` directly sees nothing change.
+
+### Tokens added
+
+- Six roles in every theme, after the 49 reference roles (`docs/specs/shell-themes.md`, "Roles added beyond the reference"): `elevated` (menus, popovers, dialogs; `#FFFFFF` / `#1D252E` / `#141619`), `scrim` (dialog overlay), `border-input` (the edge of a control the user has to find, 3:1), `placeholder` (4.5:1), `disabled` and `on-disabled` (a neutral fill and a 4.5:1 label). Each reaches consumers as `--c-<role>` inside every theme block and as a `c-<role>` preset colour. Eight theme primitives carry the values no existing primitive held (`color.theme-dark.elevated`, `.border-input`, `.placeholder`, `.scrim`; `color.theme-black.elevated`, `.border-input`, `.scrim`; `color.theme-light.scrim`); the other roles reference the primitive that already carries their value.
+
+### Contrast register
+
+- Sixty-six normative rows join `contrast-pairs.json`, twenty-two per theme: the focus ring on `elevated` (3:1; `elevated` is a shell container, so the coverage check in `test/color-math.selftest.mjs` requires it), the four inks and the three status `-ink` roles on `elevated` (4.5:1), `ink-4` icons on `elevated` (3:1), `border-input` on `surface`, `sunken`, `muted` and `elevated` (3:1), `placeholder` on the same four (4.5:1), `on-disabled` on `disabled` (4.5:1), and four pairs the reference screens draw that no row covered: `ink` and `ink-3` on `accent-soft`, `ink` on `warn-soft`, `ok-ink` on `surface` (all 4.5:1, worst 4.70:1, light `ink-3` on `accent-soft`). None is exempt, inverted or allowlisted; the worst is `light.border-input` on `muted` at 3.21:1. Three decorative `measurements` rows report the scrim on the page, and nine `capability` rows report the `ok`, `warn` and `bad` fills as icons on `elevated`: the decided usage there is the `-ink` role, and dark `bad` would measure 2.86:1.
+- `contrast-known-failures.json` goes from four rulings to two: the retired white-on-slate.300 disabled label and the decorative card edge, both unchanged.
+
+### Gates
+
+- `test/check-contrast.selftest.mjs` took its subjects from the allowlist, whose first entry was the placeholder; it is now the disabled label. Three mutations had been written against the placeholder's ink. "An entry whose pair has started passing" wrote black onto the subject's token, which the disabled label shares with the primary button's two label rows, so those rows went red too and the case's exit status proved nothing: with the gate's "delete the entry" branch disabled it still passed. It now moves only the subject row's foreground and asserts that the gate counts exactly one problem; with that branch disabled it goes red again. Of the other two, re-pointing a pair at `surface.inverse` assumed a dark foreground (white on inverse passes, so the gate reported "delete the entry" instead of the reason under test), and the "worse colour" case used a literal tuned to slate.500. The first now picks a surface on which the re-pointed pair still fails, and asserts one exists; the second derives the worse ink from the subject by laying 60 % of its background over it. Each still asserts the message the gate prints.
+
 ## v0.1.1
 
 Four merged pull requests since `v0.1.0` (`b91e07e`, #26). **#30** (`fix/dark-action-hover-and-source-walk`) changes `test/token-test.mjs` and is recorded under "Fixed". The other three changed how this repository is checked and maintained: **#27** (`docs/rename-wave-1-prose`) touched `package.json`, but only its `description` and `repository.url`, alongside README, `RELEASE.md`, `.github/dependabot.yml` and ADR prose; **#28** (`chore/relevel-shared-checkers`) re-levelled the shared checkers under `.github/scripts/`; **#29** (`chore/s06-workflow-range-rules`) changed `.github/workflows/ci.yml` and `.github/scripts/required-clauses.txt`. None of the four changes `tokens.json`, `scripts/lib/spec.mjs` or `dist/`, so nothing a consumer renders moves, `RELEASE.md`, step 4, has no decider to name, and step 5 names two bumps, a major for a renamed or removed name and a minor for a value change, neither of which applies, so the version moves by a patch.

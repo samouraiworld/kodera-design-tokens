@@ -111,16 +111,14 @@
       "fg": "semantic.text.placeholder",
       "bg": "semantic.surface.default",
       "label": "input placeholder on a white field",
-      "min": 4.5,
-      "exempt": true
+      "min": 4.5
     },
     {
       "id": "text.placeholder/surface.muted",
       "fg": "semantic.text.placeholder",
       "bg": "semantic.surface.muted",
       "label": "input placeholder on a muted field",
-      "min": 4.5,
-      "exempt": true
+      "min": 4.5
     },
     {
       "id": "text.accent/surface.default",
@@ -707,7 +705,7 @@
       "id": "forbidden:slate.500/surface.default",
       "fg": "color.slate.500",
       "bg": "semantic.surface.default",
-      "label": "slate-500 as running text — forbidden by DESIGN_SYSTEM.md §2; slate.500 is the placeholder and picto step, and the two text.placeholder rows are exempt only because a placeholder is never real text. This row fails the gate if it ever starts passing",
+      "label": "slate-500 as running text — forbidden by DESIGN_SYSTEM.md §2; slate.500 is the picto and input-border step; the placeholder moved off it to slate.600 so that a hint clears 4.5:1 like running text. This row fails the gate if it ever starts passing",
       "min": 4.5,
       "expect": "fail"
     },
@@ -1945,6 +1943,468 @@
       "bg": "semantic.theme.black.inverse",
       "label": "black: connected-room status indicator, reference line 294",
       "min": 3
+    },
+    {
+      "id": "theme.light/focus-ring/elevated",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: focus ring core on elevated — the opaque tone that sits against the control, as [data-theme=\"light\"] paints it (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/ink/elevated",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink-2/elevated",
+      "fg": "semantic.theme.light.ink-2",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ink-2 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink-3/elevated",
+      "fg": "semantic.theme.light.ink-3",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ink-3 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/accent-ink/elevated",
+      "fg": "semantic.theme.light.accent-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: accent-ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/border-input/surface",
+      "fg": "semantic.theme.light.border-input",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: control boundary on surface — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/border-input/sunken",
+      "fg": "semantic.theme.light.border-input",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: control boundary on sunken — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/border-input/muted",
+      "fg": "semantic.theme.light.border-input",
+      "bg": "semantic.theme.light.muted",
+      "label": "light: control boundary on muted — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/border-input/elevated",
+      "fg": "semantic.theme.light.border-input",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: control boundary on elevated — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/placeholder/surface",
+      "fg": "semantic.theme.light.placeholder",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: input placeholder on a field drawn on surface",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/placeholder/sunken",
+      "fg": "semantic.theme.light.placeholder",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: input placeholder on a field drawn on sunken",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/placeholder/muted",
+      "fg": "semantic.theme.light.placeholder",
+      "bg": "semantic.theme.light.muted",
+      "label": "light: input placeholder on a field drawn on muted",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/placeholder/elevated",
+      "fg": "semantic.theme.light.placeholder",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: input placeholder on a field drawn on elevated",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/on-disabled/disabled",
+      "fg": "semantic.theme.light.on-disabled",
+      "bg": "semantic.theme.light.disabled",
+      "label": "light: disabled control label on the disabled fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/elevated",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: focus ring core on elevated — the opaque tone that sits against the control, as [data-theme=\"dark\"] paints it (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/ink/elevated",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink-2/elevated",
+      "fg": "semantic.theme.dark.ink-2",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ink-2 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink-3/elevated",
+      "fg": "semantic.theme.dark.ink-3",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ink-3 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/accent-ink/elevated",
+      "fg": "semantic.theme.dark.accent-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: accent-ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/border-input/surface",
+      "fg": "semantic.theme.dark.border-input",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: control boundary on surface — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/border-input/sunken",
+      "fg": "semantic.theme.dark.border-input",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: control boundary on sunken — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/border-input/muted",
+      "fg": "semantic.theme.dark.border-input",
+      "bg": "semantic.theme.dark.muted",
+      "label": "dark: control boundary on muted — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/border-input/elevated",
+      "fg": "semantic.theme.dark.border-input",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: control boundary on elevated — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/placeholder/surface",
+      "fg": "semantic.theme.dark.placeholder",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: input placeholder on a field drawn on surface",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/placeholder/sunken",
+      "fg": "semantic.theme.dark.placeholder",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: input placeholder on a field drawn on sunken",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/placeholder/muted",
+      "fg": "semantic.theme.dark.placeholder",
+      "bg": "semantic.theme.dark.muted",
+      "label": "dark: input placeholder on a field drawn on muted",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/placeholder/elevated",
+      "fg": "semantic.theme.dark.placeholder",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: input placeholder on a field drawn on elevated",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/on-disabled/disabled",
+      "fg": "semantic.theme.dark.on-disabled",
+      "bg": "semantic.theme.dark.disabled",
+      "label": "dark: disabled control label on the disabled fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/elevated",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: focus ring core on elevated — the opaque tone that sits against the control, as [data-theme=\"black\"] paints it (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/ink/elevated",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink-2/elevated",
+      "fg": "semantic.theme.black.ink-2",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ink-2 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink-3/elevated",
+      "fg": "semantic.theme.black.ink-3",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ink-3 text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/accent-ink/elevated",
+      "fg": "semantic.theme.black.accent-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: accent-ink text on elevated (menu, popover, dialog)",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/border-input/surface",
+      "fg": "semantic.theme.black.border-input",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: control boundary on surface — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/border-input/sunken",
+      "fg": "semantic.theme.black.border-input",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: control boundary on sunken — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/border-input/muted",
+      "fg": "semantic.theme.black.border-input",
+      "bg": "semantic.theme.black.muted",
+      "label": "black: control boundary on muted — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/border-input/elevated",
+      "fg": "semantic.theme.black.border-input",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: control boundary on elevated — the only edge of a field the user has to find (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/placeholder/surface",
+      "fg": "semantic.theme.black.placeholder",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: input placeholder on a field drawn on surface",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/placeholder/sunken",
+      "fg": "semantic.theme.black.placeholder",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: input placeholder on a field drawn on sunken",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/placeholder/muted",
+      "fg": "semantic.theme.black.placeholder",
+      "bg": "semantic.theme.black.muted",
+      "label": "black: input placeholder on a field drawn on muted",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/placeholder/elevated",
+      "fg": "semantic.theme.black.placeholder",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: input placeholder on a field drawn on elevated",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/on-disabled/disabled",
+      "fg": "semantic.theme.black.on-disabled",
+      "bg": "semantic.theme.black.disabled",
+      "label": "black: disabled control label on the disabled fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ok-ink/elevated",
+      "fg": "semantic.theme.light.ok-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/warn-ink/elevated",
+      "fg": "semantic.theme.light.warn-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/bad-ink/elevated",
+      "fg": "semantic.theme.light.bad-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/icon-ink-4/elevated",
+      "fg": "semantic.theme.light.ink-4",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/ok-ink/elevated",
+      "fg": "semantic.theme.dark.ok-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/warn-ink/elevated",
+      "fg": "semantic.theme.dark.warn-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/bad-ink/elevated",
+      "fg": "semantic.theme.dark.bad-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/icon-ink-4/elevated",
+      "fg": "semantic.theme.dark.ink-4",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/ok-ink/elevated",
+      "fg": "semantic.theme.black.ok-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/warn-ink/elevated",
+      "fg": "semantic.theme.black.warn-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/bad-ink/elevated",
+      "fg": "semantic.theme.black.bad-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/icon-ink-4/elevated",
+      "fg": "semantic.theme.black.ink-4",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/ink/accent-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.accent-soft",
+      "label": "light: ink text on accent-soft — a decision callout, a selected palette option, a focused message",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink-3/accent-soft",
+      "fg": "semantic.theme.light.ink-3",
+      "bg": "semantic.theme.light.accent-soft",
+      "label": "light: ink-3 text or icon on accent-soft — the time of a focused message, the meta of a selected option, the icon of a selected row",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/warn-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.warn-soft",
+      "label": "light: ink text on warn-soft — a search match highlight, a commented passage, a warning callout",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ok-ink/surface",
+      "fg": "semantic.theme.light.ok-ink",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: ok-ink text on surface — a success hint under a field, a presence label",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/accent-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.accent-soft",
+      "label": "dark: ink text on accent-soft — a decision callout, a selected palette option, a focused message",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink-3/accent-soft",
+      "fg": "semantic.theme.dark.ink-3",
+      "bg": "semantic.theme.dark.accent-soft",
+      "label": "dark: ink-3 text or icon on accent-soft — the time of a focused message, the meta of a selected option, the icon of a selected row",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/warn-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.warn-soft",
+      "label": "dark: ink text on warn-soft — a search match highlight, a commented passage, a warning callout",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ok-ink/surface",
+      "fg": "semantic.theme.dark.ok-ink",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: ok-ink text on surface — a success hint under a field, a presence label",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/accent-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.accent-soft",
+      "label": "black: ink text on accent-soft — a decision callout, a selected palette option, a focused message",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink-3/accent-soft",
+      "fg": "semantic.theme.black.ink-3",
+      "bg": "semantic.theme.black.accent-soft",
+      "label": "black: ink-3 text or icon on accent-soft — the time of a focused message, the meta of a selected option, the icon of a selected row",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/warn-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.warn-soft",
+      "label": "black: ink text on warn-soft — a search match highlight, a commented passage, a warning callout",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ok-ink/surface",
+      "fg": "semantic.theme.black.ok-ink",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: ok-ink text on surface — a success hint under a field, a presence label",
+      "min": 4.5
     }
   ],
   "measurements": [
@@ -2486,6 +2946,111 @@
       "label": "black: the on-inverse ring's outermost tone alone on the second inverse panel, at its own alpha",
       "kind": "decorative",
       "purpose": "The outer softening of the on-inverse ring, at 35 %, measured alone. It is not the indicator: the opaque core is, and theme.black/focus-ring-on-inverse/inverse and /inverse-2 gate that core at 3:1. This tone carries no inverted row of its own, unlike the default ring's halo: that one stays below 3:1 on all 54 theme-and-ground combinations it was measured over, while this one reaches 3.04:1 on dark.inverse and 3.15:1 on black.inverse-2, so a row asserting it stays below 3:1 would be false. Both inverse panels carry a row, in every theme, so each figure quoted for this tone is derived here rather than copied into prose. What holds \u201cthe halo is never the indicator\u201d on the two grounds where an inverted row cannot is the opaque core, which test/color-math.selftest.mjs asserts across every theme and every variant.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.light/scrim/page",
+      "fg": "semantic.theme.light.scrim",
+      "bg": "semantic.theme.light.page",
+      "label": "light: scrim composited over the page, reported only",
+      "kind": "decorative",
+      "purpose": "The overlay behind a dialog dims what it covers and carries no meaning; the dialog itself sits on elevated, whose text rows are normative."
+    },
+    {
+      "id": "theme.dark/scrim/page",
+      "fg": "semantic.theme.dark.scrim",
+      "bg": "semantic.theme.dark.page",
+      "label": "dark: scrim composited over the page, reported only",
+      "kind": "decorative",
+      "purpose": "The overlay behind a dialog dims what it covers and carries no meaning; the dialog itself sits on elevated, whose text rows are normative."
+    },
+    {
+      "id": "theme.black/scrim/page",
+      "fg": "semantic.theme.black.scrim",
+      "bg": "semantic.theme.black.page",
+      "label": "black: scrim composited over the page, reported only",
+      "kind": "decorative",
+      "purpose": "The overlay behind a dialog dims what it covers and carries no meaning; the dialog itself sits on elevated, whose text rows are normative."
+    },
+    {
+      "id": "theme.light/ok/elevated",
+      "fg": "semantic.theme.light.ok",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.light/warn/elevated",
+      "fg": "semantic.theme.light.warn",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.light/bad/elevated",
+      "fg": "semantic.theme.light.bad",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/ok/elevated",
+      "fg": "semantic.theme.dark.ok",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/warn/elevated",
+      "fg": "semantic.theme.dark.warn",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/bad/elevated",
+      "fg": "semantic.theme.dark.bad",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/ok/elevated",
+      "fg": "semantic.theme.black.ok",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/warn/elevated",
+      "fg": "semantic.theme.black.warn",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/bad/elevated",
+      "fg": "semantic.theme.black.bad",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is gated as a 3:1 indicator on the base grounds only; dark bad drops below 3:1 on elevated, so menus and dialogs switch every status to its -ink role rather than deciding colour by colour. This row reports what the fill would measure there.",
       "thresholdForComparison": 3
     }
   ]
