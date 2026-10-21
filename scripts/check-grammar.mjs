@@ -30,6 +30,7 @@ const ROOT_GROUPS = new Set([
   'radius',
   'shadow',
   'motion',
+  'breakpoint',
   'component',
 ]);
 
@@ -40,6 +41,7 @@ const TIER_OF = {
   radius: 'primitive',
   shadow: 'primitive',
   motion: 'primitive',
+  breakpoint: 'primitive',
   semantic: 'semantic',
   component: 'component',
 };
@@ -125,6 +127,32 @@ for (const token of tokens) {
       resolve(path, index);
     } catch (error) {
       fail(path, 'alias', error.message);
+    }
+  }
+
+  // A composite value may reference a colour token in its `color` field (a
+  // shadow drawn in a theme colour). The build resolves that one field in
+  // place; a reference anywhere else, or one that lands on something that is
+  // not a colour, would reach the CSS as a literal "{…}" string or a length
+  // where a colour belongs, which a browser drops silently.
+  if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+    for (const [field, inner] of Object.entries(value)) {
+      const innerTarget = aliasTarget(inner);
+      if (innerTarget === null) continue;
+      if (field !== 'color') {
+        fail(path, 'alias', `${field}: a reference is allowed in a composite's "color" only`);
+        continue;
+      }
+      // `resolve` throws on a dangling reference and on a cycle alike.
+      try {
+        resolve(innerTarget, index);
+      } catch (error) {
+        fail(path, 'alias', `${field}: ${error.message}`);
+        continue;
+      }
+      if (index.get(innerTarget).type !== 'color') {
+        fail(path, 'alias', `${field}: "${innerTarget}" is a ${index.get(innerTarget).type} token, not a colour`);
+      }
     }
   }
 

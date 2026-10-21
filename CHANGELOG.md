@@ -6,7 +6,39 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-Nothing yet.
+**`feat/breakpoint-elevation-tokens`** adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and renames, removes or changes nothing a consumer can use today, so `RELEASE.md`, step 5, makes it a minor.
+
+### Decided by
+
+- **`feat/breakpoint-elevation-tokens`**: zôÖma through the lead's delegated authority (owner decisions D0–D6, which delegate design authority to the lead session). The values below are new.
+
+### Tokens added
+
+- **Breakpoints**, a new `breakpoint` root group (primitive tier, `dimension`): `sm` 40rem, `md` 48rem, `lg` 64rem, `xl` 80rem, `2xl` 96rem (640 to 1536 px at a 16 px root), mobile-first min-widths. The smallest device designed for is 360 px, and every screen still reflows without horizontal scroll at 320 CSS px (WCAG 1.4.10). They reach the preset as `screens` and the CSS as `--breakpoint-*`. They are Tailwind 4's own default steps, so a Tailwind 4 consumer that takes the preset sees no change, and its queries keep scaling with the reader's default font size.
+- **Elevation**, four levels plus level 0 (`shadow-none`, no token), each with a purpose, one geometry and a value per theme:
+  - `raised`, a resting card: the `shadow.card` geometry, `0 8px 24px -16px`, in the theme's `shadow-1`;
+  - `overlay`, a menu, popover, select, tooltip or toast: the `shadow.pop` geometry, `0 20px 50px -20px`, in `shadow-2`;
+  - `drawer`, a panel fixed to a screen edge: `0 0 64px -8px`, with no offset so it falls on the open edge whichever edge the panel is on, in `shadow-2`;
+  - `dialog`: `0 32px 80px -24px`, in `shadow-2`.
+
+  A level is chosen by the kind of surface, not by its z layer (A12): a toast sits above a dialog and still casts level 2.
+- Twelve primitives, `shadow.theme-<theme>.<level>`, hold the geometry and reference the theme's existing shadow colour. They are public CSS variables too, `--shadow-theme-light-raised` … `--shadow-theme-black-dialog`, typed in `TokenCssVariable`, so removing one later is a major. `semantic.elevation.<theme>.<level>` references them.
+- Each level reaches the CSS as `--elevation-<level>` inside every theme block and the preset as `boxShadow.<level>`, a `var()`, so `shadow-overlay` follows `[data-theme]`. A `shadow-c-*` colour or an opacity modifier has no effect on it.
+- No new colour. The levels reuse `color.theme-*.shadow-1` and `shadow-2`, which `contrast-pairs.json` already measures.
+- `shadow.card` and `shadow.pop` are unchanged. Today the console draws `shadow-card shadow-c-shadow-1` and `shadow-pop shadow-c-shadow-2`; `shadow-raised` and `shadow-overlay` render those same shadows in each theme.
+- Not covered: A10's mapping of `samourai-hub`'s three arbitrary shadows. The hub is out of Kodera's scope.
+
+### Gates
+
+- The grammar gate accepts the `breakpoint` root group. It now reads references inside a composite value: one is allowed in a shadow's `color` only, and it must resolve, without a cycle, to a colour token. Each of those fails as `[alias]`, naming the token and the field, instead of reaching the CSS as a literal `{…}` string or a length where a colour belongs.
+- The build resolves that colour and names the token when it is not a colour. It refuses an elevation set that is missing in a theme, empty, or different between themes, and a level named after a shadow primitive or after one of Tailwind's own shadow sizes (`sm`, `lg`, `inner` …), which it would silently replace.
+- `test/elevation-breakpoints.selftest.mjs`, in the `units` gate, checks four things:
+  - four levels, weakest first, each in its own theme's shadow colour and distinct across themes;
+  - one geometry per level, with `raised` and `overlay` field for field equal to `shadow.card` and `shadow.pop`, and blur rising up the ladder;
+  - every level scoped in every theme block and dynamic in the preset;
+  - four or five rem breakpoints, rising from above 360 px, each in the CSS and equal to the preset's `screens`.
+
+  Every clause, and every error above, has a mutation that asserts its own message. Deleting any one of the new build or grammar checks turns the suite red.
 
 ## v0.2.0
 
