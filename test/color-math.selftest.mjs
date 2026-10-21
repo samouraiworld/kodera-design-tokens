@@ -135,7 +135,7 @@ test('the tone against the control is opaque on every theme and every variant', 
   assertOpaqueIndicators();
 
   // The mutation it exists for: drop the opaque core and the halo becomes the
-  // indicator. It is loud elsewhere — 54 contrast problems — but on the two
+  // indicator. It is loud elsewhere — 57 contrast problems — but on the two
   // grounds above the gate's own rows say PASS, so "loud elsewhere" is not the
   // same as guarded.
   const real = SPEC.focusRing.layers;
@@ -254,7 +254,7 @@ function ringClaim(source) {
     // `inverted`: the halo carries at least one `expect: "fail"` row per theme,
     // pinning it as never the indicator. One per theme and not one per ground:
     // the default halo was measured over all 57 theme-and-ground combinations
-    // and spans 1.01:1 to 2.27:1, and 54 inverted rows would restate that
+    // and spans 1.01:1 to 2.27:1, and 57 inverted rows would restate that
     // spread rather than guard it. What the rule proves is that the pin exists
     // in every theme; what it does not prove is that every ground carries one.
     default: { grounds: [...normal, ...painted], halo: 'inverted' },

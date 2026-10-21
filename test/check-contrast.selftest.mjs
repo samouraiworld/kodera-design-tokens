@@ -415,9 +415,12 @@ assertFailsFor(
       pairs.find((p) => p.id === pair.id).fg = luminance(bg) > 0.18 ? '#000000' : '#FFFFFF';
     });
   },
-  /listed in contrast-known-failures\.json but the pair passes now — delete the entry/,
-  // Nothing else may be red, or the exit status proves nothing about this branch.
-  [/below the minimum and not in contrast-known-failures/, /written for (fg|bg|min)/],
+  [
+    /listed in contrast-known-failures\.json but the pair passes now — delete the entry/,
+    // Nothing else may be red, or the exit status proves nothing about this branch:
+    // the summary must count exactly one problem, this one.
+    /^1 contrast problem\(s\)/m,
+  ],
 );
 
 assertFailsFor(
