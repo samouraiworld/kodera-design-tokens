@@ -14,7 +14,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { SPEC_COLORS } from '../scripts/lib/spec.mjs';
-import { composite, indexTokens, loadTokens, luminance, parseColor, resolve, toHex } from '../scripts/lib/tokens.mjs';
+import { composite, contrastRatio, indexTokens, loadTokens, luminance, parseColor, resolve, toHex } from '../scripts/lib/tokens.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const INPUTS = ['tokens.json', 'contrast-pairs.json', 'contrast-known-failures.json'];
@@ -122,8 +122,16 @@ assertFailsFor(
   'a pair re-pointed at a different background keeps its id but loses its excuse',
   (dir) => {
     const { pair } = excusedPair(dir, TOKEN_PATH_SUBJECT());
-    // Any other opaque surface: the excuse names a pair, and this is not it.
-    const other = pair.bg === 'semantic.surface.inverse' ? 'semantic.surface.default' : 'semantic.surface.inverse';
+    // Any other opaque surface on which the pair STILL fails: the excuse names a
+    // pair, and this is not it. Re-pointing it at a surface where it clears
+    // would be reported as an entry to delete instead, which is a different
+    // reason; which surfaces qualify depends on the subject's own ink.
+    const index = indexTokens(readJson(dir, 'tokens.json'));
+    const fg = parseColor(resolve(pair.fg, index));
+    const other = ['semantic.surface.inverse', 'semantic.surface.default', 'semantic.surface.muted'].find(
+      (bg) => bg !== pair.bg && contrastRatio(fg, parseColor(resolve(bg, index))) < pair.min,
+    );
+    assert.ok(other, `${pair.id}: no other surface keeps the pair failing, so a re-pointed pair cannot be built`);
     editPairs(dir, (pairs) => {
       pairs.find((p) => p.id === pair.id).bg = other;
     });
@@ -157,20 +165,22 @@ assertFailsFor(
   'a colour that got worse since the ruling is not covered by the ruling',
   (dir) => {
     const { pair } = excusedPair(dir, TOKEN_PATH_SUBJECT());
-    // Push the foreground towards the background: same pair, worse ratio.
+    // Push the foreground towards the background: same pair, worse ratio. The
+    // new ink is the old one with 60 % of the background laid over it, so the
+    // move is derived from the subject rather than a literal tuned to one ink.
     //
     // The literal lands on the pair's OWN token, not on the ramp step it
-    // aliases. Following the alias would move a shared primitive — the
-    // placeholder ink and `semantic.border.input` are both `color.slate.500`
-    // since ADR-0002 — and drag an unrelated gated row below its minimum, so
-    // the gate would go red partly for a reason this test is not about. Two
-    // rows still report it, surface.default and surface.muted: both are the
-    // placeholder ink under test, on the two surfaces it is excused against.
+    // aliases. Following the alias would move a shared primitive and drag
+    // unrelated gated rows that read it below their minimum, so the gate would
+    // go red partly for a reason this test is not about.
     const tokens = readJson(dir, 'tokens.json');
+    const index = indexTokens(tokens);
+    const fg = parseColor(resolve(pair.fg, index));
+    const bg = parseColor(resolve(pair.bg, index));
     const path = pair.fg.split('.');
     let node = tokens;
     for (const key of path) node = node[key];
-    node.$value = '#B0B8C0';
+    node.$value = toHex(composite({ ...bg, a: 0.6 }, fg));
     writeJson(dir, 'tokens.json', tokens);
   },
   /worse than the [\d.]+ the entry was written for/,
@@ -397,9 +407,7 @@ assertFailsFor(
     // Take the pair's foreground to the far end of the scale from its own
     // background, so the row clears by a distance no rounding argument reaches.
     // The literal lands on the pair's own token rather than on the ramp step it
-    // aliases, for the same reason as the mutations above. Two rows report it
-    // when the subject is a placeholder row — the ink is excused on both of the
-    // surfaces it is measured against — and both report the same one thing.
+    // aliases, for the same reason as the mutations above.
     const tokens = readJson(dir, 'tokens.json');
     const bg = parseColor(resolve(pair.bg, indexTokens(tokens)));
     let node = tokens;

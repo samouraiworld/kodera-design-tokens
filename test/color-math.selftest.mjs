@@ -192,13 +192,15 @@ test('a ring asked for by an unknown theme or variant is refused, not silently d
 // the three themes to an identical role set, so a role present in one is
 // present in all.
 //
-// The six shell containers take the ring for normal grounds, together with the
+// The seven shell containers take the ring for normal grounds, together with the
 // painted status and tag backgrounds; the two inverse panels take the
 // on-inverse variant, because the normal core is the wrong side of that ground.
-const SHELL_CONTAINERS = new Set(['page', 'surface', 'sunken', 'muted', 'muted-2', 'hairline']);
+// `elevated` is a container: a menu item or a dialog button is focused on it.
+const SHELL_CONTAINERS = new Set(['page', 'surface', 'sunken', 'muted', 'muted-2', 'hairline', 'elevated']);
 
 // Roles no control is focused on top of: inks and `*-fg` foregrounds, lines,
-// shadows, the page gradient, and the control fills. A control fill is the
+// shadows, the scrim, the page gradient, and the control fills (`disabled` is
+// one: a disabled control's own fill). A control fill is the
 // ground of the ring drawn AROUND that control, which no row measures in either
 // direction today. In the light theme the core `#2340C4` is `light.action-hover`
 // exactly, so a focused primary button draws its ring at 1.20:1 against its
@@ -207,11 +209,11 @@ const SHELL_CONTAINERS = new Set(['page', 'surface', 'sunken', 'muted', 'muted-2
 // listed here rather than left out silently, so its absence is a decision.
 const NOT_A_GROUND = new Set([
   'page-grad',
-  'border', 'border-soft', 'border-strong', 'rail-line',
-  'shadow-1', 'shadow-2',
-  'ink', 'ink-2', 'ink-3', 'ink-4', 'accent-ink',
-  'on-inverse', 'on-inverse-dim',
-  'action', 'action-hover',
+  'border', 'border-soft', 'border-strong', 'border-input', 'rail-line',
+  'shadow-1', 'shadow-2', 'scrim',
+  'ink', 'ink-2', 'ink-3', 'ink-4', 'accent-ink', 'placeholder',
+  'on-inverse', 'on-inverse-dim', 'on-disabled',
+  'action', 'action-hover', 'disabled',
   'ok', 'ok-ink', 'ok-border', 'ok-on-dark',
   'warn', 'warn-ink',
   'bad', 'bad-ink', 'bad-on-dark',

@@ -8,6 +8,31 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 Nothing yet.
 
+## v0.2.0
+
+One pull request since `v0.1.1`: **`feat/themes-dark-black`**, which completes the three themes for the screens the product reference does not draw (menus, dialogs, form fields, disabled controls) and fixes the two placeholder rows by value. It adds names and changes one value, and renames or removes nothing, so `RELEASE.md`, step 5, makes it a minor.
+
+### Decided by
+
+- **`feat/themes-dark-black`**: the lead session appointed by @zxxma (CTO and CEO authority, owner decisions D0–D6), on the lane brief that carries @zxxma's wish for a more modern UI and a real dark theme. Every value below is new except `semantic.text.placeholder`.
+
+### Token values changed — design decisions
+
+- `semantic.text.placeholder`: `{color.slate.500}` → `{color.slate.600}`. The hint now clears 4.5:1 like running text — 5.87:1 on white (was 3.62:1) and 5.22:1 on the muted field (was 3.21:1) — so `text.placeholder/surface.default` and `text.placeholder/surface.muted` lose their exemption and leave `contrast-known-failures.json`. Every field still carries a visible label. `slate.500` itself does not move: it stays the picto and `border.input` step, and `forbidden:slate.500/surface.default` still fails the gate if it ever becomes usable as text. A consumer that draws `text-placeholder` sees a darker hint; one that uses `slate-500` directly sees nothing change.
+
+### Tokens added
+
+- Six roles in every theme, after the 49 reference roles (`docs/specs/shell-themes.md`, "Roles added beyond the reference"): `elevated` (menus, popovers, dialogs; `#FFFFFF` / `#1D252E` / `#141619`), `scrim` (dialog overlay), `border-input` (the edge of a control the user has to find, 3:1), `placeholder` (4.5:1), `disabled` and `on-disabled` (a neutral fill and a 4.5:1 label). Each reaches consumers as `--c-<role>` inside every theme block and as a `c-<role>` preset colour. Eight theme primitives carry the values no existing primitive held (`color.theme-dark.elevated`, `.border-input`, `.placeholder`, `.scrim`; `color.theme-black.elevated`, `.border-input`, `.scrim`; `color.theme-light.scrim`); the other roles reference the primitive that already carries their value.
+
+### Contrast register
+
+- Forty-two normative rows join `contrast-pairs.json`, fourteen per theme: the focus ring on `elevated` (3:1; `elevated` is a shell container, so the coverage check in `test/color-math.selftest.mjs` requires it), the four inks on `elevated` (4.5:1), `border-input` on `surface`, `sunken`, `muted` and `elevated` (3:1), `placeholder` on the same four (4.5:1) and `on-disabled` on `disabled` (4.5:1). None is exempt, inverted or allowlisted; the worst is `light.border-input` on `muted` at 3.21:1. Three decorative `measurements` rows report the scrim on the page.
+- `contrast-known-failures.json` goes from four rulings to two: the retired white-on-slate.300 disabled label and the decorative card edge, both unchanged.
+
+### Gates
+
+- `test/check-contrast.selftest.mjs` took its subject from the first allowlist entry, which was the placeholder; it is now the disabled label. Two mutations had been written against the placeholder's ink: re-pointing a pair at `surface.inverse` assumed a dark foreground (white on inverse passes, so the gate reported "delete the entry" instead of the reason under test), and the "worse colour" case used a literal tuned to slate.500. The first now picks a surface on which the re-pointed pair still fails, and asserts one exists; the second derives the worse ink from the subject by laying 60 % of its background over it. Each still asserts the message the gate prints.
+
 ## v0.1.1
 
 Four merged pull requests since `v0.1.0` (`b91e07e`, #26). **#30** (`fix/dark-action-hover-and-source-walk`) changes `test/token-test.mjs` and is recorded under "Fixed". The other three changed how this repository is checked and maintained: **#27** (`docs/rename-wave-1-prose`) touched `package.json`, but only its `description` and `repository.url`, alongside README, `RELEASE.md`, `.github/dependabot.yml` and ADR prose; **#28** (`chore/relevel-shared-checkers`) re-levelled the shared checkers under `.github/scripts/`; **#29** (`chore/s06-workflow-range-rules`) changed `.github/workflows/ci.yml` and `.github/scripts/required-clauses.txt`. None of the four changes `tokens.json`, `scripts/lib/spec.mjs` or `dist/`, so nothing a consumer renders moves, `RELEASE.md`, step 4, has no decider to name, and step 5 names two bumps, a major for a renamed or removed name and a minor for a value change, neither of which applies, so the version moves by a patch.

@@ -2,24 +2,6 @@
   "$comment": "The explicit allowlist. A pair in contrast-pairs.json that falls below its minimum and is NOT listed here fails the gate; a pair listed here that starts passing ALSO fails the gate, so an entry cannot outlive the problem it describes. While the pair is still failing the same rule is enforced field by field: each entry is bound to the pair it excuses — `fg`, `bg` and `min` must equal the pair's, and `ratio` is the value measured when the entry was written, so the gate fails if the pair is re-pointed at other tokens or at another `spec:` role, if its minimum is loosened, or if the measured ratio moves by more than 0.05 in either direction. There is no `fgAlpha` field: compositing is unconditional and the alpha travels with the colour (ADR-0002), so there is nothing there to bind to. `reason` is mandatory and is what a reviewer reads; `decision` is mandatory and names what would let the entry be deleted. Adding an entry is a design decision, not a build fix — see AGENTS.md. Every entry below is decided rather than pending: what is written is the ruling, and the trigger that would reopen it.",
   "failures": [
     {
-      "id": "text.placeholder/surface.default",
-      "fg": "semantic.text.placeholder",
-      "bg": "semantic.surface.default",
-      "ratio": 3.62,
-      "min": 4.5,
-      "reason": "Exempt: a placeholder is never real text. It is a hint that disappears on the first keystroke and it never carries the field's name — every field carries a visible label above it (COMPONENTS.md, Text field: label 13/500 slate.900, above, 6 px gap), so nothing a user has to read depends on this ratio.",
-      "decision": "Decided, not pending: slate.500 stays the placeholder colour and this row stays exempt for exactly as long as the visible-label rule holds. If a field ever ships placeholder-as-label this becomes a hard failure, and the fix is the label, not the token. The other half of the rule is machine-guarded: forbidden:slate.500/surface.default fails the gate if slate.500 ever becomes usable as running text."
-    },
-    {
-      "id": "text.placeholder/surface.muted",
-      "fg": "semantic.text.placeholder",
-      "bg": "semantic.surface.muted",
-      "ratio": 3.21,
-      "min": 4.5,
-      "reason": "Exempt for the same reason as text.placeholder/surface.default, on the muted field variant (COMPONENTS.md, Text field suffix: muted block slate.100). A placeholder is never real text, and the field's name is on the visible label above it.",
-      "decision": "Decided, not pending: same ruling and the same trigger as text.placeholder/surface.default. Both surfaces stay listed so neither is forgotten when the rule is revisited."
-    },
-    {
       "id": "action.onPrimary/slate.300",
       "fg": "semantic.action.onPrimary",
       "bg": "color.slate.300",

@@ -77,6 +77,7 @@
   --theme-light-t5-fg: #56626E;
   --theme-light-t6-bg: #DCE6F0;
   --theme-light-t6-fg: #2F3A45;
+  --theme-light-scrim: rgba(47,58,69,.55);
   --theme-dark-page: #10151B;
   --theme-dark-page-grad: linear-gradient(115deg,#161D25 0%,#111820 45%,#0C1116 100%);
   --theme-dark-surface: #171E26;
@@ -125,6 +126,10 @@
   --theme-dark-t5-fg: #B9C6D4;
   --theme-dark-t6-bg: #26303A;
   --theme-dark-t6-fg: #E8EFF6;
+  --theme-dark-elevated: #1D252E;
+  --theme-dark-border-input: #6B7886;
+  --theme-dark-placeholder: #8592A1;
+  --theme-dark-scrim: rgba(0,0,0,.6);
   --theme-black-page: #000000;
   --theme-black-page-grad: linear-gradient(115deg,#0B0C0E 0%,#000000 45%,#000000 100%);
   --theme-black-surface: #0B0C0E;
@@ -173,6 +178,9 @@
   --theme-black-t5-fg: #C3CDD8;
   --theme-black-t6-bg: #1B1E22;
   --theme-black-t6-fg: #F1F4F8;
+  --theme-black-elevated: #141619;
+  --theme-black-border-input: #606A75;
+  --theme-black-scrim: rgba(0,0,0,.72);
 
   /* semantic — surfaces and boundaries */
   --bg-page: linear-gradient(115deg, var(--frost-200) 0%, var(--frost-100) 45%, var(--white) 100%);
@@ -190,7 +198,7 @@
   --text-primary: #2F3A45;
   --text-secondary: #4C5763;
   --text-tertiary: #5A6672; /* Smallest body colour: 5.87:1 on white, 4.64:1 on frost.200, the dark end of the page gradient */
-  --text-placeholder: #7C8894; /* Never real text: 3.62:1 on white. Every field carries a visible label above it (COMPONENTS.md, Text field) */
+  --text-placeholder: #5A6672; /* Input placeholder, slate.600: 5.87:1 on white and 5.22:1 on the muted field, so the hint clears 4.5:1 like running text. Every field still carries a visible label above it (COMPONENTS.md, Text field); slate.500 stays forbidden as text */
   --text-inverse: #FFFFFF;
   --text-accent: #2B4BDB;
   --text-success: #1F7A45;
@@ -332,6 +340,12 @@
   --c-t5-fg: #56626E;
   --c-t6-bg: #DCE6F0;
   --c-t6-fg: #2F3A45;
+  --c-elevated: #FFFFFF;
+  --c-scrim: rgba(47,58,69,.55);
+  --c-border-input: #7C8894;
+  --c-placeholder: #5C6874;
+  --c-disabled: #EEF2F6;
+  --c-on-disabled: #5C6874;
   --focus-ring: 0 0 0 2px #2340C4, 0 0 0 5px rgba(35, 64, 196, 0.35);
   --focus-ring-color: #2340C4;
   --focus-ring-on-inverse: 0 0 0 2px #FFFFFF, 0 0 0 5px rgba(255, 255, 255, 0.35);
@@ -388,6 +402,12 @@
   --c-t5-fg: #B9C6D4;
   --c-t6-bg: #26303A;
   --c-t6-fg: #E8EFF6;
+  --c-elevated: #1D252E;
+  --c-scrim: rgba(0,0,0,.6);
+  --c-border-input: #6B7886;
+  --c-placeholder: #8592A1;
+  --c-disabled: #242E38;
+  --c-on-disabled: #98A6B5;
   --focus-ring: 0 0 0 2px #A9BBFF, 0 0 0 5px rgba(169, 187, 255, 0.35);
   --focus-ring-color: #A9BBFF;
   --focus-ring-on-inverse: 0 0 0 2px #F3F7FB, 0 0 0 5px rgba(243, 247, 251, 0.35);
@@ -444,6 +464,12 @@
   --c-t5-fg: #C3CDD8;
   --c-t6-bg: #1B1E22;
   --c-t6-fg: #F1F4F8;
+  --c-elevated: #141619;
+  --c-scrim: rgba(0,0,0,.72);
+  --c-border-input: #606A75;
+  --c-placeholder: #7C8794;
+  --c-disabled: #1B1E22;
+  --c-on-disabled: #9BA7B4;
   --focus-ring: 0 0 0 2px #A9BBFF, 0 0 0 5px rgba(169, 187, 255, 0.35);
   --focus-ring-color: #A9BBFF;
   --focus-ring-on-inverse: 0 0 0 2px #F7FAFC, 0 0 0 5px rgba(247, 250, 252, 0.35);
