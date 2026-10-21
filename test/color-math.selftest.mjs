@@ -253,7 +253,7 @@ function ringClaim(source) {
   return {
     // `inverted`: the halo carries at least one `expect: "fail"` row per theme,
     // pinning it as never the indicator. One per theme and not one per ground:
-    // the default halo was measured over all 54 theme-and-ground combinations
+    // the default halo was measured over all 57 theme-and-ground combinations
     // and spans 1.01:1 to 2.27:1, and 54 inverted rows would restate that
     // spread rather than guard it. What the rule proves is that the pin exists
     // in every theme; what it does not prove is that every ground carries one.

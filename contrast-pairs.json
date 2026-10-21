@@ -2237,6 +2237,90 @@
       "bg": "semantic.theme.black.disabled",
       "label": "black: disabled control label on the disabled fill",
       "min": 4.5
+    },
+    {
+      "id": "theme.light/ok-ink/elevated",
+      "fg": "semantic.theme.light.ok-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/warn-ink/elevated",
+      "fg": "semantic.theme.light.warn-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/bad-ink/elevated",
+      "fg": "semantic.theme.light.bad-ink",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/icon-ink-4/elevated",
+      "fg": "semantic.theme.light.ink-4",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/ok-ink/elevated",
+      "fg": "semantic.theme.dark.ok-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/warn-ink/elevated",
+      "fg": "semantic.theme.dark.warn-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/bad-ink/elevated",
+      "fg": "semantic.theme.dark.bad-ink",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/icon-ink-4/elevated",
+      "fg": "semantic.theme.dark.ink-4",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/ok-ink/elevated",
+      "fg": "semantic.theme.black.ok-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ok-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/warn-ink/elevated",
+      "fg": "semantic.theme.black.warn-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: warn-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/bad-ink/elevated",
+      "fg": "semantic.theme.black.bad-ink",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: bad-ink on elevated — a status label or icon in a menu or dialog; on elevated, status draws its -ink role",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/icon-ink-4/elevated",
+      "fg": "semantic.theme.black.ink-4",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ink-4 informative icon on elevated (non-text, 1.4.11)",
+      "min": 3
     }
   ],
   "measurements": [
@@ -2803,6 +2887,87 @@
       "label": "black: scrim composited over the page, reported only",
       "kind": "decorative",
       "purpose": "The overlay behind a dialog dims what it covers and carries no meaning; the dialog itself sits on elevated, whose text rows are normative."
+    },
+    {
+      "id": "theme.light/ok/elevated",
+      "fg": "semantic.theme.light.ok",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.light/warn/elevated",
+      "fg": "semantic.theme.light.warn",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.light/bad/elevated",
+      "fg": "semantic.theme.light.bad",
+      "bg": "semantic.theme.light.elevated",
+      "label": "light: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/ok/elevated",
+      "fg": "semantic.theme.dark.ok",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/warn/elevated",
+      "fg": "semantic.theme.dark.warn",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.dark/bad/elevated",
+      "fg": "semantic.theme.dark.bad",
+      "bg": "semantic.theme.dark.elevated",
+      "label": "dark: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/ok/elevated",
+      "fg": "semantic.theme.black.ok",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: ok fill colour as an icon on elevated; capability probe, the decided usage is ok-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws ok-ink, which the 4.5:1 row above gates. The ok fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/warn/elevated",
+      "fg": "semantic.theme.black.warn",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: warn fill colour as an icon on elevated; capability probe, the decided usage is warn-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws warn-ink, which the 4.5:1 row above gates. The warn fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "theme.black/bad/elevated",
+      "fg": "semantic.theme.black.bad",
+      "bg": "semantic.theme.black.elevated",
+      "label": "black: bad fill colour as an icon on elevated; capability probe, the decided usage is bad-ink",
+      "kind": "capability",
+      "purpose": "On elevated a status icon or label draws bad-ink, which the 4.5:1 row above gates. The bad fill is a button and badge fill sized for its on-inverse label; this row reports what it would measure as an icon on a menu or dialog, so a consumer that uses it there re-creates a gap the gate does not see (dark bad measures below 3:1).",
+      "thresholdForComparison": 3
     }
   ]
 }

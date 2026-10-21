@@ -406,16 +406,18 @@ assertFailsFor(
     const { pair } = excusedPair(dir, EXEMPT_SUBJECT());
     // Take the pair's foreground to the far end of the scale from its own
     // background, so the row clears by a distance no rounding argument reaches.
-    // The literal lands on the pair's own token rather than on the ramp step it
-    // aliases, for the same reason as the mutations above.
-    const tokens = readJson(dir, 'tokens.json');
-    const bg = parseColor(resolve(pair.bg, indexTokens(tokens)));
-    let node = tokens;
-    for (const key of pair.fg.split('.')) node = node[key];
-    node.$value = luminance(bg) > 0.18 ? '#000000' : '#FFFFFF';
-    writeJson(dir, 'tokens.json', tokens);
+    // The literal lands on the ROW, not on a token: the subject's ink is shared
+    // with other gated rows (the disabled-label entry reads action.onPrimary,
+    // which the primary button's label rows read too), and moving the token
+    // would fail those rows and keep the gate red whatever this branch did.
+    const bg = parseColor(resolve(pair.bg, indexTokens(readJson(dir, 'tokens.json'))));
+    editPairs(dir, (pairs) => {
+      pairs.find((p) => p.id === pair.id).fg = luminance(bg) > 0.18 ? '#000000' : '#FFFFFF';
+    });
   },
   /listed in contrast-known-failures\.json but the pair passes now — delete the entry/,
+  // Nothing else may be red, or the exit status proves nothing about this branch.
+  [/below the minimum and not in contrast-known-failures/, /written for (fg|bg|min)/],
 );
 
 assertFailsFor(
