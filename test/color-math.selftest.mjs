@@ -217,6 +217,7 @@ const NOT_A_GROUND = new Set([
   'ok', 'ok-ink', 'ok-border', 'ok-on-dark',
   'warn', 'warn-ink',
   'bad', 'bad-ink', 'bad-on-dark',
+  'cursor-1', 'cursor-2', 'cursor-3', 'cursor-4', 'cursor-5', 'cursor-6',
 ]);
 
 /** Which ground list a theme role belongs to, or null when it is not a ground. */

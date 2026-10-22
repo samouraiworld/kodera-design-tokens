@@ -2405,6 +2405,888 @@
       "bg": "semantic.theme.black.surface",
       "label": "black: ok-ink text on surface — a success hint under a field, a presence label",
       "min": 4.5
+    },
+    {
+      "id": "theme.light/cursor-1/surface",
+      "fg": "semantic.theme.light.cursor-1",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 1 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-1/sunken",
+      "fg": "semantic.theme.light.cursor-1",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 1 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-1",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-1",
+      "label": "light: collaborator 1 cursor name flag label on cursor-1",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-1-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-1-soft",
+      "label": "light: ink text on collaborator 1 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-1-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-1-soft",
+      "label": "light: focus ring core on the painted cursor-1-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-2/surface",
+      "fg": "semantic.theme.light.cursor-2",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 2 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-2/sunken",
+      "fg": "semantic.theme.light.cursor-2",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 2 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-2",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-2",
+      "label": "light: collaborator 2 cursor name flag label on cursor-2",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-2-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-2-soft",
+      "label": "light: ink text on collaborator 2 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-2-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-2-soft",
+      "label": "light: focus ring core on the painted cursor-2-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-3/surface",
+      "fg": "semantic.theme.light.cursor-3",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 3 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-3/sunken",
+      "fg": "semantic.theme.light.cursor-3",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 3 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-3",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-3",
+      "label": "light: collaborator 3 cursor name flag label on cursor-3",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-3-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-3-soft",
+      "label": "light: ink text on collaborator 3 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-3-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-3-soft",
+      "label": "light: focus ring core on the painted cursor-3-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-4/surface",
+      "fg": "semantic.theme.light.cursor-4",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 4 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-4/sunken",
+      "fg": "semantic.theme.light.cursor-4",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 4 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-4",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-4",
+      "label": "light: collaborator 4 cursor name flag label on cursor-4",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-4-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-4-soft",
+      "label": "light: ink text on collaborator 4 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-4-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-4-soft",
+      "label": "light: focus ring core on the painted cursor-4-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-5/surface",
+      "fg": "semantic.theme.light.cursor-5",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 5 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-5/sunken",
+      "fg": "semantic.theme.light.cursor-5",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 5 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-5",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-5",
+      "label": "light: collaborator 5 cursor name flag label on cursor-5",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-5-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-5-soft",
+      "label": "light: ink text on collaborator 5 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-5-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-5-soft",
+      "label": "light: focus ring core on the painted cursor-5-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-6/surface",
+      "fg": "semantic.theme.light.cursor-6",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: collaborator 6 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/cursor-6/sunken",
+      "fg": "semantic.theme.light.cursor-6",
+      "bg": "semantic.theme.light.sunken",
+      "label": "light: collaborator 6 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/on-inverse/cursor-6",
+      "fg": "semantic.theme.light.on-inverse",
+      "bg": "semantic.theme.light.cursor-6",
+      "label": "light: collaborator 6 cursor name flag label on cursor-6",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/ink/cursor-6-soft",
+      "fg": "semantic.theme.light.ink",
+      "bg": "semantic.theme.light.cursor-6-soft",
+      "label": "light: ink text on collaborator 6 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/cursor-6-soft",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.cursor-6-soft",
+      "label": "light: focus ring core on the painted cursor-6-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-1-fg/tag-1-bg",
+      "fg": "semantic.theme.light.tag-1-fg",
+      "bg": "semantic.theme.light.tag-1-bg",
+      "label": "light: non-status categorical tag 1 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-1-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-1-bg",
+      "label": "light: focus ring core on the painted tag-1-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-2-fg/tag-2-bg",
+      "fg": "semantic.theme.light.tag-2-fg",
+      "bg": "semantic.theme.light.tag-2-bg",
+      "label": "light: non-status categorical tag 2 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-2-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-2-bg",
+      "label": "light: focus ring core on the painted tag-2-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-3-fg/tag-3-bg",
+      "fg": "semantic.theme.light.tag-3-fg",
+      "bg": "semantic.theme.light.tag-3-bg",
+      "label": "light: non-status categorical tag 3 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-3-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-3-bg",
+      "label": "light: focus ring core on the painted tag-3-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-4-fg/tag-4-bg",
+      "fg": "semantic.theme.light.tag-4-fg",
+      "bg": "semantic.theme.light.tag-4-bg",
+      "label": "light: non-status categorical tag 4 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-4-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-4-bg",
+      "label": "light: focus ring core on the painted tag-4-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-5-fg/tag-5-bg",
+      "fg": "semantic.theme.light.tag-5-fg",
+      "bg": "semantic.theme.light.tag-5-bg",
+      "label": "light: non-status categorical tag 5 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-5-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-5-bg",
+      "label": "light: focus ring core on the painted tag-5-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.light/tag-6-fg/tag-6-bg",
+      "fg": "semantic.theme.light.tag-6-fg",
+      "bg": "semantic.theme.light.tag-6-bg",
+      "label": "light: non-status categorical tag 6 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/focus-ring/tag-6-bg",
+      "fg": "spec:focus-ring.light.indicator",
+      "bg": "semantic.theme.light.tag-6-bg",
+      "label": "light: focus ring core on the painted tag-6-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-1/surface",
+      "fg": "semantic.theme.dark.cursor-1",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 1 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-1/sunken",
+      "fg": "semantic.theme.dark.cursor-1",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 1 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-1",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-1",
+      "label": "dark: collaborator 1 cursor name flag label on cursor-1",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-1-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-1-soft",
+      "label": "dark: ink text on collaborator 1 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-1-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-1-soft",
+      "label": "dark: focus ring core on the painted cursor-1-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-2/surface",
+      "fg": "semantic.theme.dark.cursor-2",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 2 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-2/sunken",
+      "fg": "semantic.theme.dark.cursor-2",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 2 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-2",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-2",
+      "label": "dark: collaborator 2 cursor name flag label on cursor-2",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-2-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-2-soft",
+      "label": "dark: ink text on collaborator 2 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-2-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-2-soft",
+      "label": "dark: focus ring core on the painted cursor-2-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-3/surface",
+      "fg": "semantic.theme.dark.cursor-3",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 3 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-3/sunken",
+      "fg": "semantic.theme.dark.cursor-3",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 3 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-3",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-3",
+      "label": "dark: collaborator 3 cursor name flag label on cursor-3",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-3-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-3-soft",
+      "label": "dark: ink text on collaborator 3 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-3-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-3-soft",
+      "label": "dark: focus ring core on the painted cursor-3-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-4/surface",
+      "fg": "semantic.theme.dark.cursor-4",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 4 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-4/sunken",
+      "fg": "semantic.theme.dark.cursor-4",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 4 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-4",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-4",
+      "label": "dark: collaborator 4 cursor name flag label on cursor-4",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-4-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-4-soft",
+      "label": "dark: ink text on collaborator 4 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-4-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-4-soft",
+      "label": "dark: focus ring core on the painted cursor-4-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-5/surface",
+      "fg": "semantic.theme.dark.cursor-5",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 5 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-5/sunken",
+      "fg": "semantic.theme.dark.cursor-5",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 5 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-5",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-5",
+      "label": "dark: collaborator 5 cursor name flag label on cursor-5",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-5-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-5-soft",
+      "label": "dark: ink text on collaborator 5 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-5-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-5-soft",
+      "label": "dark: focus ring core on the painted cursor-5-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-6/surface",
+      "fg": "semantic.theme.dark.cursor-6",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: collaborator 6 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/cursor-6/sunken",
+      "fg": "semantic.theme.dark.cursor-6",
+      "bg": "semantic.theme.dark.sunken",
+      "label": "dark: collaborator 6 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/on-inverse/cursor-6",
+      "fg": "semantic.theme.dark.on-inverse",
+      "bg": "semantic.theme.dark.cursor-6",
+      "label": "dark: collaborator 6 cursor name flag label on cursor-6",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/ink/cursor-6-soft",
+      "fg": "semantic.theme.dark.ink",
+      "bg": "semantic.theme.dark.cursor-6-soft",
+      "label": "dark: ink text on collaborator 6 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/cursor-6-soft",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.cursor-6-soft",
+      "label": "dark: focus ring core on the painted cursor-6-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-1-fg/tag-1-bg",
+      "fg": "semantic.theme.dark.tag-1-fg",
+      "bg": "semantic.theme.dark.tag-1-bg",
+      "label": "dark: non-status categorical tag 1 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-1-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-1-bg",
+      "label": "dark: focus ring core on the painted tag-1-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-2-fg/tag-2-bg",
+      "fg": "semantic.theme.dark.tag-2-fg",
+      "bg": "semantic.theme.dark.tag-2-bg",
+      "label": "dark: non-status categorical tag 2 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-2-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-2-bg",
+      "label": "dark: focus ring core on the painted tag-2-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-3-fg/tag-3-bg",
+      "fg": "semantic.theme.dark.tag-3-fg",
+      "bg": "semantic.theme.dark.tag-3-bg",
+      "label": "dark: non-status categorical tag 3 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-3-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-3-bg",
+      "label": "dark: focus ring core on the painted tag-3-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-4-fg/tag-4-bg",
+      "fg": "semantic.theme.dark.tag-4-fg",
+      "bg": "semantic.theme.dark.tag-4-bg",
+      "label": "dark: non-status categorical tag 4 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-4-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-4-bg",
+      "label": "dark: focus ring core on the painted tag-4-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-5-fg/tag-5-bg",
+      "fg": "semantic.theme.dark.tag-5-fg",
+      "bg": "semantic.theme.dark.tag-5-bg",
+      "label": "dark: non-status categorical tag 5 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-5-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-5-bg",
+      "label": "dark: focus ring core on the painted tag-5-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.dark/tag-6-fg/tag-6-bg",
+      "fg": "semantic.theme.dark.tag-6-fg",
+      "bg": "semantic.theme.dark.tag-6-bg",
+      "label": "dark: non-status categorical tag 6 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/focus-ring/tag-6-bg",
+      "fg": "spec:focus-ring.dark.indicator",
+      "bg": "semantic.theme.dark.tag-6-bg",
+      "label": "dark: focus ring core on the painted tag-6-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-1/surface",
+      "fg": "semantic.theme.black.cursor-1",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 1 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-1/sunken",
+      "fg": "semantic.theme.black.cursor-1",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 1 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-1",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-1",
+      "label": "black: collaborator 1 cursor name flag label on cursor-1",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-1-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-1-soft",
+      "label": "black: ink text on collaborator 1 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-1-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-1-soft",
+      "label": "black: focus ring core on the painted cursor-1-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-2/surface",
+      "fg": "semantic.theme.black.cursor-2",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 2 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-2/sunken",
+      "fg": "semantic.theme.black.cursor-2",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 2 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-2",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-2",
+      "label": "black: collaborator 2 cursor name flag label on cursor-2",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-2-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-2-soft",
+      "label": "black: ink text on collaborator 2 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-2-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-2-soft",
+      "label": "black: focus ring core on the painted cursor-2-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-3/surface",
+      "fg": "semantic.theme.black.cursor-3",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 3 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-3/sunken",
+      "fg": "semantic.theme.black.cursor-3",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 3 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-3",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-3",
+      "label": "black: collaborator 3 cursor name flag label on cursor-3",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-3-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-3-soft",
+      "label": "black: ink text on collaborator 3 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-3-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-3-soft",
+      "label": "black: focus ring core on the painted cursor-3-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-4/surface",
+      "fg": "semantic.theme.black.cursor-4",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 4 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-4/sunken",
+      "fg": "semantic.theme.black.cursor-4",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 4 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-4",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-4",
+      "label": "black: collaborator 4 cursor name flag label on cursor-4",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-4-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-4-soft",
+      "label": "black: ink text on collaborator 4 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-4-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-4-soft",
+      "label": "black: focus ring core on the painted cursor-4-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-5/surface",
+      "fg": "semantic.theme.black.cursor-5",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 5 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-5/sunken",
+      "fg": "semantic.theme.black.cursor-5",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 5 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-5",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-5",
+      "label": "black: collaborator 5 cursor name flag label on cursor-5",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-5-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-5-soft",
+      "label": "black: ink text on collaborator 5 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-5-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-5-soft",
+      "label": "black: focus ring core on the painted cursor-5-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-6/surface",
+      "fg": "semantic.theme.black.cursor-6",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: collaborator 6 cursor caret, presence ring and pill edge on surface (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/cursor-6/sunken",
+      "fg": "semantic.theme.black.cursor-6",
+      "bg": "semantic.theme.black.sunken",
+      "label": "black: collaborator 6 cursor caret, presence ring and pill edge on sunken (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/on-inverse/cursor-6",
+      "fg": "semantic.theme.black.on-inverse",
+      "bg": "semantic.theme.black.cursor-6",
+      "label": "black: collaborator 6 cursor name flag label on cursor-6",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ink/cursor-6-soft",
+      "fg": "semantic.theme.black.ink",
+      "bg": "semantic.theme.black.cursor-6-soft",
+      "label": "black: ink text on collaborator 6 selection highlight",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/cursor-6-soft",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.cursor-6-soft",
+      "label": "black: focus ring core on the painted cursor-6-soft ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-1-fg/tag-1-bg",
+      "fg": "semantic.theme.black.tag-1-fg",
+      "bg": "semantic.theme.black.tag-1-bg",
+      "label": "black: non-status categorical tag 1 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-1-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-1-bg",
+      "label": "black: focus ring core on the painted tag-1-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-2-fg/tag-2-bg",
+      "fg": "semantic.theme.black.tag-2-fg",
+      "bg": "semantic.theme.black.tag-2-bg",
+      "label": "black: non-status categorical tag 2 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-2-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-2-bg",
+      "label": "black: focus ring core on the painted tag-2-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-3-fg/tag-3-bg",
+      "fg": "semantic.theme.black.tag-3-fg",
+      "bg": "semantic.theme.black.tag-3-bg",
+      "label": "black: non-status categorical tag 3 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-3-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-3-bg",
+      "label": "black: focus ring core on the painted tag-3-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-4-fg/tag-4-bg",
+      "fg": "semantic.theme.black.tag-4-fg",
+      "bg": "semantic.theme.black.tag-4-bg",
+      "label": "black: non-status categorical tag 4 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-4-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-4-bg",
+      "label": "black: focus ring core on the painted tag-4-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-5-fg/tag-5-bg",
+      "fg": "semantic.theme.black.tag-5-fg",
+      "bg": "semantic.theme.black.tag-5-bg",
+      "label": "black: non-status categorical tag 5 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-5-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-5-bg",
+      "label": "black: focus ring core on the painted tag-5-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
+    },
+    {
+      "id": "theme.black/tag-6-fg/tag-6-bg",
+      "fg": "semantic.theme.black.tag-6-fg",
+      "bg": "semantic.theme.black.tag-6-bg",
+      "label": "black: non-status categorical tag 6 label on fill",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/focus-ring/tag-6-bg",
+      "fg": "spec:focus-ring.black.indicator",
+      "bg": "semantic.theme.black.tag-6-bg",
+      "label": "black: focus ring core on the painted tag-6-bg ground — a control sits on these too, so the ring is claimed to clear them (non-text, 1.4.11)",
+      "min": 3
     }
   ],
   "measurements": [

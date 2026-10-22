@@ -8,6 +8,46 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 Nothing yet.
 
+## v0.4.0
+
+`feat/cursor-and-tag-palettes` adds the collaborator cursor palette (DESIGN_HANDOFF A11) and the non-status categorical tag palette (A5 / A11) across all three shell themes (`light`, `dark`, `black`), bringing each theme from 55 to 79 roles. It adds names only and does not rename, remove or change any token a consumer already uses (`t1`–`t6` stay untouched). `RELEASE.md`, step 5, makes the whole a minor.
+
+### Decided by
+
+- **`feat/cursor-and-tag-palettes`**: zôÖma through the lead's delegated authority (owner decisions D0–D6, which delegate design authority to the lead session). All values below are new.
+
+### Tokens added
+
+- **Collaborator cursor palette**, twelve roles per theme (`cursor-1`..`cursor-6` and `cursor-1-soft`..`cursor-6-soft`), named generically rather than under `docs-cursor-*` so the collaborative canvas/board, presence indicators and document editor share one palette instead of falling back to `action` or `ink-4` (`p06-docs.html` drew collaborator 2's cursor in `ink-4` because only one accent existed):
+  - `cursor-1` / `cursor-1-soft` (cobalt): `#2647D4` / `#E8EEFC` in light, `#3D5FE8` / `#172240` in dark, `#3E61EE` / `#101830` in black;
+  - `cursor-2` / `cursor-2-soft` (iris): `#6336C2` / `#EFE9FC` in light, `#7B50DA` / `#231B3D` in dark, `#8056E0` / `#1B1330` in black;
+  - `cursor-3` / `cursor-3-soft` (teal): `#0E6E78` / `#E3F4F6` in light, `#127882` / `#122A30` in dark, `#157D88` / `#0B1E23` in black;
+  - `cursor-4` / `cursor-4-soft` (berry): `#A82468` / `#FAEAF2` in light, `#BE347A` / `#331829` in dark, `#C5387E` / `#26101E` in black;
+  - `cursor-5` / `cursor-5-soft` (copper): `#AC4D0C` / `#FDF0E4` in light, `#B25110` / `#301E12` in dark, `#B65511` / `#23150B` in black;
+  - `cursor-6` / `cursor-6-soft` (jade): `#117556` / `#E4F5EE` in light, `#147A5A` / `#122B24` in dark, `#177F5E` / `#0B1F19` in black.
+- **Non-status categorical tag palette**, twelve roles per theme (`tag-1-bg`/`tag-1-fg`..`tag-6-bg`/`tag-6-fg`), for room topics, departments, categories and filter chips that carry no status meaning. The existing `t1`–`t6` roles stay untouched for avatar tints and status-aligned chips; because `t1`–`t4` reuse the semantic `accent`, `ok`, `warn` and `bad` softs and inks, every `tag-1`..`tag-6` pair sits outside all four semantic status hue bands (`bad` red `345°–15°`, `warn` amber `15°–50°`, `ok` emerald `120°–165°`, `accent` cobalt `220°–240°`) and reuses zero status or `t1`–`t5` values:
+  - `tag-1-bg` / `tag-1-fg` (iris, `~256°`): `#F1EEFC` / `#4D2CA6` (7.92:1) in light, `#241C3D` / `#D6C9FB` (9.24:1) in dark, `#19132C` / `#DFD4FC` (11.57:1) in black;
+  - `tag-2-bg` / `tag-2-fg` (teal, `~187°`): `#E5F4F6` / `#0E5E6A` (6.60:1) in light, `#11292F` / `#A3DFE8` (9.22:1) in dark, `#0A1E23` / `#B0E7EF` (11.61:1) in black;
+  - `tag-3-bg` / `tag-3-fg` (plum, `~321°`): `#F9EBF4` / `#8A2465` (6.86:1) in light, `#331729` / `#F0B9DC` (8.51:1) in dark, `#25101E` / `#F5C7E4` (10.97:1) in black;
+  - `tag-4-bg` / `tag-4-fg` (cerulean, `~204°`): `#E6F1FA` / `#12517A` (7.28:1) in light, `#132638` / `#ABD4F5` (8.77:1) in dark, `#0C1C2B` / `#B8DDF8` (11.12:1) in black;
+  - `tag-5-bg` / `tag-5-fg` (orchid, `~283°`): `#F5ECF9` / `#6E2889` (7.45:1) in light, `#2D1938` / `#E3BEF5` (8.87:1) in dark, `#201129` / `#EBCBF8` (11.27:1) in black;
+  - `tag-6-bg` / `tag-6-fg` (lichen, `~84°`): `#EEF3E6` / `#3F571B` (6.91:1) in light, `#1E2814` / `#C7DDA4` (8.98:1) in dark, `#151D0D` / `#D3E6B2` (11.23:1) in black.
+- Seventy-two primitives (`color.theme-<theme>.cursor-*` and `color.theme-<theme>.tag-*`) and seventy-two semantic aliases (`semantic.theme.<theme>.cursor-*` and `semantic.theme.<theme>.tag-*`), each emitted as `--c-<role>` inside every `[data-theme]` block and as `c-<role>` in the Tailwind preset.
+
+### Contrast register
+
+- **One hundred twenty-six normative rows** join `contrast-pairs.json`, forty-two per theme, with no exemptions, inversions or allowlist entries:
+  - For each collaborator cursor slot (`cursor-1`..`cursor-6`): `cursor-N` on `surface` (3:1, worst `dark.cursor-1` at 3.39:1), `cursor-N` on `sunken` (3:1, worst `dark.cursor-1` at 3.21:1), `on-inverse` on `cursor-N` for floating cursor name flags (4.5:1, worst `dark.cursor-3` at 4.63:1), `ink` on `cursor-N-soft` for selection highlights (4.5:1, worst `light.cursor-2-soft` at 9.75:1), and `spec:focus-ring.<theme>.indicator` on `cursor-N-soft` (3:1, worst `light.cursor-1-soft` at 6.74:1).
+  - For each non-status categorical tag slot (`tag-1`..`tag-6`): `tag-N-fg` on `tag-N-bg` (4.5:1, worst `light.tag-2` at 6.60:1) and `spec:focus-ring.<theme>.indicator` on `tag-N-bg` (3:1, worst `light.tag-1-bg` at 6.95:1).
+
+### Gates
+
+- `test/color-math.selftest.mjs` classifies `cursor-1`..`cursor-6` as non-grounds (solid cursor strokes and flag fills) while `cursor-1-soft`..`cursor-6-soft` and `tag-1-bg`..`tag-6-bg` are classified as painted grounds requiring focus-ring coverage rows across all three themes.
+- `test/cursor-and-tag-palettes.selftest.mjs` joins the `units` gate:
+  - checks that all six collaborator cursor slots per theme alias their theme primitives, carry descriptions, clear 3:1 on `surface` and `sunken`, clear 4.5:1 under `on-inverse` and `ink` on `-soft`, stay `>= 20°` apart in hue, reuse no action/status/`ink-4` hex value, carry all five normative contrast rows per slot, and emit scoped CSS and dynamic `var(--c-*)` preset entries;
+  - checks that all six non-status categorical tag pairs per theme alias their theme primitives, carry descriptions, clear 4.5:1 (`tag-N-fg` on `tag-N-bg`), stay outside all four semantic status hue bands (`bad` red, `warn` amber, `ok` emerald, `accent` cobalt), reuse no status or `t1`–`t5` hex value, keep `-bg` and `-fg` within `10°` in hue and distinct slots `>= 12°` apart, carry both normative contrast rows (`tag-N-fg` at 4.5:1 and `focus-ring` at 3:1), and emit scoped CSS and dynamic `var(--c-*)` preset entries;
+  - twenty-two self-test mutations prove every clause and status-band refusal fails on its own with its expected message.
+
 ## v0.3.0
 
 Two pull requests since `v0.2.0`. **#35** (`feat/breakpoint-elevation-tokens`) adds breakpoint tokens (DESIGN_HANDOFF A13) and themed elevation tokens (A10). It adds names and does not rename, remove or change anything a consumer can use today. **`chore/release-v0.3.0`** cuts this version and changes only `package.json`'s `version` and this file. `RELEASE.md`, step 5, makes the whole a minor.

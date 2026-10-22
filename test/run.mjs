@@ -34,6 +34,7 @@ const gates = [
       'test/check-contrast.selftest.mjs',
       'test/theme-contract.selftest.mjs',
       'test/elevation-breakpoints.selftest.mjs',
+      'test/cursor-and-tag-palettes.selftest.mjs',
     ],
   ],
 ];
