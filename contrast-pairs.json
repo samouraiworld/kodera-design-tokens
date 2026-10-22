@@ -428,6 +428,13 @@
       "min": 3.0
     },
     {
+      "id": "theme.light/focus-ring-on-inverse/bad",
+      "fg": "spec:focus-ring-on-inverse.light.indicator",
+      "bg": "semantic.theme.light.bad",
+      "label": "light: on-inverse focus ring core on bad — the variant a danger control on an inverse panel (Quitter) or a danger toast action is drawn with, where the normal core is the wrong side of the ground (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
       "id": "theme.dark/focus-ring/surface",
       "fg": "spec:focus-ring.dark.indicator",
       "bg": "semantic.theme.dark.surface",
@@ -554,6 +561,13 @@
       "min": 3.0
     },
     {
+      "id": "theme.dark/focus-ring-on-inverse/bad",
+      "fg": "spec:focus-ring-on-inverse.dark.indicator",
+      "bg": "semantic.theme.dark.bad",
+      "label": "dark: on-inverse focus ring core on bad — the variant a danger control on an inverse panel (Quitter) or a danger toast action is drawn with, where the normal core is the wrong side of the ground (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
       "id": "theme.black/focus-ring/surface",
       "fg": "spec:focus-ring.black.indicator",
       "bg": "semantic.theme.black.surface",
@@ -677,6 +691,13 @@
       "fg": "spec:focus-ring-on-inverse.black.indicator",
       "bg": "semantic.theme.black.inverse-2",
       "label": "black: on-inverse focus ring core on inverse-2 — the variant a control on an inverse panel is drawn with, where the normal core is the wrong side of the ground (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
+      "id": "theme.black/focus-ring-on-inverse/bad",
+      "fg": "spec:focus-ring-on-inverse.black.indicator",
+      "bg": "semantic.theme.black.bad",
+      "label": "black: on-inverse focus ring core on bad — the variant a danger control on an inverse panel (Quitter) or a danger toast action is drawn with, where the normal core is the wrong side of the ground (non-text, 1.4.11)",
       "min": 3.0
     },
 
@@ -2351,6 +2372,20 @@
       "min": 4.5
     },
     {
+      "id": "theme.light/ok-ink/muted",
+      "fg": "semantic.theme.light.ok-ink",
+      "bg": "semantic.theme.light.muted",
+      "label": "light: ok-ink text on muted — a room active-speaker label on a hovered row, a presence label on a muted field",
+      "min": 4.5
+    },
+    {
+      "id": "theme.light/inverse/on-inverse",
+      "fg": "semantic.theme.light.inverse",
+      "bg": "semantic.theme.light.on-inverse",
+      "label": "light: inverse icon and label on the on-inverse pressed plate — a muted or deafened call toggle",
+      "min": 4.5
+    },
+    {
       "id": "theme.dark/ink/accent-soft",
       "fg": "semantic.theme.dark.ink",
       "bg": "semantic.theme.dark.accent-soft",
@@ -2379,6 +2414,20 @@
       "min": 4.5
     },
     {
+      "id": "theme.dark/ok-ink/muted",
+      "fg": "semantic.theme.dark.ok-ink",
+      "bg": "semantic.theme.dark.muted",
+      "label": "dark: ok-ink text on muted — a room active-speaker label on a hovered row, a presence label on a muted field",
+      "min": 4.5
+    },
+    {
+      "id": "theme.dark/inverse/on-inverse",
+      "fg": "semantic.theme.dark.inverse",
+      "bg": "semantic.theme.dark.on-inverse",
+      "label": "dark: inverse icon and label on the on-inverse pressed plate — a muted or deafened call toggle",
+      "min": 4.5
+    },
+    {
       "id": "theme.black/ink/accent-soft",
       "fg": "semantic.theme.black.ink",
       "bg": "semantic.theme.black.accent-soft",
@@ -2404,6 +2453,20 @@
       "fg": "semantic.theme.black.ok-ink",
       "bg": "semantic.theme.black.surface",
       "label": "black: ok-ink text on surface — a success hint under a field, a presence label",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/ok-ink/muted",
+      "fg": "semantic.theme.black.ok-ink",
+      "bg": "semantic.theme.black.muted",
+      "label": "black: ok-ink text on muted — a room active-speaker label on a hovered row, a presence label on a muted field",
+      "min": 4.5
+    },
+    {
+      "id": "theme.black/inverse/on-inverse",
+      "fg": "semantic.theme.black.inverse",
+      "bg": "semantic.theme.black.on-inverse",
+      "label": "black: inverse icon and label on the on-inverse pressed plate — a muted or deafened call toggle",
       "min": 4.5
     },
     {
@@ -3795,6 +3858,15 @@
       "thresholdForComparison": 3
     },
     {
+      "id": "focus-ring-on-inverse-halo/theme.light.bad",
+      "fg": "spec:focus-ring-on-inverse.light.outer",
+      "bg": "semantic.theme.light.bad",
+      "label": "light: the on-inverse ring's outermost tone alone on bad, at its own alpha",
+      "kind": "decorative",
+      "purpose": "The outer softening of the on-inverse ring, at 35 %, measured alone on the danger control fill (Quitter). It is not the indicator: the opaque core is, and theme.light/focus-ring-on-inverse/bad gates that core at 3:1.",
+      "thresholdForComparison": 3
+    },
+    {
       "id": "focus-ring-on-inverse-halo/theme.dark.inverse",
       "fg": "spec:focus-ring-on-inverse.dark.outer",
       "bg": "semantic.theme.dark.inverse",
@@ -3813,6 +3885,15 @@
       "thresholdForComparison": 3
     },
     {
+      "id": "focus-ring-on-inverse-halo/theme.dark.bad",
+      "fg": "spec:focus-ring-on-inverse.dark.outer",
+      "bg": "semantic.theme.dark.bad",
+      "label": "dark: the on-inverse ring's outermost tone alone on bad, at its own alpha",
+      "kind": "decorative",
+      "purpose": "The outer softening of the on-inverse ring, at 35 %, measured alone on the danger control fill (Quitter). It is not the indicator: the opaque core is, and theme.dark/focus-ring-on-inverse/bad gates that core at 3:1.",
+      "thresholdForComparison": 3
+    },
+    {
       "id": "focus-ring-on-inverse-halo/theme.black.inverse",
       "fg": "spec:focus-ring-on-inverse.black.outer",
       "bg": "semantic.theme.black.inverse",
@@ -3828,6 +3909,15 @@
       "label": "black: the on-inverse ring's outermost tone alone on the second inverse panel, at its own alpha",
       "kind": "decorative",
       "purpose": "The outer softening of the on-inverse ring, at 35 %, measured alone. It is not the indicator: the opaque core is, and theme.black/focus-ring-on-inverse/inverse and /inverse-2 gate that core at 3:1. This tone carries no inverted row of its own, unlike the default ring's halo: that one stays below 3:1 on all 54 theme-and-ground combinations it was measured over, while this one reaches 3.04:1 on dark.inverse and 3.15:1 on black.inverse-2, so a row asserting it stays below 3:1 would be false. Both inverse panels carry a row, in every theme, so each figure quoted for this tone is derived here rather than copied into prose. What holds \u201cthe halo is never the indicator\u201d on the two grounds where an inverted row cannot is the opaque core, which test/color-math.selftest.mjs asserts across every theme and every variant.",
+      "thresholdForComparison": 3
+    },
+    {
+      "id": "focus-ring-on-inverse-halo/theme.black.bad",
+      "fg": "spec:focus-ring-on-inverse.black.outer",
+      "bg": "semantic.theme.black.bad",
+      "label": "black: the on-inverse ring's outermost tone alone on bad, at its own alpha",
+      "kind": "decorative",
+      "purpose": "The outer softening of the on-inverse ring, at 35 %, measured alone on the danger control fill (Quitter). It is not the indicator: the opaque core is, and theme.black/focus-ring-on-inverse/bad gates that core at 3:1.",
       "thresholdForComparison": 3
     },
     {

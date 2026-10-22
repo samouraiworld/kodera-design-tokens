@@ -61,6 +61,34 @@ function hueDistance(h1, h2) {
   return diff > 180 ? 360 - diff : diff;
 }
 
+/** sRGB channel (0..255) to linear light (0..1). */
+function srgbToLinear(channel) {
+  const v = channel / 255;
+  return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+}
+
+/** sRGB (0..255) to CIE L*a*b* under D65. */
+function rgbToLab({ r, g, b }) {
+  const lr = srgbToLinear(r);
+  const lg = srgbToLinear(g);
+  const lb = srgbToLinear(b);
+  const x = (lr * 0.4124564 + lg * 0.3575761 + lb * 0.1804375) / 0.95047;
+  const y = (lr * 0.2126729 + lg * 0.7151522 + lb * 0.072175) / 1.0;
+  const z = (lr * 0.0193339 + lg * 0.119192 + lb * 0.9503041) / 1.08883;
+  const f = (t) => (t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116);
+  const fx = f(x);
+  const fy = f(y);
+  const fz = f(z);
+  return { L: 116 * fy - 16, a: 500 * (fx - fy), b: 200 * (fy - fz) };
+}
+
+/** CIE76 Euclidean distance in L*a*b*. */
+function deltaE76(c1, c2) {
+  const l1 = rgbToLab(c1);
+  const l2 = rgbToLab(c2);
+  return Math.hypot(l1.L - l2.L, l1.a - l2.a, l1.b - l2.b);
+}
+
 /**
  * Semantic status hue bands reserved for `bad` (red), `warn` (amber),
  * `ok` (emerald) and `accent` (cobalt). A non-status categorical tag that
@@ -104,6 +132,8 @@ function checkCollaboratorCursors(source, contrastRegister, styles, config) {
     const sunken = parseColor(resolve(`semantic.theme.${theme}.sunken`, index));
     const ink = parseColor(resolve(`semantic.theme.${theme}.ink`, index));
     const onInverse = parseColor(resolve(`semantic.theme.${theme}.on-inverse`, index));
+    const actionColor = parseColor(resolve(`semantic.theme.${theme}.action`, index));
+    const actionHoverColor = parseColor(resolve(`semantic.theme.${theme}.action-hover`, index));
 
     const forbiddenCursorValues = new Set(
       ['action', 'action-hover', 'ok', 'warn', 'bad', 'ink-4', 'accent-soft', 'ok-soft', 'warn-soft', 'bad-soft'].map(
@@ -134,6 +164,17 @@ function checkCollaboratorCursors(source, contrastRegister, styles, config) {
       const softHex = resolve(`semantic.theme.${theme}.${softRole}`, index);
       const solidColor = parseColor(solidHex);
       const softColor = parseColor(softHex);
+
+      const dEAction = deltaE76(solidColor, actionColor);
+      assert.ok(
+        dEAction >= 10,
+        `${theme}.${solidRole}: ΔE76 ${dEAction.toFixed(1)} against action is below 10 (too close to the primary action colour)`,
+      );
+      const dEActionHover = deltaE76(solidColor, actionHoverColor);
+      assert.ok(
+        dEActionHover >= 10,
+        `${theme}.${solidRole}: ΔE76 ${dEActionHover.toFixed(1)} against action-hover is below 10 (too close to the primary action hover colour)`,
+      );
 
       const onSurface = contrastRatio(solidColor, surface);
       assert.ok(
@@ -210,6 +251,28 @@ function checkCollaboratorCursors(source, contrastRegister, styles, config) {
         assert.equal(config.theme.extend.colors[`c-${role}`], `var(--c-${role})`, `${role}: dynamic preset required`);
       }
     }
+
+    requireNormativeRow(
+      pairs,
+      `theme.${theme}/ok-ink/muted`,
+      `semantic.theme.${theme}.ok-ink`,
+      `semantic.theme.${theme}.muted`,
+      4.5,
+    );
+    requireNormativeRow(
+      pairs,
+      `theme.${theme}/inverse/on-inverse`,
+      `semantic.theme.${theme}.inverse`,
+      `semantic.theme.${theme}.on-inverse`,
+      4.5,
+    );
+    requireNormativeRow(
+      pairs,
+      `theme.${theme}/focus-ring-on-inverse/bad`,
+      focusRingRef('on-inverse', theme, 'indicator'),
+      `semantic.theme.${theme}.bad`,
+      3,
+    );
   }
 }
 
@@ -357,7 +420,29 @@ test('every collaborator cursor clause fails on its own mutation', () => {
   assert.throws(
     () =>
       checkCollaboratorCursors(
-        mutateTree((t) => (t.color['theme-light']['cursor-2'].$value = '#2849D6')),
+        mutateTree((t) => (t.color['theme-light']['cursor-1'].$value = '#2647D4')),
+        register,
+        css,
+        preset,
+      ),
+    /light\.cursor-1: ΔE76 2\.1 against action is below 10/,
+  );
+
+  assert.throws(
+    () =>
+      checkCollaboratorCursors(
+        mutateTree((t) => (t.color['theme-dark']['cursor-1'].$value = '#1F3CC0')),
+        register,
+        css,
+        preset,
+      ),
+    /dark\.cursor-1: ΔE76 .* against action-hover is below 10/,
+  );
+
+  assert.throws(
+    () =>
+      checkCollaboratorCursors(
+        mutateTree((t) => (t.color['theme-light']['cursor-2'].$value = '#0F62A5')),
         register,
         css,
         preset,
@@ -436,8 +521,41 @@ test('every collaborator cursor clause fails on its own mutation', () => {
     /light\.cursor-4: scoped CSS declaration missing/,
   );
 
+  assert.throws(
+    () =>
+      checkCollaboratorCursors(
+        tree,
+        mutateRegister((r) => (r.pairs = r.pairs.filter((p) => p.id !== 'theme.light/ok-ink/muted'))),
+        css,
+        preset,
+      ),
+    /theme\.light\/ok-ink\/muted: missing normative contrast row/,
+  );
+
+  assert.throws(
+    () =>
+      checkCollaboratorCursors(
+        tree,
+        mutateRegister((r) => (r.pairs = r.pairs.filter((p) => p.id !== 'theme.dark/inverse/on-inverse'))),
+        css,
+        preset,
+      ),
+    /theme\.dark\/inverse\/on-inverse: missing normative contrast row/,
+  );
+
+  assert.throws(
+    () =>
+      checkCollaboratorCursors(
+        tree,
+        mutateRegister((r) => (r.pairs = r.pairs.filter((p) => p.id !== 'theme.black/focus-ring-on-inverse/bad'))),
+        css,
+        preset,
+      ),
+    /theme\.black\/focus-ring-on-inverse\/bad: missing normative contrast row/,
+  );
+
   const frozenPreset = structuredClone(preset);
-  frozenPreset.theme.extend.colors['c-cursor-1'] = '#2647D4';
+  frozenPreset.theme.extend.colors['c-cursor-1'] = '#0E60A3';
   assert.throws(
     () => checkCollaboratorCursors(tree, register, css, frozenPreset),
     /cursor-1: dynamic preset required/,

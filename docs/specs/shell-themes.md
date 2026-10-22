@@ -78,14 +78,14 @@ Six collaborator slots per theme, named generically (`cursor-*`, not `docs-curso
 
 | Slot | Hue family | Light (`cursor-N` / `-soft`) | Dark (`cursor-N` / `-soft`) | Black (`cursor-N` / `-soft`) | Gated by |
 |---|---|---|---|---|---|
-| `1` | Cobalt | `#2647D4` / `#E8EEFC` | `#3D5FE8` / `#172240` | `#3E61EE` / `#101830` | `cursor-N` on `surface` and `sunken` at 3:1; `on-inverse` on `cursor-N` at 4.5:1; `ink` on `cursor-N-soft` at 4.5:1; `--focus-ring` on `cursor-N-soft` at 3:1 |
-| `2` | Iris | `#6336C2` / `#EFE9FC` | `#7B50DA` / `#231B3D` | `#8056E0` / `#1B1330` | same five normative rows per theme |
-| `3` | Teal | `#0E6E78` / `#E3F4F6` | `#127882` / `#122A30` | `#157D88` / `#0B1E23` | same five normative rows per theme |
-| `4` | Berry | `#A82468` / `#FAEAF2` | `#BE347A` / `#331829` | `#C5387E` / `#26101E` | same five normative rows per theme |
-| `5` | Copper | `#AC4D0C` / `#FDF0E4` | `#B25110` / `#301E12` | `#B65511` / `#23150B` | same five normative rows per theme |
-| `6` | Jade | `#117556` / `#E4F5EE` | `#147A5A` / `#122B24` | `#177F5E` / `#0B1F19` | same five normative rows per theme |
+| `1` | Cerulean | `#0E60A3` / `#E4F0FB` | `#1671BA` / `#112536` | `#1873BC` / `#0B1A28` | `cursor-N` on `surface` and `sunken` at 3:1; `on-inverse` on `cursor-N` at 4.5:1; `ink` on `cursor-N-soft` at 4.5:1; `--focus-ring` on `cursor-N-soft` at 3:1 |
+| `2` | Iris | `#6336C2` / `#EFE9FC` | `#7C52DC` / `#241B3E` | `#8056E0` / `#1B1330` | same five normative rows per theme |
+| `3` | Teal | `#0E6E78` / `#E3F4F6` | `#147984` / `#0F262C` | `#157D88` / `#0B1E23` | same five normative rows per theme |
+| `4` | Berry | `#A82468` / `#FAEAF2` | `#C1357B` / `#321728` | `#C5387E` / `#26101E` | same five normative rows per theme |
+| `5` | Copper | `#AC4D0C` / `#FDF0E4` | `#B15310` / `#2E1E12` | `#B65511` / `#23150B` | same five normative rows per theme |
+| `6` | Jade | `#117556` / `#E4F5EE` | `#157B5B` / `#112922` | `#177F5E` / `#0B1F19` | same five normative rows per theme |
 
-In the product reference (`p06-docs.html`), one collaborator colour does three jobs at once: a 2 px caret bar on `surface`, a 3 px pill edge on `sunken`, and the fill of the floating name flag carrying `on-inverse` text (`#FFFFFF` / `#F3F7FB` / `#F7FAFC`). Every `cursor-N` therefore sits in the luminance band that clears both bounds simultaneously across all three themes: worst against `surface` or `sunken` is `dark.cursor-1` on `sunken` at **3.21:1** (against 3:1), and worst under `on-inverse` is `dark.cursor-3` at **4.63:1** (against 4.5:1). Every `cursor-N-soft` clears **4.5:1** under `ink` (worst `light.cursor-2-soft` at **9.75:1**) and **3:1** under `--focus-ring` (worst `light.cursor-1-soft` at **6.74:1**). `test/cursor-and-tag-palettes.selftest.mjs` enforces all five rows per slot, pairwise hue separation (`>= 20°`) and non-reuse of `action`, status or `ink-4` values.
+In the product reference (`p06-docs.html`), one collaborator colour does three jobs at once: a 2 px caret bar on `surface`, a 3 px pill edge on `sunken`, and the fill of the floating name flag carrying `on-inverse` text (`#FFFFFF` / `#F3F7FB` / `#F7FAFC`). Every `cursor-N` therefore sits in the luminance band that clears both bounds simultaneously across all three themes: worst against `surface` or `sunken` is `dark.cursor-6` on `surface` at **3.21:1** (against 3:1), and worst under `on-inverse` is `black.cursor-2` at **4.63:1** (against 4.5:1). Every `cursor-N-soft` clears **4.5:1** under `ink` (worst `light.cursor-2-soft` at **9.79:1**) and **3:1** under `--focus-ring` (worst `light.cursor-2-soft` at **6.81:1**). `test/cursor-and-tag-palettes.selftest.mjs` enforces all five rows per slot, pairwise hue separation (`>= 20°`), `ΔE76 >= 10` separation from `action` and `action-hover`, and non-reuse of `action`, status or `ink-4` values.
 
 ### Non-status categorical tag palette (`tag-1-bg`/`tag-1-fg`..`tag-6-bg`/`tag-6-fg`)
 
@@ -93,12 +93,12 @@ Six categorical fill + label pairs per theme for non-status badges, room topics,
 
 | Slot | Hue family | Light (`-bg` / `-fg`, ratio) | Dark (`-bg` / `-fg`, ratio) | Black (`-bg` / `-fg`, ratio) | Gated by |
 |---|---|---|---|---|---|
-| `tag-1` | Iris (`~256°`) | `#F1EEFC` / `#4D2CA6` (7.92:1) | `#241C3D` / `#D6C9FB` (9.24:1) | `#19132C` / `#DFD4FC` (11.57:1) | `tag-1-fg` on `tag-1-bg` at 4.5:1; `--focus-ring` on `tag-1-bg` at 3:1 |
-| `tag-2` | Teal (`~187°`) | `#E5F4F6` / `#0E5E6A` (6.60:1) | `#11292F` / `#A3DFE8` (9.22:1) | `#0A1E23` / `#B0E7EF` (11.61:1) | `tag-2-fg` on `tag-2-bg` at 4.5:1; `--focus-ring` on `tag-2-bg` at 3:1 |
-| `tag-3` | Plum (`~321°`) | `#F9EBF4` / `#8A2465` (6.86:1) | `#331729` / `#F0B9DC` (8.51:1) | `#25101E` / `#F5C7E4` (10.97:1) | `tag-3-fg` on `tag-3-bg` at 4.5:1; `--focus-ring` on `tag-3-bg` at 3:1 |
-| `tag-4` | Cerulean (`~204°`) | `#E6F1FA` / `#12517A` (7.28:1) | `#132638` / `#ABD4F5` (8.77:1) | `#0C1C2B` / `#B8DDF8` (11.12:1) | `tag-4-fg` on `tag-4-bg` at 4.5:1; `--focus-ring` on `tag-4-bg` at 3:1 |
-| `tag-5` | Orchid (`~283°`) | `#F5ECF9` / `#6E2889` (7.45:1) | `#2D1938` / `#E3BEF5` (8.87:1) | `#201129` / `#EBCBF8` (11.27:1) | `tag-5-fg` on `tag-5-bg` at 4.5:1; `--focus-ring` on `tag-5-bg` at 3:1 |
-| `tag-6` | Lichen (`~84°`) | `#EEF3E6` / `#3F571B` (6.91:1) | `#1E2814` / `#C7DDA4` (8.98:1) | `#151D0D` / `#D3E6B2` (11.23:1) | `tag-6-fg` on `tag-6-bg` at 4.5:1; `--focus-ring` on `tag-6-bg` at 3:1 |
+| `tag-1` | Iris (`~256°`) | `#F1EEFC` / `#4D2CA6` (8.25:1) | `#231B3C` / `#D5C8FA` (10.41:1) | `#19132C` / `#DFD4FC` (12.78:1) | `tag-1-fg` on `tag-1-bg` at 4.5:1; `--focus-ring` on `tag-1-bg` at 3:1 |
+| `tag-2` | Teal (`~187°`) | `#E5F4F6` / `#0E5E6A` (6.58:1) | `#10282E` / `#9FE0EA` (10.49:1) | `#0A1E23` / `#B0E7EF` (12.69:1) | `tag-2-fg` on `tag-2-bg` at 4.5:1; `--focus-ring` on `tag-2-bg` at 3:1 |
+| `tag-3` | Plum (`~321°`) | `#F9EBF4` / `#8A2465` (7.23:1) | `#311728` / `#F0B9DC` (9.88:1) | `#25101E` / `#F5C7E4` (12.10:1) | `tag-3-fg` on `tag-3-bg` at 4.5:1; `--focus-ring` on `tag-3-bg` at 3:1 |
+| `tag-4` | Cerulean (`~204°`) | `#E6F1FA` / `#12517A` (7.38:1) | `#122638` / `#A8D5F5` (9.93:1) | `#0C1C2B` / `#B8DDF8` (12.11:1) | `tag-4-fg` on `tag-4-bg` at 4.5:1; `--focus-ring` on `tag-4-bg` at 3:1 |
+| `tag-5` | Orchid (`~283°`) | `#F5ECF9` / `#6E2889` (7.84:1) | `#2B1836` / `#E4BEF5` (10.09:1) | `#201129` / `#EBCBF8` (12.30:1) | `tag-5-fg` on `tag-5-bg` at 4.5:1; `--focus-ring` on `tag-5-bg` at 3:1 |
+| `tag-6` | Lichen (`~84°`) | `#EEF3E6` / `#3F571B` (7.18:1) | `#1E2814` / `#C7DEA0` (10.51:1) | `#151D0D` / `#D3E6B2` (12.96:1) | `tag-6-fg` on `tag-6-bg` at 4.5:1; `--focus-ring` on `tag-6-bg` at 3:1 |
 
 `test/cursor-and-tag-palettes.selftest.mjs` enforces the 4.5:1 text and 3:1 focus-ring rows, the four forbidden status hue bands, non-reuse of status and `t1`–`t5` values, within-pair hue alignment (`<= 10°`), and between-slot hue separation (`>= 12°`), with a self-test mutation for every clause.
 

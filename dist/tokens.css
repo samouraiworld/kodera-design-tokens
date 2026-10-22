@@ -78,8 +78,8 @@
   --theme-light-t6-bg: #DCE6F0;
   --theme-light-t6-fg: #2F3A45;
   --theme-light-scrim: rgba(47,58,69,.55);
-  --theme-light-cursor-1: #2647D4;
-  --theme-light-cursor-1-soft: #E8EEFC;
+  --theme-light-cursor-1: #0E60A3;
+  --theme-light-cursor-1-soft: #E4F0FB;
   --theme-light-cursor-2: #6336C2;
   --theme-light-cursor-2-soft: #EFE9FC;
   --theme-light-cursor-3: #0E6E78;
@@ -154,8 +154,8 @@
   --theme-dark-border-input: #6B7886;
   --theme-dark-placeholder: #8592A1;
   --theme-dark-scrim: rgba(0,0,0,.6);
-  --theme-dark-cursor-1: #3F63EC;
-  --theme-dark-cursor-1-soft: #172342;
+  --theme-dark-cursor-1: #1671BA;
+  --theme-dark-cursor-1-soft: #112536;
   --theme-dark-cursor-2: #7C52DC;
   --theme-dark-cursor-2-soft: #241B3E;
   --theme-dark-cursor-3: #147984;
@@ -229,8 +229,8 @@
   --theme-black-elevated: #141619;
   --theme-black-border-input: #606A75;
   --theme-black-scrim: rgba(0,0,0,.72);
-  --theme-black-cursor-1: #3E61EE;
-  --theme-black-cursor-1-soft: #101830;
+  --theme-black-cursor-1: #1873BC;
+  --theme-black-cursor-1-soft: #0B1A28;
   --theme-black-cursor-2: #8056E0;
   --theme-black-cursor-2-soft: #1B1330;
   --theme-black-cursor-3: #157D88;
@@ -437,8 +437,8 @@
   --c-placeholder: #5C6874;
   --c-disabled: #EEF2F6;
   --c-on-disabled: #5C6874;
-  --c-cursor-1: #2647D4;
-  --c-cursor-1-soft: #E8EEFC;
+  --c-cursor-1: #0E60A3;
+  --c-cursor-1-soft: #E4F0FB;
   --c-cursor-2: #6336C2;
   --c-cursor-2-soft: #EFE9FC;
   --c-cursor-3: #0E6E78;
@@ -527,8 +527,8 @@
   --c-placeholder: #8592A1;
   --c-disabled: #242E38;
   --c-on-disabled: #98A6B5;
-  --c-cursor-1: #3F63EC;
-  --c-cursor-1-soft: #172342;
+  --c-cursor-1: #1671BA;
+  --c-cursor-1-soft: #112536;
   --c-cursor-2: #7C52DC;
   --c-cursor-2-soft: #241B3E;
   --c-cursor-3: #147984;
@@ -617,8 +617,8 @@
   --c-placeholder: #7C8794;
   --c-disabled: #1B1E22;
   --c-on-disabled: #9BA7B4;
-  --c-cursor-1: #3E61EE;
-  --c-cursor-1-soft: #101830;
+  --c-cursor-1: #1873BC;
+  --c-cursor-1-soft: #0B1A28;
   --c-cursor-2: #8056E0;
   --c-cursor-2-soft: #1B1330;
   --c-cursor-3: #157D88;

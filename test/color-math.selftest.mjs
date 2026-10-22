@@ -216,7 +216,7 @@ const NOT_A_GROUND = new Set([
   'action', 'action-hover', 'disabled',
   'ok', 'ok-ink', 'ok-border', 'ok-on-dark',
   'warn', 'warn-ink',
-  'bad', 'bad-ink', 'bad-on-dark',
+  'bad-ink', 'bad-on-dark',
   'cursor-1', 'cursor-2', 'cursor-3', 'cursor-4', 'cursor-5', 'cursor-6',
 ]);
 
@@ -224,7 +224,7 @@ const NOT_A_GROUND = new Set([
 function classifyGround(role) {
   if (SHELL_CONTAINERS.has(role)) return 'normal';
   if (NOT_A_GROUND.has(role) || /-fg$/.test(role)) return null;
-  if (/^inverse(-\d+)?$/.test(role)) return 'inverse';
+  if (/^inverse(-\d+)?$/.test(role) || role === 'bad') return 'inverse';
   if (/-(bg|soft)$/.test(role)) return 'painted';
   throw new Error(
     `theme role "${role}" is neither classified as a ground the focus ring must clear nor listed as not a ground; classify it before it ships`,
@@ -364,6 +364,10 @@ test('every ground the themed ring is claimed to clear carries a normative row',
   assert.throws(
     () => assertRingCoverage(pairs.filter((p) => p.id !== 'theme.black/focus-ring-on-inverse/inverse-2'), measurements),
     /black: the on-inverse ring is claimed to clear inverse-2 and no row measures it/,
+  );
+  assert.throws(
+    () => assertRingCoverage(pairs.filter((p) => p.id !== 'theme.light/focus-ring-on-inverse/bad'), measurements),
+    /light: the on-inverse ring is claimed to clear bad and no row measures it/,
   );
   // A halo row quietly deleted takes the pin with it, and the two themed ones
   // are the newest and least missed. Deleting all four is caught by the same
