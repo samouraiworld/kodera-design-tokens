@@ -113,7 +113,7 @@ test('each theme paints its own ring, and the two variants are different rings',
  *
  * This is the guarantee the default ring's inverted halo rows buy, stated where
  * a row cannot state it. On the on-inverse variant the 35 % halo genuinely
- * clears 3:1 on two of the six panels it is painted on — 3.04:1 on
+ * clears 3:1 on two of the nine grounds it is painted on — 3.04:1 on
  * `dark.inverse`, 3.15:1 on `black.inverse-2` — so an inverted row there would
  * assert something false, and the contrast gate reports a translucent-only ring
  * on those two grounds as a PASS on its own row. The invariant holds on all of
@@ -193,7 +193,7 @@ test('a ring asked for by an unknown theme or variant is refused, not silently d
 // present in all.
 //
 // The seven shell containers take the ring for normal grounds, together with the
-// painted status and tag backgrounds; the two inverse panels take the
+// painted status, cursor and tag backgrounds; `inverse`, `inverse-2` and `bad` take the
 // on-inverse variant, because the normal core is the wrong side of that ground.
 // `elevated` is a container: a menu item or a dialog button is focused on it.
 const SHELL_CONTAINERS = new Set(['page', 'surface', 'sunken', 'muted', 'muted-2', 'hairline', 'elevated']);
