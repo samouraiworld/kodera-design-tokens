@@ -6,7 +6,7 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-Nothing yet.
+Add deterministic SwiftUI and Compose bindings, source provenance and a native format manifest. Existing web outputs and all token values are unchanged. Native generation and refusal mutations run in the existing test and drift gates. No package version or release tag is changed.
 
 ## v0.4.0
 

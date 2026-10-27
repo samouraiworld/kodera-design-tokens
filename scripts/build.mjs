@@ -15,7 +15,8 @@
 // token a consumer cannot use.
 
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { buildNative } from './lib/native.mjs';
 import { ROOT, loadTokens, walkTokens, indexTokens, resolve, resolveValue, parseColor, aliasTarget } from './lib/tokens.mjs';
 import {
   SPEC,
@@ -513,6 +514,7 @@ const artefacts = {
   'tokens.css': buildCss(),
   'tailwind.preset.js': buildPreset(),
   'tokens.d.ts': buildTypes(),
+  ...buildNative(readFileSync(join(ROOT, 'tokens.json'))),
 };
 
 if (CHECK) {
@@ -538,6 +540,7 @@ if (CHECK) {
 } else {
   mkdirSync(DIST, { recursive: true });
   for (const [name, content] of Object.entries(artefacts)) {
+    mkdirSync(dirname(join(DIST, name)), { recursive: true });
     writeFileSync(join(DIST, name), content, 'utf8');
     console.log(`wrote dist/${name}  (${content.length} bytes)`);
   }

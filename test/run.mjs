@@ -35,6 +35,7 @@ const gates = [
       'test/theme-contract.selftest.mjs',
       'test/elevation-breakpoints.selftest.mjs',
       'test/cursor-and-tag-palettes.selftest.mjs',
+      'test/native-generation.selftest.mjs',
     ],
   ],
 ];
