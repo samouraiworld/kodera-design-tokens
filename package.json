@@ -15,6 +15,9 @@
     "test/token-test.mjs"
   ],
   "exports": {
+    "./native/swift": "./dist/native/KoderaTokens.swift",
+    "./native/compose": "./dist/native/KoderaTokens.kt",
+    "./native/manifest": "./dist/native/manifest.json",
     "./tokens.json": "./tokens.json",
     "./tokens.css": "./dist/tokens.css",
     "./tailwind-preset": {

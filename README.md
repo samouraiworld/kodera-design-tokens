@@ -9,6 +9,9 @@ tokens.json                    W3C DTCG source of truth, delivered by the design
 dist/tokens.css                generated CSS custom properties
 dist/tailwind.preset.js        generated Tailwind preset (ESM)
 dist/tokens.d.ts               generated types
+dist/native/KoderaTokens.swift generated SwiftUI bindings
+dist/native/KoderaTokens.kt    generated Compose bindings (io.kodera.tokens)
+dist/native/manifest.json      native format, source SHA-256, mapping and provenance
 contrast-pairs.json            the accessibility contract, as data
 contrast-known-failures.json   the explicit allowlist, one written reason per entry
 token-grammar-exceptions.json  naming-grammar deviations, one written reason per entry
@@ -29,6 +32,18 @@ npm run check:grammar   # DTCG validity + naming grammar + tier counts
 npm run check:contrast  # the contrast table and the gate
 npm run check:drift     # dist/ equals a fresh build
 ```
+
+## Native consumers
+
+The build also emits SwiftUI and Compose source files, exported as `@samourai/design-tokens/native/swift` and `/native/compose`, plus `/native/manifest`. Native projects consume these generated files from a pinned package revision. The Swift file imports `SwiftUI`; the Kotlin file declares `package io.kodera.tokens` and imports Compose `Color`, `dp`, `sp` and font weight. Native compilation is a consumer check; this package checks generation and source equality with plain Node.
+
+Both platforms expose `KoderaTokens.light`, `.dark` and `.black` palettes with camelCase colour roles: `surface`, `ink`, `actionHover`, `borderInput`, `cursor1Soft`, and the rest. Each palette has the same 78 colour properties; the page gradient is excluded explicitly. The numeric groups are `KoderaTokens.Space.s4`, `Radius.md`, `FontSize.lg`, and `FontWeight.semibold`. Hyphenated keys become camelCase; numeric keys receive an `s` prefix, including `FontSize.s2xl`. Invalid or colliding native identifiers fail the build.
+
+Spacing, radius and font-size tokens preserve the numeric magnitude of source `px` values: Swift points for all three, Compose `dp` for spacing/radius and `sp` for font size. Consumers apply native font scaling and responsive layout. Font weights map to SwiftUI `Font.Weight` and Compose font weights without changing the source weight. `KoderaTokens.FontFamily.sans` and `.mono` expose `primary` and `fallbacks` metadata only: they neither install fonts nor choose a platform font automatically.
+
+Colours use sRGB channels and preserve alpha without compositing. `dist/native/manifest.json` declares format `kodera-native-tokens/1`, the SHA-256 of the exact `tokens.json` bytes, every exported source path and alias chain, native API names, values and units. Package version, environment, time and commit identity are not generator inputs. All other token paths are listed with an exclusion reason; gradients and elevation have no approximation in this format. Web CSS, preset and type outputs keep their existing behavior.
+
+The native self-test checks exact source mappings, reproducibility, source identity, theme parity, package exports and unchanged web outputs. Mutations prove refusal of missing roles/groups, dangling aliases, cycles, wrong types, invalid values and identifier collisions; isolated build mutations prove missing/edited native artifacts fail the existing drift gate.
 
 ## The three sync tests
 
