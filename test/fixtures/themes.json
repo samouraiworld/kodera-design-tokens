@@ -1,9 +1,9 @@
 {
   "light": {
-    "page": "#EEF3F8",
-    "page-grad": "linear-gradient(115deg,#DCE6F0 0%,#EEF3F8 45%,#FFFFFF 100%)",
+    "page": "#FFFFFF",
+    "page-grad": "linear-gradient(115deg,#FFFFFF 0%,#FFFFFF 45%,#FFFFFF 100%)",
     "surface": "#FFFFFF",
-    "sunken": "#F7FAFD",
+    "sunken": "#FFFFFF",
     "muted": "#EEF2F6",
     "muted-2": "#DCE6F0",
     "hairline": "#F2F6FA",

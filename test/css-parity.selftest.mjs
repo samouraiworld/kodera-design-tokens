@@ -56,8 +56,16 @@ test('the generated file carries the do-not-edit header', () => {
   assert.match(css, /GENERATED FILE — DO NOT EDIT/);
 });
 
-test('the page gradient references the frost variables rather than inlining hexes', () => {
-  assert.match(css, /--bg-page: linear-gradient\(115deg, var\(--frost-200\) 0%, var\(--frost-100\) 45%, var\(--white\) 100%\);/);
+function checkLegacyWhitePage(styles) {
+  assert.match(styles, /--bg-page: linear-gradient\(115deg, var\(--white\) 0%, var\(--white\) 45%, var\(--white\) 100%\);/, 'LEGACY_WHITE_GRADIENT');
+  assert.match(styles, /--bg-page-flat: #FFFFFF;/, 'LEGACY_WHITE_FALLBACK');
+}
+
+test('the legacy page gradient and flat fallback stay white', () => {
+  checkLegacyWhitePage(css);
+  assert.throws(() => checkLegacyWhitePage(css.replace('var(--white) 0%', 'var(--frost-200) 0%')), /LEGACY_WHITE_GRADIENT/);
+  assert.throws(() => checkLegacyWhitePage(css.replace('--bg-page-flat: #FFFFFF;', '--bg-page-flat: #EEF3F8;')), /LEGACY_WHITE_FALLBACK/);
+  checkLegacyWhitePage(css);
 });
 
 test('every theme declares both rings, an opaque core inside a translucent halo', () => {

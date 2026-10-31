@@ -2,7 +2,7 @@
   "format": "kodera-native-tokens/1",
   "source": {
     "path": "tokens.json",
-    "sha256": "1f5eda69f00b77b998df21f53edbe316b27abc58d8e54dd12f0a29f9e99609c8"
+    "sha256": "ef11a997d3e17e73a06326e2aae5f7bb257c3d211e2ec47554c8a6a5bdbec38c"
   },
   "mapping": {
     "colors": "sRGB normalized channels; alpha preserved without compositing",
@@ -20,9 +20,9 @@
       "api": "KoderaTokens.light.page",
       "type": "color",
       "value": {
-        "r": 238,
-        "g": 243,
-        "b": 248,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 1
       },
       "colorSpace": "sRGB"
@@ -52,9 +52,9 @@
       "api": "KoderaTokens.light.sunken",
       "type": "color",
       "value": {
-        "r": 247,
-        "g": 250,
-        "b": 253,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 1
       },
       "colorSpace": "sRGB"

@@ -23,10 +23,10 @@ import { resolve, parseColor } from './tokens.mjs';
 export const THEMES = ['light', 'dark', 'black'];
 
 export const SPEC = {
-  // DESIGN_SYSTEM.md §2: "frost gradient 115deg #DCE6F0 → #EEF3F8 (45%) → #FFFFFF".
+  // Owner white-light correction: preserve the legacy gradient API and stop geometry.
   pageGradient: {
     angle: '115deg',
-    stops: [['color.frost.200', '0%'], ['color.frost.100', '45%'], ['color.white', '100%']],
+    stops: [['color.white', '0%'], ['color.white', '45%'], ['color.white', '100%']],
   },
 
   // COMPONENTS.md delivered the ring as "0 0 0 3px rgba(43,75,219,.35) on
