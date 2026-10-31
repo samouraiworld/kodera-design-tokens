@@ -6,6 +6,8 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
+White-light foundation candidate, decided by zôÖma: use white for the light page and sunken backgrounds and all existing page-gradient stops, including the legacy page fallback. Preserve every token name, gradient angle/stop position, dark/black map, ink/focus/status/disabled value and geometry. Canonical web/native outputs carry the same correction; consumers have not been repinned. Production regressions bind default/scoped light and legacy/themed parity. No version, tag, contrast threshold or exception changes. See `docs/specs/white-ink-foundation.md`.
+
 Add deterministic SwiftUI and Compose bindings, source provenance and a native format manifest. Existing web outputs and all token values are unchanged. Native generation and refusal mutations run in the existing test and drift gates. No package version or release tag is changed.
 
 ## v0.4.0

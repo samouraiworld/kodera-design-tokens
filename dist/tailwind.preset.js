@@ -54,7 +54,7 @@ export default {
           "500": "#C2372B",
           "600": "#B5321F",
         },
-        "surface-page": "#EEF3F8",
+        "surface-page": "#FFFFFF",
         surface: "#FFFFFF",
         "surface-muted": "#EEF2F6",
         "surface-accent": "#E4E9FB",
@@ -228,7 +228,7 @@ export default {
         dialog: "var(--elevation-dialog)",
       },
       backgroundImage: {
-        frost: "linear-gradient(115deg, #DCE6F0 0%, #EEF3F8 45%, #FFFFFF 100%)",
+        frost: "linear-gradient(115deg, #FFFFFF 0%, #FFFFFF 45%, #FFFFFF 100%)",
         "c-page-gradient": "var(--c-page-grad)",
       },
       ringColor: {

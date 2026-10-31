@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// 1f5eda69f00b77b998df21f53edbe316b27abc58d8e54dd12f0a29f9e99609c8
+// ef11a997d3e17e73a06326e2aae5f7bb257c3d211e2ec47554c8a6a5bdbec38c
 // Source file: tokens.json
 
 package io.kodera.tokens
@@ -92,9 +92,9 @@ public object KoderaTokens {
         public val tag6Fg: Color,
     )
     public val light = Palette(
-        page = Color(red = 0.9333333333333333f, green = 0.9529411764705882f, blue = 0.9725490196078431f, alpha = 1.0f),
+        page = Color(red = 1.0f, green = 1.0f, blue = 1.0f, alpha = 1.0f),
         surface = Color(red = 1.0f, green = 1.0f, blue = 1.0f, alpha = 1.0f),
-        sunken = Color(red = 0.9686274509803922f, green = 0.9803921568627451f, blue = 0.9921568627450981f, alpha = 1.0f),
+        sunken = Color(red = 1.0f, green = 1.0f, blue = 1.0f, alpha = 1.0f),
         muted = Color(red = 0.9333333333333333f, green = 0.9490196078431372f, blue = 0.9647058823529412f, alpha = 1.0f),
         muted2 = Color(red = 0.8627450980392157f, green = 0.9019607843137255f, blue = 0.9411764705882353f, alpha = 1.0f),
         hairline = Color(red = 0.9490196078431372f, green = 0.9647058823529412f, blue = 0.9803921568627451f, alpha = 1.0f),
