@@ -28,10 +28,10 @@
   --red-100: #FBE5E2;
   --red-500: #C2372B;
   --red-600: #B5321F;
-  --theme-light-page: #EEF3F8;
-  --theme-light-page-grad: linear-gradient(115deg,#DCE6F0 0%,#EEF3F8 45%,#FFFFFF 100%);
+  --theme-light-page: #FFFFFF;
+  --theme-light-page-grad: linear-gradient(115deg,#FFFFFF 0%,#FFFFFF 45%,#FFFFFF 100%);
   --theme-light-surface: #FFFFFF;
-  --theme-light-sunken: #F7FAFD;
+  --theme-light-sunken: #FFFFFF;
   --theme-light-muted: #EEF2F6;
   --theme-light-muted-2: #DCE6F0;
   --theme-light-hairline: #F2F6FA;
@@ -255,8 +255,8 @@
   --theme-black-tag-6-fg: #D3E6B2;
 
   /* semantic — surfaces and boundaries */
-  --bg-page: linear-gradient(115deg, var(--frost-200) 0%, var(--frost-100) 45%, var(--white) 100%);
-  --bg-page-flat: #EEF3F8; /* Flat fallback; the page background is the frost gradient 115deg frost.200 → frost.100 (45%) → white */
+  --bg-page: linear-gradient(115deg, var(--white) 0%, var(--white) 45%, var(--white) 100%);
+  --bg-page-flat: #FFFFFF; /* White flat fallback; the light page gradient retains its 115deg angle and 0%, 45%, 100% stops, all white */
   --surface: #FFFFFF;
   --surface-muted: #EEF2F6;
   --surface-accent: #E4E9FB;
@@ -382,10 +382,10 @@
 /* Complete shell themes, and the focus ring, which follows them; the legacy
    variables above retain their values. */
 :root, [data-theme="light"] {
-  --c-page: #EEF3F8;
-  --c-page-grad: linear-gradient(115deg,#DCE6F0 0%,#EEF3F8 45%,#FFFFFF 100%);
+  --c-page: #FFFFFF;
+  --c-page-grad: linear-gradient(115deg,#FFFFFF 0%,#FFFFFF 45%,#FFFFFF 100%);
   --c-surface: #FFFFFF;
-  --c-sunken: #F7FAFD;
+  --c-sunken: #FFFFFF;
   --c-muted: #EEF2F6;
   --c-muted-2: #DCE6F0;
   --c-hairline: #F2F6FA;

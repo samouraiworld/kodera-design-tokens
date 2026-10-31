@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// 1f5eda69f00b77b998df21f53edbe316b27abc58d8e54dd12f0a29f9e99609c8
+// ef11a997d3e17e73a06326e2aae5f7bb257c3d211e2ec47554c8a6a5bdbec38c
 // Source file: tokens.json
 
 import SwiftUI
@@ -87,9 +87,9 @@ public enum KoderaTokens {
         public let tag6Fg: Color
     }
     public static let light = Palette(
-        page: Color(.sRGB, red: 0.9333333333333333, green: 0.9529411764705882, blue: 0.9725490196078431, opacity: 1.0),
+        page: Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0),
         surface: Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0),
-        sunken: Color(.sRGB, red: 0.9686274509803922, green: 0.9803921568627451, blue: 0.9921568627450981, opacity: 1.0),
+        sunken: Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0),
         muted: Color(.sRGB, red: 0.9333333333333333, green: 0.9490196078431372, blue: 0.9647058823529412, opacity: 1.0),
         muted2: Color(.sRGB, red: 0.8627450980392157, green: 0.9019607843137255, blue: 0.9411764705882353, opacity: 1.0),
         hairline: Color(.sRGB, red: 0.9490196078431372, green: 0.9647058823529412, blue: 0.9803921568627451, opacity: 1.0),

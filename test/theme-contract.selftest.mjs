@@ -92,6 +92,46 @@ function checkContract(source, styles, config) {
 
 test('three complete themes and shell geometry match the fixed reference', () => checkContract(tree, css, preset));
 
+function checkWhiteFoundation(source, styles) {
+  const index = indexTokens(source);
+  for (const role of ['page', 'surface', 'sunken', 'elevated']) {
+    assert.equal(resolve(`semantic.theme.light.${role}`, index), '#FFFFFF', `WHITE_LIGHT_PAGE_SURFACE:${role}`);
+  }
+  assert.deepEqual(resolve('semantic.theme.light.page-grad', index), [
+    { color: '#FFFFFF', position: 0 },
+    { color: '#FFFFFF', position: 0.45 },
+    { color: '#FFFFFF', position: 1 },
+  ], 'WHITE_LIGHT_GRADIENT');
+  assert.equal(resolve('semantic.surface.page', index), '#FFFFFF', 'WHITE_LEGACY_FALLBACK');
+  const light = styles.match(/:root, \[data-theme="light"\] \{([^}]+)\}/)?.[1];
+  assert.ok(light, 'WHITE_LIGHT_DEFAULT_SCOPE');
+  for (const role of ['page', 'surface', 'sunken', 'elevated']) {
+    assert.ok(light.includes(`--c-${role}: #FFFFFF;`), `WHITE_LIGHT_SCOPED_CSS:${role}`);
+    assert.equal((styles.match(new RegExp(`--c-${role}:`, 'g')) ?? []).length, 3, `WHITE_THEME_BOUNDARY_COUNT:${role}`);
+  }
+  assert.ok(light.includes('--c-page-grad: linear-gradient(115deg,#FFFFFF 0%,#FFFFFF 45%,#FFFFFF 100%);'), 'WHITE_LIGHT_SCOPED_GRADIENT');
+}
+
+test('white-light page surfaces and default/scoped declarations agree with legacy fallback', () => {
+  checkWhiteFoundation(tree, css);
+  const page = structuredClone(tree);
+  page.color['theme-light'].page.$value = '#EEF3F8';
+  assert.throws(() => checkWhiteFoundation(page, css), /WHITE_LIGHT_PAGE_SURFACE:page/);
+  const sunken = structuredClone(tree);
+  sunken.color['theme-light'].sunken.$value = '#F7FAFD';
+  assert.throws(() => checkWhiteFoundation(sunken, css), /WHITE_LIGHT_PAGE_SURFACE:sunken/);
+  const gradient = structuredClone(tree);
+  gradient.color['theme-light']['page-grad'].$value[0].color = '#DCE6F0';
+  assert.throws(() => checkWhiteFoundation(gradient, css), /WHITE_LIGHT_GRADIENT/);
+  const legacy = structuredClone(tree);
+  legacy.semantic.surface.page.$value = '{color.frost.100}';
+  assert.throws(() => checkWhiteFoundation(legacy, css), /WHITE_LEGACY_FALLBACK/);
+  assert.throws(() => checkWhiteFoundation(tree, css.replace(':root, [data-theme="light"] {', '[data-theme="light"] {')), /WHITE_LIGHT_DEFAULT_SCOPE/);
+  assert.throws(() => checkWhiteFoundation(tree, css.replace('--c-page: #FFFFFF;', '--c-page: #EEF3F8;')), /WHITE_LIGHT_SCOPED_CSS:page/);
+  assert.throws(() => checkWhiteFoundation(tree, css + '\n:root { --c-page: #EEF3F8; }'), /WHITE_THEME_BOUNDARY_COUNT:page/);
+  checkWhiteFoundation(tree, css);
+});
+
 test('the CSS variable type enumerates the declarations actually generated', () => {
   const types = readFileSync(join(ROOT, 'dist/tokens.d.ts'), 'utf8');
   const names = [...new Set([...css.matchAll(/^\s*(--[a-z0-9-]+):/gm)].map((m) => m[1]))].sort();

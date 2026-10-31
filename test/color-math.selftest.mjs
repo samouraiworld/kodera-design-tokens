@@ -51,8 +51,14 @@ test('a translucent foreground is flattened onto the background before it is mea
   assert.equal(at2(contrastRatio(COBALT, WHITE)), 6.70);
 
   const onPage = composite({ ...COBALT, a: 0.35 }, PAGE);
-  assert.equal(toHex(onPage), '#AAB8EE');
-  assert.equal(at2(contrastRatio(onPage, PAGE)), 1.74);
+  assert.equal(toHex(onPage), '#B5C0F2');
+  assert.equal(at2(contrastRatio(onPage, PAGE)), 1.78);
+
+  // Keep the former frost arithmetic independent of the current page role.
+  const frost = color('color.frost.100');
+  const onFrost = composite({ ...COBALT, a: 0.35 }, frost);
+  assert.equal(toHex(onFrost), '#AAB8EE');
+  assert.equal(at2(contrastRatio(onFrost, frost)), 1.74);
 });
 
 test('an opaque foreground passes through unchanged, and a missing alpha is opaque', () => {
@@ -81,11 +87,15 @@ test('the ring is measured as it is painted: an opaque indicator inside a transl
   const indicator = focusRingIndicator(index, 'light');
   assert.equal(indicator.color.a, 1, 'the tone against the control is opaque; a translucent one is what SC 1.4.11 rejected');
   assert.equal(at2(contrastRatio(composite(indicator.color, WHITE), WHITE)), 8.07);
-  assert.equal(at2(contrastRatio(composite(indicator.color, PAGE), PAGE)), 7.23);
+  assert.equal(at2(contrastRatio(composite(indicator.color, PAGE), PAGE)), 8.07);
 
   const outer = focusRingOuter(index, 'light');
   assert.equal(at2(contrastRatio(composite(outer.color, WHITE), WHITE)), 1.86);
-  assert.equal(at2(contrastRatio(composite(outer.color, PAGE), PAGE)), 1.82);
+  assert.equal(at2(contrastRatio(composite(outer.color, PAGE), PAGE)), 1.86);
+
+  const frost = color('color.frost.100');
+  assert.equal(at2(contrastRatio(composite(indicator.color, frost), frost)), 7.23);
+  assert.equal(at2(contrastRatio(composite(outer.color, frost), frost)), 1.82);
   assert.ok(
     contrastRatio(composite(outer.color, WHITE), WHITE) < 3,
     'the halo alone stays below 3:1 — if it ever clears it, the opaque core is carrying nothing and the ring needs a decision, not a silent pass',
