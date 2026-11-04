@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// 44ab48c719c1deae20bf65ca78ef762d6e80bc80c602b45b5d703b42a8115c4d
+// 75163f2f96cc3f2bdbf613dab82a53ca568cf33e7fe7e08cb06ce136691fc82c
 // Source file: tokens.json
 
 import SwiftUI

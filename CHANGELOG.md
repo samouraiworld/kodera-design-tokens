@@ -33,13 +33,13 @@ Nothing yet.
 
 ### Contrast register
 
-- Six normative rows, two per theme: `action` against `surface` and against `page` at 3:1 (non-text, 1.4.11). Light 6.70:1 and 6.70:1, dark 3.54:1 and 3.85:1, black 3.90:1 and 4.18:1. In dark the fill measured 2.88:1 against `surface` before, so this pair could not be gated until now; the old values fail the new row.
+- Six normative rows, two per theme: `action` against `surface` and against `page` at 3:1 (non-text, 1.4.11). Light 6.70:1 and 6.70:1, dark 3.54:1 and 3.85:1, black 3.90:1 and 4.18:1. In dark the fill measured 2.88:1 against `surface` before (old `action` on old `surface`), so this pair could not be gated until now. The rows are a floor, not a pin: the old dark `action` alone measures 3.05:1 and 3.32:1 on the new grounds and would pass them. What pins the decided values is `test/fixtures/themes.json` and the cursor test's `action-hover` probe.
 - 483 rows, 0 fail, 0 allowed, unchanged exemptions. Tightest text row: `on-inverse` on `action`, 4.66:1 in dark and 4.79:1 in black.
 
 ### Gates
 
-- `test/givre-nuit.selftest.mjs` joins the `units` gate. It checks that no theme paints a gradient, that the dark grounds get lighter in order (`inverse` < `page` < `sunken` < `surface` < `elevated`), that every theme's `inverse` is a near-black rail (luminance below 0.02), that every `action-hover` is its theme's own primitive, that the six action rows exist and are normative at 3:1, and that the radius ladder rises with `md` 10, `lg` 16 and `xl` 20 px. Eleven mutations each assert their own message.
-- The pinned references move with the decision: `test/fixtures/themes.json` (35 role values), the dark and black focus ring in `test/css-parity.selftest.mjs`, `--r-lg` there, `Radius.md` in the native test, and the cursor mutation that probes `action-hover`, which now sits next to the new dark hover.
+- `test/givre-nuit.selftest.mjs` joins the `units` gate. It checks that no theme paints a gradient, that no gradient token anywhere in the tree has two colours, that no `linear-gradient` in the built CSS or preset has two distinct stop colours (a sandbox build of a top-level two-stop primitive proves it), that the dark grounds get lighter in order (`inverse` < `page` < `sunken` < `surface` < `elevated`), that every theme's `inverse` is a near-black rail (luminance below 0.02), that every `action-hover` is its theme's own primitive, that the six action rows exist and are normative at 3:1, and that the radius ladder rises with `md` 10, `lg` 16 and `xl` 20 px. Seventeen mutations, fifteen in memory and two on a sandbox build, each assert their own message.
+- The pinned references move with the decision: `test/fixtures/themes.json` (36 role values: light 5, dark 27, black 4; dark `disabled` and `on-disabled` move through their references to `muted-2` and `ink-3`), the dark and black focus ring in `test/css-parity.selftest.mjs`, `--r-lg` there, `Radius.md` in the native test, and the cursor mutation that probes `action-hover`, which now sits next to the new dark hover.
 
 ### Carried from `Unreleased`
 
