@@ -77,7 +77,7 @@ Until GitHub Packages is set up for the organisation, a consuming repository tak
 // package.json in a consuming repository
 {
   "dependencies": {
-    "@samourai/design-tokens": "github:samouraiworld/kodera-design-tokens#v0.1.0"
+    "@samourai/design-tokens": "github:samouraiworld/kodera-design-tokens#v0.4.0"
   }
 }
 ```
