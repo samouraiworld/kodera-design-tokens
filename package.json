@@ -2,7 +2,7 @@
   "name": "@samourai/design-tokens",
   "version": "0.5.0",
   "description": "Design tokens of Kodera: DTCG source, generated CSS variables and Tailwind preset, contrast gate",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "repository": {
