@@ -143,3 +143,7 @@ Two things the build emits are still not tokens: the frost page gradient behind 
 3. `npm run build` and commit `dist/`.
 4. `npm test`. If a pair fails, the fix is the value — not an allowlist entry, unless the design workstream decided otherwise and the reason says so.
 5. If an allowlist entry is what the decision calls for, it carries the pair's `fg`, `bg` and `min`, the ratio measured today, a reason and a decision. `test/check-contrast.selftest.mjs` is where a new way the gate must fail gets its mutation.
+
+## Licence
+
+The code and the token values are [MIT](LICENSE), copyright Samouraï Coop. The Kodera name and logo are not licensed: see [`TRADEMARKS.md`](TRADEMARKS.md). The package stays `private`: consumers take it as a git dependency pinned to a tag (above).

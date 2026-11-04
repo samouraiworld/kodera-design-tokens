@@ -6,7 +6,9 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
-Nothing yet.
+### Licence
+
+- The code and the token values are licensed under MIT (`LICENSE`, `package.json` `"license": "MIT"`), copyright Samouraï Coop. The Kodera name and logo are excluded (`TRADEMARKS.md`). Decided by zôÖma, 2026-11-04.
 
 ## v0.5.0
 
