@@ -1812,6 +1812,20 @@
       "min": 4.5
     },
     {
+      "id": "theme.light/action/surface",
+      "fg": "semantic.theme.light.action",
+      "bg": "semantic.theme.light.surface",
+      "label": "light: primary button fill against surface, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
+      "id": "theme.light/action/page",
+      "fg": "semantic.theme.light.action",
+      "bg": "semantic.theme.light.page",
+      "label": "light: primary button fill against page, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
       "id": "theme.light/on-inverse/bad",
       "fg": "semantic.theme.light.on-inverse",
       "bg": "semantic.theme.light.bad",
@@ -1833,6 +1847,20 @@
       "min": 4.5
     },
     {
+      "id": "theme.dark/action/surface",
+      "fg": "semantic.theme.dark.action",
+      "bg": "semantic.theme.dark.surface",
+      "label": "dark: primary button fill against surface, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
+      "id": "theme.dark/action/page",
+      "fg": "semantic.theme.dark.action",
+      "bg": "semantic.theme.dark.page",
+      "label": "dark: primary button fill against page, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
       "id": "theme.dark/on-inverse/bad",
       "fg": "semantic.theme.dark.on-inverse",
       "bg": "semantic.theme.dark.bad",
@@ -1852,6 +1880,20 @@
       "bg": "semantic.theme.black.action-hover",
       "label": "black: reference button or badge label on action-hover",
       "min": 4.5
+    },
+    {
+      "id": "theme.black/action/surface",
+      "fg": "semantic.theme.black.action",
+      "bg": "semantic.theme.black.surface",
+      "label": "black: primary button fill against surface, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
+    },
+    {
+      "id": "theme.black/action/page",
+      "fg": "semantic.theme.black.action",
+      "bg": "semantic.theme.black.page",
+      "label": "black: primary button fill against page, so the control is found without reading its label (non-text, 1.4.11)",
+      "min": 3.0
     },
     {
       "id": "theme.black/on-inverse/bad",

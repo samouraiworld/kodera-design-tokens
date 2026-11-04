@@ -86,14 +86,14 @@ test('every theme declares both rings, an opaque core inside a translucent halo'
       '--focus-ring-on-inverse-color: #FFFFFF;',
     ],
     '[data-theme="dark"]': [
-      '--focus-ring: 0 0 0 2px #A9BBFF, 0 0 0 5px rgba(169, 187, 255, 0.35);',
-      '--focus-ring-color: #A9BBFF;',
+      '--focus-ring: 0 0 0 2px #AEBEFF, 0 0 0 5px rgba(174, 190, 255, 0.35);',
+      '--focus-ring-color: #AEBEFF;',
       '--focus-ring-on-inverse: 0 0 0 2px #F3F7FB, 0 0 0 5px rgba(243, 247, 251, 0.35);',
       '--focus-ring-on-inverse-color: #F3F7FB;',
     ],
     '[data-theme="black"]': [
-      '--focus-ring: 0 0 0 2px #A9BBFF, 0 0 0 5px rgba(169, 187, 255, 0.35);',
-      '--focus-ring-color: #A9BBFF;',
+      '--focus-ring: 0 0 0 2px #AEBEFF, 0 0 0 5px rgba(174, 190, 255, 0.35);',
+      '--focus-ring-color: #AEBEFF;',
       '--focus-ring-on-inverse: 0 0 0 2px #F7FAFC, 0 0 0 5px rgba(247, 250, 252, 0.35);',
       '--focus-ring-on-inverse-color: #F7FAFC;',
     ],
@@ -126,7 +126,7 @@ test('a spot check of values still matches the design drop', () => {
     ['--slate-900', '#2F3A45'],
     ['--cobalt-500', '#2B4BDB'],
     ['--surface-inverse', '#2F3A45'],
-    ['--r-lg', '12px'],
+    ['--r-lg', '16px'],
     ['--dur-base', '200ms'],
     ['--ease-out', 'cubic-bezier(0.2, 0.7, 0.3, 1)'],
   ]) {

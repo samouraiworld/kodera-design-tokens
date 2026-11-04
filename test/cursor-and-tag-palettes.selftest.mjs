@@ -431,7 +431,7 @@ test('every collaborator cursor clause fails on its own mutation', () => {
   assert.throws(
     () =>
       checkCollaboratorCursors(
-        mutateTree((t) => (t.color['theme-dark']['cursor-1'].$value = '#1F3CC0')),
+        mutateTree((t) => (t.color['theme-dark']['cursor-1'].$value = '#2A46CC')),
         register,
         css,
         preset,
