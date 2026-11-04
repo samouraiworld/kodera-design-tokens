@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// ef11a997d3e17e73a06326e2aae5f7bb257c3d211e2ec47554c8a6a5bdbec38c
+// 75163f2f96cc3f2bdbf613dab82a53ca568cf33e7fe7e08cb06ce136691fc82c
 // Source file: tokens.json
 
 import SwiftUI
@@ -96,15 +96,15 @@ public enum KoderaTokens {
         border: Color(.sRGB, red: 0.8509803921568627, green: 0.8823529411764706, blue: 0.9176470588235294, opacity: 1.0),
         borderSoft: Color(.sRGB, red: 0.8941176470588236, green: 0.9176470588235294, blue: 0.9450980392156862, opacity: 1.0),
         borderStrong: Color(.sRGB, red: 0.788235294117647, green: 0.8274509803921568, blue: 0.8705882352941177, opacity: 1.0),
-        inverse: Color(.sRGB, red: 0.1843137254901961, green: 0.22745098039215686, blue: 0.27058823529411763, opacity: 1.0),
-        inverse2: Color(.sRGB, red: 0.23921568627450981, green: 0.28627450980392155, blue: 0.33725490196078434, opacity: 1.0),
-        railLine: Color(.sRGB, red: 0.33725490196078434, green: 0.3843137254901961, blue: 0.43137254901960786, opacity: 1.0),
-        ink: Color(.sRGB, red: 0.1843137254901961, green: 0.22745098039215686, blue: 0.27058823529411763, opacity: 1.0),
+        inverse: Color(.sRGB, red: 0.06666666666666667, green: 0.09411764705882353, blue: 0.15294117647058825, opacity: 1.0),
+        inverse2: Color(.sRGB, red: 0.11372549019607843, green: 0.1450980392156863, blue: 0.20784313725490197, opacity: 1.0),
+        railLine: Color(.sRGB, red: 0.22745098039215686, green: 0.27058823529411763, blue: 0.34901960784313724, opacity: 1.0),
+        ink: Color(.sRGB, red: 0.11764705882352941, green: 0.1607843137254902, blue: 0.2, opacity: 1.0),
         ink2: Color(.sRGB, red: 0.33725490196078434, green: 0.3843137254901961, blue: 0.43137254901960786, opacity: 1.0),
         ink3: Color(.sRGB, red: 0.3607843137254902, green: 0.40784313725490196, blue: 0.4549019607843137, opacity: 1.0),
         ink4: Color(.sRGB, red: 0.48627450980392156, green: 0.5333333333333333, blue: 0.5803921568627451, opacity: 1.0),
         onInverse: Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0),
-        onInverseDim: Color(.sRGB, red: 0.788235294117647, green: 0.8274509803921568, blue: 0.8705882352941177, opacity: 1.0),
+        onInverseDim: Color(.sRGB, red: 0.7058823529411765, green: 0.7490196078431373, blue: 0.8, opacity: 1.0),
         action: Color(.sRGB, red: 0.16862745098039217, green: 0.29411764705882354, blue: 0.8588235294117647, opacity: 1.0),
         actionHover: Color(.sRGB, red: 0.13725490196078433, green: 0.25098039215686274, blue: 0.7686274509803922, opacity: 1.0),
         accentSoft: Color(.sRGB, red: 0.8941176470588236, green: 0.9137254901960784, blue: 0.984313725490196, opacity: 1.0),
@@ -167,28 +167,28 @@ public enum KoderaTokens {
         tag6Fg: Color(.sRGB, red: 0.24705882352941178, green: 0.3411764705882353, blue: 0.10588235294117647, opacity: 1.0)
     )
     public static let dark = Palette(
-        page: Color(.sRGB, red: 0.06274509803921569, green: 0.08235294117647059, blue: 0.10588235294117647, opacity: 1.0),
-        surface: Color(.sRGB, red: 0.09019607843137255, green: 0.11764705882352941, blue: 0.14901960784313725, opacity: 1.0),
-        sunken: Color(.sRGB, red: 0.07450980392156863, green: 0.10196078431372549, blue: 0.12941176470588237, opacity: 1.0),
-        muted: Color(.sRGB, red: 0.12156862745098039, green: 0.1568627450980392, blue: 0.19215686274509805, opacity: 1.0),
-        muted2: Color(.sRGB, red: 0.1411764705882353, green: 0.1803921568627451, blue: 0.2196078431372549, opacity: 1.0),
-        hairline: Color(.sRGB, red: 0.10588235294117647, green: 0.13333333333333333, blue: 0.16470588235294117, opacity: 1.0),
-        border: Color(.sRGB, red: 0.17254901960784313, green: 0.20784313725490197, blue: 0.24705882352941178, opacity: 1.0),
-        borderSoft: Color(.sRGB, red: 0.1411764705882353, green: 0.17647058823529413, blue: 0.21176470588235294, opacity: 1.0),
-        borderStrong: Color(.sRGB, red: 0.22745098039215686, green: 0.27058823529411763, blue: 0.3176470588235294, opacity: 1.0),
-        inverse: Color(.sRGB, red: 0.047058823529411764, green: 0.06666666666666667, blue: 0.08627450980392157, opacity: 1.0),
-        inverse2: Color(.sRGB, red: 0.11764705882352941, green: 0.1568627450980392, blue: 0.19215686274509805, opacity: 1.0),
-        railLine: Color(.sRGB, red: 0.2235294117647059, green: 0.2627450980392157, blue: 0.30980392156862746, opacity: 1.0),
-        ink: Color(.sRGB, red: 0.9098039215686274, green: 0.9372549019607843, blue: 0.9647058823529412, opacity: 1.0),
-        ink2: Color(.sRGB, red: 0.7254901960784313, green: 0.7764705882352941, blue: 0.8313725490196079, opacity: 1.0),
-        ink3: Color(.sRGB, red: 0.596078431372549, green: 0.6509803921568628, blue: 0.7098039215686275, opacity: 1.0),
-        ink4: Color(.sRGB, red: 0.4980392156862745, green: 0.5529411764705883, blue: 0.611764705882353, opacity: 1.0),
+        page: Color(.sRGB, red: 0.043137254901960784, green: 0.054901960784313725, blue: 0.0784313725490196, opacity: 1.0),
+        surface: Color(.sRGB, red: 0.07450980392156863, green: 0.09411764705882353, blue: 0.13725490196078433, opacity: 1.0),
+        sunken: Color(.sRGB, red: 0.054901960784313725, green: 0.07058823529411765, blue: 0.09803921568627451, opacity: 1.0),
+        muted: Color(.sRGB, red: 0.11372549019607843, green: 0.1411764705882353, blue: 0.2, opacity: 1.0),
+        muted2: Color(.sRGB, red: 0.14901960784313725, green: 0.1803921568627451, blue: 0.24313725490196078, opacity: 1.0),
+        hairline: Color(.sRGB, red: 0.08627450980392157, green: 0.10588235294117647, blue: 0.1450980392156863, opacity: 1.0),
+        border: Color(.sRGB, red: 0.14901960784313725, green: 0.1803921568627451, blue: 0.23529411764705882, opacity: 1.0),
+        borderSoft: Color(.sRGB, red: 0.11372549019607843, green: 0.1411764705882353, blue: 0.18823529411764706, opacity: 1.0),
+        borderStrong: Color(.sRGB, red: 0.20392156862745098, green: 0.25098039215686274, blue: 0.33725490196078434, opacity: 1.0),
+        inverse: Color(.sRGB, red: 0.027450980392156862, green: 0.03529411764705882, blue: 0.050980392156862744, opacity: 1.0),
+        inverse2: Color(.sRGB, red: 0.08627450980392157, green: 0.10588235294117647, blue: 0.14901960784313725, opacity: 1.0),
+        railLine: Color(.sRGB, red: 0.16470588235294117, green: 0.19607843137254902, blue: 0.25882352941176473, opacity: 1.0),
+        ink: Color(.sRGB, red: 0.9294117647058824, green: 0.9450980392156862, blue: 0.9686274509803922, opacity: 1.0),
+        ink2: Color(.sRGB, red: 0.7215686274509804, green: 0.7607843137254902, blue: 0.8196078431372549, opacity: 1.0),
+        ink3: Color(.sRGB, red: 0.592156862745098, green: 0.6392156862745098, blue: 0.7098039215686275, opacity: 1.0),
+        ink4: Color(.sRGB, red: 0.49019607843137253, green: 0.5411764705882353, blue: 0.615686274509804, opacity: 1.0),
         onInverse: Color(.sRGB, red: 0.9529411764705882, green: 0.9686274509803922, blue: 0.984313725490196, opacity: 1.0),
-        onInverseDim: Color(.sRGB, red: 0.6196078431372549, green: 0.6784313725490196, blue: 0.7372549019607844, opacity: 1.0),
-        action: Color(.sRGB, red: 0.23137254901960785, green: 0.3411764705882353, blue: 0.8705882352941177, opacity: 1.0),
-        actionHover: Color(.sRGB, red: 0.16862745098039217, green: 0.29411764705882354, blue: 0.8588235294117647, opacity: 1.0),
-        accentSoft: Color(.sRGB, red: 0.10980392156862745, green: 0.1450980392156863, blue: 0.25098039215686274, opacity: 1.0),
-        accentInk: Color(.sRGB, red: 0.6627450980392157, green: 0.7333333333333333, blue: 1.0, opacity: 1.0),
+        onInverseDim: Color(.sRGB, red: 0.6313725490196078, green: 0.6784313725490196, blue: 0.7450980392156863, opacity: 1.0),
+        action: Color(.sRGB, red: 0.2627450980392157, green: 0.3803921568627451, blue: 0.9333333333333333, opacity: 1.0),
+        actionHover: Color(.sRGB, red: 0.22745098039215686, green: 0.34901960784313724, blue: 0.9098039215686274, opacity: 1.0),
+        accentSoft: Color(.sRGB, red: 0.10196078431372549, green: 0.13725490196078433, blue: 0.3137254901960784, opacity: 1.0),
+        accentInk: Color(.sRGB, red: 0.6823529411764706, green: 0.7450980392156863, blue: 1.0, opacity: 1.0),
         okOnDark: Color(.sRGB, red: 0.4980392156862745, green: 0.8196078431372549, blue: 0.6392156862745098, opacity: 1.0),
         badOnDark: Color(.sRGB, red: 0.9450980392156862, green: 0.5686274509803921, blue: 0.5137254901960784, opacity: 1.0),
         ok: Color(.sRGB, red: 0.20784313725490197, green: 0.6627450980392157, blue: 0.41568627450980394, opacity: 1.0),
@@ -215,12 +215,12 @@ public enum KoderaTokens {
         t5Fg: Color(.sRGB, red: 0.7254901960784313, green: 0.7764705882352941, blue: 0.8313725490196079, opacity: 1.0),
         t6Bg: Color(.sRGB, red: 0.14901960784313725, green: 0.18823529411764706, blue: 0.22745098039215686, opacity: 1.0),
         t6Fg: Color(.sRGB, red: 0.9098039215686274, green: 0.9372549019607843, blue: 0.9647058823529412, opacity: 1.0),
-        elevated: Color(.sRGB, red: 0.11372549019607843, green: 0.1450980392156863, blue: 0.1803921568627451, opacity: 1.0),
+        elevated: Color(.sRGB, red: 0.10588235294117647, green: 0.12941176470588237, blue: 0.18823529411764706, opacity: 1.0),
         scrim: Color(.sRGB, red: 0.0, green: 0.0, blue: 0.0, opacity: 0.6),
-        borderInput: Color(.sRGB, red: 0.4196078431372549, green: 0.47058823529411764, blue: 0.5254901960784314, opacity: 1.0),
-        placeholder: Color(.sRGB, red: 0.5215686274509804, green: 0.5725490196078431, blue: 0.6313725490196078, opacity: 1.0),
-        disabled: Color(.sRGB, red: 0.1411764705882353, green: 0.1803921568627451, blue: 0.2196078431372549, opacity: 1.0),
-        onDisabled: Color(.sRGB, red: 0.596078431372549, green: 0.6509803921568628, blue: 0.7098039215686275, opacity: 1.0),
+        borderInput: Color(.sRGB, red: 0.43137254901960786, green: 0.49019607843137253, blue: 0.5803921568627451, opacity: 1.0),
+        placeholder: Color(.sRGB, red: 0.5607843137254902, green: 0.6078431372549019, blue: 0.6823529411764706, opacity: 1.0),
+        disabled: Color(.sRGB, red: 0.14901960784313725, green: 0.1803921568627451, blue: 0.24313725490196078, opacity: 1.0),
+        onDisabled: Color(.sRGB, red: 0.592156862745098, green: 0.6392156862745098, blue: 0.7098039215686275, opacity: 1.0),
         cursor1: Color(.sRGB, red: 0.08627450980392157, green: 0.44313725490196076, blue: 0.7294117647058823, opacity: 1.0),
         cursor1Soft: Color(.sRGB, red: 0.06666666666666667, green: 0.1450980392156863, blue: 0.21176470588235294, opacity: 1.0),
         cursor2: Color(.sRGB, red: 0.48627450980392156, green: 0.3215686274509804, blue: 0.8627450980392157, opacity: 1.0),
@@ -265,10 +265,10 @@ public enum KoderaTokens {
         ink4: Color(.sRGB, red: 0.48627450980392156, green: 0.5294117647058824, blue: 0.5803921568627451, opacity: 1.0),
         onInverse: Color(.sRGB, red: 0.9686274509803922, green: 0.9803921568627451, blue: 0.9882352941176471, opacity: 1.0),
         onInverseDim: Color(.sRGB, red: 0.6392156862745098, green: 0.6862745098039216, blue: 0.7372549019607844, opacity: 1.0),
-        action: Color(.sRGB, red: 0.23137254901960785, green: 0.3411764705882353, blue: 0.8705882352941177, opacity: 1.0),
-        actionHover: Color(.sRGB, red: 0.16862745098039217, green: 0.29411764705882354, blue: 0.8588235294117647, opacity: 1.0),
+        action: Color(.sRGB, red: 0.2627450980392157, green: 0.3803921568627451, blue: 0.9333333333333333, opacity: 1.0),
+        actionHover: Color(.sRGB, red: 0.22745098039215686, green: 0.34901960784313724, blue: 0.9098039215686274, opacity: 1.0),
         accentSoft: Color(.sRGB, red: 0.0784313725490196, green: 0.10196078431372549, blue: 0.1803921568627451, opacity: 1.0),
-        accentInk: Color(.sRGB, red: 0.6627450980392157, green: 0.7333333333333333, blue: 1.0, opacity: 1.0),
+        accentInk: Color(.sRGB, red: 0.6823529411764706, green: 0.7450980392156863, blue: 1.0, opacity: 1.0),
         okOnDark: Color(.sRGB, red: 0.4980392156862745, green: 0.8196078431372549, blue: 0.6392156862745098, opacity: 1.0),
         badOnDark: Color(.sRGB, red: 0.9450980392156862, green: 0.5686274509803921, blue: 0.5137254901960784, opacity: 1.0),
         ok: Color(.sRGB, red: 0.1843137254901961, green: 0.6196078431372549, blue: 0.38823529411764707, opacity: 1.0),
@@ -351,9 +351,9 @@ public enum KoderaTokens {
     }
     public enum Radius {
         public static let sm: CGFloat = 6.0
-        public static let md: CGFloat = 8.0
-        public static let lg: CGFloat = 12.0
-        public static let xl: CGFloat = 16.0
+        public static let md: CGFloat = 10.0
+        public static let lg: CGFloat = 16.0
+        public static let xl: CGFloat = 20.0
         public static let full: CGFloat = 999.0
     }
     public enum FontSize {

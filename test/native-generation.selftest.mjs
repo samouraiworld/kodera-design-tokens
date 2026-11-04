@@ -84,7 +84,7 @@ test('native dimensions, weights and family fallbacks have explicit mapping', as
   const m = JSON.parse(outputs[names[2]]);
   for (const [path, api, value, swiftUnit, composeUnit] of [
     ['space.4', 'Space.s4', 16, 'pt', 'dp'],
-    ['radius.md', 'Radius.md', 8, 'pt', 'dp'],
+    ['radius.md', 'Radius.md', 10, 'pt', 'dp'],
     ['font.size.lg', 'FontSize.lg', 16, 'pt', 'sp'],
   ]) {
     const e = m.entries.find(e => e.path === path);

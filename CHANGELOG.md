@@ -6,6 +6,43 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
+Nothing yet.
+
+## v0.5.0
+
+"Givre & Nuit": a deeper dark theme, a near-black rail in every theme, a brighter cobalt in dark and black, flat grounds everywhere and rounder corners. Values only: every token name, CSS variable and preset key a consumer uses today still resolves; two primitives are added. Together with the two entries carried from `Unreleased` below, this is a minor (`RELEASE.md`, step 5). Direction, reference screens and the design contrast table: `docs/specs/givre-nuit.md`.
+
+### Decided by
+
+- **`feat/givre-nuit-v0.5.0`**: zôÖma, 2026-11-04, through the lead session (decisions D-UI1 to D-UI4): direction approved; Automatique stays the default theme; **no gradient**, plain cobalt only; the black theme is kept.
+- The white-light foundation and the native bindings below: as recorded in their own entries.
+
+### Token values changed — design decisions
+
+- **Dark grounds** (`color.theme-dark.*`): `page` `#10151B` → `#0B0E14`, `sunken` `#131A21` → `#0E1219`, `surface` `#171E26` → `#131823`, `elevated` `#1D252E` → `#1B2130`, `muted` `#1F2831` → `#1D2433`, `muted-2` `#242E38` → `#262E3E`, `hairline` `#1B222A` → `#161B25`, `border` `#2C353F` → `#262E3C`, `border-soft` `#242D36` → `#1D2430`, `border-strong` `#3A4551` → `#344056`, `border-input` `#6B7886` → `#6E7D94`, `inverse` `#0C1116` → `#07090D`, `inverse-2` `#1E2831` → `#161B26`, `rail-line` `#39434F` → `#2A3242`.
+- **Dark inks**: `ink` `#E8EFF6` → `#EDF1F7`, `ink-2` `#B9C6D4` → `#B8C2D1`, `ink-3` `#98A6B5` → `#97A3B5`, `ink-4` `#7F8D9C` → `#7D8A9D`, `placeholder` `#8592A1` → `#8F9BAE`, `on-inverse-dim` `#9EADBC` → `#A1ADBE`.
+- **Cobalt in dark and black**: `action` `#3B57DE` → `#4361EE`; `accent-ink` `#A9BBFF` → `#AEBEFF` (the focus-ring core follows); `accent-soft` (dark) `#1C2540` → `#1A2350`. `action-hover` was `{color.cobalt.500}` (`#2B4BDB`, the light action, darker than the dark action); it is now each theme's own primitive, `#3A59E8`.
+- **Flat page**: the dark and black `page-grad` stops are all the page colour (`#0B0E14`, `#000000`), as light's already are. No theme paints a gradient.
+- **Light** (on top of the white foundation): `ink` `#2F3A45` → `#1E2933`, `inverse` `#2F3A45` → `#111827` (the rail and inverse panels), `inverse-2` `#3D4956` → `#1D2535`, `rail-line` `#56626E` → `#3A4559`, `on-inverse-dim` `#C9D3DE` → `#B4BFCC`.
+- **Radius** (web and native): `md` 8 → 10 px (also the preset's `rounded` default), `lg` 12 → 16 px, `xl` 16 → 20 px.
+- Unchanged: status roles, tags, cursors, `t1`–`t6`, typography, spacing, elevation geometry, the legacy non-themed roles (`--surface-inverse`, `--text-*`).
+
+### Tokens added
+
+- `color.theme-dark.action-hover` and `color.theme-black.action-hover` (`#3A59E8`), with their CSS variables `--theme-dark-action-hover` and `--theme-black-action-hover`. `semantic.theme.<theme>.action-hover` references them.
+
+### Contrast register
+
+- Six normative rows, two per theme: `action` against `surface` and against `page` at 3:1 (non-text, 1.4.11). Light 6.70:1 and 6.70:1, dark 3.54:1 and 3.85:1, black 3.90:1 and 4.18:1. In dark the fill measured 2.88:1 against `surface` before (old `action` on old `surface`), so this pair could not be gated until now. The rows are a floor, not a pin: the old dark `action` alone measures 3.05:1 and 3.32:1 on the new grounds and would pass them. What pins the decided values is `test/fixtures/themes.json` and the cursor test's `action-hover` probe.
+- 483 rows, 0 fail, 0 allowed, unchanged exemptions. Tightest text row: `on-inverse` on `action`, 4.66:1 in dark and 4.79:1 in black.
+
+### Gates
+
+- `test/givre-nuit.selftest.mjs` joins the `units` gate. It checks that no theme paints a gradient, that no gradient token anywhere in the tree has two colours, that no `linear-gradient` in the built CSS or preset has two distinct stop colours (a sandbox build of a top-level two-stop primitive proves it), that the dark grounds get lighter in order (`inverse` < `page` < `sunken` < `surface` < `elevated`), that every theme's `inverse` is a near-black rail (luminance below 0.02), that every `action-hover` is its theme's own primitive, that the six action rows exist and are normative at 3:1, and that the radius ladder rises with `md` 10, `lg` 16 and `xl` 20 px. Seventeen mutations, fifteen in memory and two on a sandbox build, each assert their own message.
+- The pinned references move with the decision: `test/fixtures/themes.json` (36 role values: light 5, dark 27, black 4; dark `disabled` and `on-disabled` move through their references to `muted-2` and `ink-3`), the dark and black focus ring in `test/css-parity.selftest.mjs`, `--r-lg` there, `Radius.md` in the native test, and the cursor mutation that probes `action-hover`, which now sits next to the new dark hover.
+
+### Carried from `Unreleased`
+
 White-light foundation candidate, decided by zôÖma: use white for the light page and sunken backgrounds and all existing page-gradient stops, including the legacy page fallback. Preserve every token name, gradient angle/stop position, dark/black map, ink/focus/status/disabled value and geometry. Canonical web/native outputs carry the same correction; consumers have not been repinned. Production regressions bind default/scoped light and legacy/themed parity. No version, tag, contrast threshold or exception changes. See `docs/specs/white-ink-foundation.md`.
 
 Add deterministic SwiftUI and Compose bindings, source provenance and a native format manifest. Existing web outputs and all token values are unchanged. Native generation and refusal mutations run in the existing test and drift gates. No package version or release tag is changed.
