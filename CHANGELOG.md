@@ -12,7 +12,7 @@ A wider rail item, so the rail's labels fit in 12 px sentence case. One value ch
 
 ### Decided by
 
-- **`feat/rail-item-68`**: the lead session, for gap G6 of the console gap report (the « Messages » rail item). The value comes from the reference screens accepted in kodera-internal #123: `design/reference/assets/kodera.css` sizes a rail item as the rail less `sp-2`, 68 px, so that a 12 px sentence-case label fits.
+- **`feat/rail-item-68`**: zôÖma, who accepted the reference screens as drawn, with their listed deviations (kodera-internal #123, `design/reference/README.md`, "Deviations from the product mock, accepted": "Rail entry 56 px → 68 px (`shell-rail-width` less one spacing step)", because « Messages » at 12 px is 58 px wide). The lead session lands it for gap G6 of the console gap report.
 
 ### Token values changed — design decisions
 
