@@ -6,6 +6,18 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## Unreleased
 
+## v0.6.0
+
+A wider rail item, so the rail's labels fit in 12 px sentence case. One value changes and no name does, so this is a minor (`RELEASE.md`, step 5). The licence entry below was carried over from `Unreleased`.
+
+### Decided by
+
+- **`feat/rail-item-68`**: the lead session, for gap G6 of the console gap report (the « Messages » rail item). The value comes from the reference screens accepted in kodera-internal #123: `design/reference/assets/kodera.css` sizes a rail item as the rail less `sp-2`, 68 px, so that a 12 px sentence-case label fits.
+
+### Token values changed — design decisions
+
+- **Rail item**: `space.shell-rail-item-width` `56px` → `68px`. `semantic.layout.rail-item-width` and `component.shell.rail-item-width` reference it, so `--shell-rail-item-width`, `--sp-shell-rail-item-width`, `--layout-rail-item-width`, the preset's `shell-rail-item-width` key and the native bindings follow. The rail itself stays 76 px. A consumer that uses the item width as a height too (a square item) grows taller with it. The console sets its item height separately in the pull request that repins.
+
 ### Licence
 
 - The code and the token values are licensed under MIT (`LICENSE`, `package.json` `"license": "MIT"`), copyright Samouraï Coop. The Kodera name and logo are excluded (`TRADEMARKS.md`). Decided by zôÖma, 2026-11-04.

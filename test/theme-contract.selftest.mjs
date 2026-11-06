@@ -11,7 +11,7 @@ import preset from '../dist/tailwind.preset.js';
 const fixture = JSON.parse(readFileSync(join(ROOT, 'test/fixtures/themes.json'), 'utf8'));
 const tree = JSON.parse(readFileSync(join(ROOT, 'tokens.json'), 'utf8'));
 const css = readFileSync(join(ROOT, 'dist/tokens.css'), 'utf8');
-const geometry = { 'rail-width': '76px', 'rail-item-width': '56px', 'sidebar-width': '264px', 'document-max-width': '780px', 'document-min-width': '360px', 'dock-width': '340px', 'dock-offset': '24px' };
+const geometry = { 'rail-width': '76px', 'rail-item-width': '68px', 'sidebar-width': '264px', 'document-max-width': '780px', 'document-min-width': '360px', 'dock-width': '340px', 'dock-offset': '24px' };
 
 /**
  * The preset's ring keys are references, never values.

@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// 75163f2f96cc3f2bdbf613dab82a53ca568cf33e7fe7e08cb06ce136691fc82c
+// d8e65579415c0b1067091dfdbb97eec4f8b06ffb02fb601b096b241b9d2223f1
 // Source file: tokens.json
 
 package io.kodera.tokens
@@ -343,7 +343,7 @@ public object KoderaTokens {
         public val s10 = 40.dp
         public val s12 = 48.dp
         public val shellRailWidth = 76.dp
-        public val shellRailItemWidth = 56.dp
+        public val shellRailItemWidth = 68.dp
         public val shellSidebarWidth = 264.dp
         public val shellDocumentMaxWidth = 780.dp
         public val shellDocumentMinWidth = 360.dp

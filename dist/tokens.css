@@ -320,7 +320,7 @@
   --sp-10: 40px;
   --sp-12: 48px;
   --sp-shell-rail-width: 76px;
-  --sp-shell-rail-item-width: 56px;
+  --sp-shell-rail-item-width: 68px;
   --sp-shell-sidebar-width: 264px;
   --sp-shell-document-max-width: 780px;
   --sp-shell-document-min-width: 360px;
@@ -366,14 +366,14 @@
 
   /* shell geometry */
   --layout-rail-width: 76px;
-  --layout-rail-item-width: 56px;
+  --layout-rail-item-width: 68px;
   --layout-sidebar-width: 264px;
   --layout-document-max-width: 780px;
   --layout-document-min-width: 360px;
   --layout-dock-width: 340px;
   --layout-dock-offset: 24px;
   --shell-rail-width: 76px;
-  --shell-rail-item-width: 56px;
+  --shell-rail-item-width: 68px;
   --shell-sidebar-width: 264px;
   --shell-document-max-width: 780px;
   --shell-document-min-width: 360px;
