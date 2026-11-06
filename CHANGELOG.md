@@ -12,11 +12,11 @@ A wider rail item, so the rail's labels fit in 12 px sentence case. One value ch
 
 ### Decided by
 
-- **`feat/rail-item-68`**: zôÖma, who accepted the reference screens as drawn, with their listed deviations (kodera-internal #123, `design/reference/README.md`, "Deviations from the product mock, accepted": "Rail entry 56 px → 68 px (`shell-rail-width` less one spacing step)", because « Messages » at 12 px is 58 px wide). The lead session lands it for gap G6 of the console gap report.
+- **`feat/rail-item-68`**: zôÖma, who accepted the reference screens as drawn, with their listed deviations (kodera-internal #123, `design/reference/README.md`, "Deviations from the product mock, accepted": the row "Rail entry 56 px | 68 px (`shell-rail-width` less one spacing step)", because « Messages » at 12 px is 58 px wide). The lead session lands it for gap G6 of the console gap report.
 
 ### Token values changed — design decisions
 
-- **Rail item**: `space.shell-rail-item-width` `56px` → `68px`. `semantic.layout.rail-item-width` and `component.shell.rail-item-width` reference it, so `--shell-rail-item-width`, `--sp-shell-rail-item-width`, `--layout-rail-item-width`, the preset's `shell-rail-item-width` key and the native bindings follow. The rail itself stays 76 px. A consumer that uses the item width as a height too (a square item) grows taller with it. The console sets its item height separately in the pull request that repins.
+- **Rail item**: `space.shell-rail-item-width` `56px` → `68px`. `semantic.layout.rail-item-width` and `component.shell.rail-item-width` reference it, so `--shell-rail-item-width`, `--sp-shell-rail-item-width`, `--layout-rail-item-width`, the preset's `shell-rail-item-width` key and the native bindings follow. The rail itself stays 76 px. A consumer that uses the item width as a height grows taller with it. The console does so twice: its square rail items, and its content header (`TopBar`, the shell's `header`), which is `shell-rail-item-width` tall, the approved 56 px. Its repin gives both their own height, the items from padding as the reference draws them and the header 56 px, or the header grows to 68 px.
 
 ### Licence
 
