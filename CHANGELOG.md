@@ -20,7 +20,7 @@ A wider rail item, so the rail's labels fit in 12 px sentence case, and a conten
 
 ### Tokens added
 
-- `space.shell-header-height` (`56px`), with `semantic.layout.header-height` and `component.shell.header-height`: the content header's height, the approved console height that the console took from the rail item width until now. CSS variables `--shell-header-height`, `--sp-shell-header-height` and `--layout-header-height`; the preset key `shell-header-height`; native `shellHeaderHeight`. Same decider: the 56 px header is the console's approved height (`TopBar`), kept as it is.
+- `space.shell-header-height` (`56px`), with `semantic.layout.header-height` and `component.shell.header-height`: the content header's height, the approved console height that the console took from the rail item width until now. CSS variables `--shell-header-height`, `--sp-shell-header-height` and `--layout-header-height`; the preset key `shell-header-height`; native `shellHeaderHeight`. Decided by zôÖma through the console's shell-fidelity spec (`kodera-console` `docs/specs/shell-fidelity.md`, status "approved by the owner": "a 56 px content header"); the token keeps the console's pixels as they are. Open question for zôÖma, not decided here: the reference accepted in kodera-internal #123 draws the content header at 60 px (`design/reference/README.md`, "Content header | `.head` | 60 px"), and its deviations table has no 56 px row; the console's `TopBar` records the same gap.
 
 ### Tests
 
