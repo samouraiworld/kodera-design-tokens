@@ -11,7 +11,7 @@ import preset from '../dist/tailwind.preset.js';
 const fixture = JSON.parse(readFileSync(join(ROOT, 'test/fixtures/themes.json'), 'utf8'));
 const tree = JSON.parse(readFileSync(join(ROOT, 'tokens.json'), 'utf8'));
 const css = readFileSync(join(ROOT, 'dist/tokens.css'), 'utf8');
-const geometry = { 'rail-width': '76px', 'rail-item-width': '68px', 'sidebar-width': '264px', 'document-max-width': '780px', 'document-min-width': '360px', 'dock-width': '340px', 'dock-offset': '24px' };
+const geometry = { 'rail-width': '76px', 'rail-item-width': '68px', 'header-height': '56px', 'sidebar-width': '264px', 'document-max-width': '780px', 'document-min-width': '360px', 'dock-width': '340px', 'dock-offset': '24px' };
 
 /**
  * The preset's ring keys are references, never values.
@@ -91,6 +91,22 @@ function checkContract(source, styles, config) {
 }
 
 test('three complete themes and shell geometry match the fixed reference', () => checkContract(tree, css, preset));
+
+// The reference sizes a rail item as the rail less one spacing step, so a 12 px
+// sentence-case label fits (kodera-internal `design/reference/assets/kodera.css`,
+// `--rail-item`). The token is a literal, so this keeps the two from drifting apart
+// when either moves.
+function checkRailItemFitsRail(source) {
+  const index = indexTokens(source);
+  const px = (path) => Number.parseFloat(resolve(path, index));
+  assert.equal(
+    px('component.shell.rail-item-width'),
+    px('component.shell.rail-width') - px('space.2'),
+    'rail item: the rail less one spacing step',
+  );
+}
+
+test('a rail item is the rail less one spacing step', () => checkRailItemFitsRail(tree));
 
 function checkWhiteFoundation(source, styles) {
   const index = indexTokens(source);

@@ -1,6 +1,6 @@
 // GENERATED FILE — DO NOT EDIT. kodera-native-tokens/1
 // Public source checksum (SHA-256)
-// d8e65579415c0b1067091dfdbb97eec4f8b06ffb02fb601b096b241b9d2223f1
+// 4f1f2014d67925918533d60d7b7a9107c3bec9649d1e4744ca41212a08f9e0f8
 // Source file: tokens.json
 
 import SwiftUI
@@ -342,6 +342,7 @@ public enum KoderaTokens {
         public static let s12: CGFloat = 48.0
         public static let shellRailWidth: CGFloat = 76.0
         public static let shellRailItemWidth: CGFloat = 68.0
+        public static let shellHeaderHeight: CGFloat = 56.0
         public static let shellSidebarWidth: CGFloat = 264.0
         public static let shellDocumentMaxWidth: CGFloat = 780.0
         public static let shellDocumentMinWidth: CGFloat = 360.0

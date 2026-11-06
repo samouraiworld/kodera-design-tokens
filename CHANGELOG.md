@@ -8,7 +8,7 @@ One section per tag, newest first, no dates: the tag and the commit it points at
 
 ## v0.6.0
 
-A wider rail item, so the rail's labels fit in 12 px sentence case. One value changes and no name does, so this is a minor (`RELEASE.md`, step 5). The licence entry below was carried over from `Unreleased`.
+A wider rail item, so the rail's labels fit in 12 px sentence case, and a content-header height of its own. One value changes and one name is added, so this is a minor (`RELEASE.md`, step 5). The licence entry below was carried over from `Unreleased`.
 
 ### Decided by
 
@@ -16,7 +16,15 @@ A wider rail item, so the rail's labels fit in 12 px sentence case. One value ch
 
 ### Token values changed — design decisions
 
-- **Rail item**: `space.shell-rail-item-width` `56px` → `68px`. `semantic.layout.rail-item-width` and `component.shell.rail-item-width` reference it, so `--shell-rail-item-width`, `--sp-shell-rail-item-width`, `--layout-rail-item-width`, the preset's `shell-rail-item-width` key and the native bindings follow. The rail itself stays 76 px. A consumer that uses the item width as a height grows taller with it. The console does so twice: its square rail items, and its content header (`TopBar`, the shell's `header`), which is `shell-rail-item-width` tall, the approved 56 px. Its repin gives both their own height, the items from padding as the reference draws them and the header 56 px, or the header grows to 68 px.
+- **Rail item**: `space.shell-rail-item-width` `56px` → `68px`. `semantic.layout.rail-item-width` and `component.shell.rail-item-width` reference it, so `--shell-rail-item-width`, `--sp-shell-rail-item-width`, `--layout-rail-item-width`, the preset's `shell-rail-item-width` key and the native bindings follow. The rail itself stays 76 px. A consumer that uses the item width as a height grows taller with it. The console does so twice: its square rail items, and its content header (`TopBar`, the shell's `header`), which is `shell-rail-item-width` tall, the approved 56 px. Its repin gives both their own height: the items from padding, as the reference draws them, and the header the new `shell-header-height` below, so the header stays at 56 px.
+
+### Tokens added
+
+- `space.shell-header-height` (`56px`), with `semantic.layout.header-height` and `component.shell.header-height`: the content header's height, the approved console height that the console took from the rail item width until now. CSS variables `--shell-header-height`, `--sp-shell-header-height` and `--layout-header-height`; the preset key `shell-header-height`; native `shellHeaderHeight`. Same decider: the 56 px header is the console's approved height (`TopBar`), kept as it is.
+
+### Tests
+
+- The shell geometry pins `header-height` at 56 px, and a new test holds a rail item to the rail less one spacing step, as the reference defines it.
 
 ### Licence
 

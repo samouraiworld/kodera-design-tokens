@@ -173,6 +173,7 @@ export default {
         "12": "48px",
         "shell-rail-width": "var(--shell-rail-width)",
         "shell-rail-item-width": "var(--shell-rail-item-width)",
+        "shell-header-height": "var(--shell-header-height)",
         "shell-sidebar-width": "var(--shell-sidebar-width)",
         "shell-document-max-width": "var(--shell-document-max-width)",
         "shell-document-min-width": "var(--shell-document-min-width)",
